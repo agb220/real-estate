@@ -90,13 +90,25 @@ label {
 }
 
 .header {
-  padding: 1.875rem 0;
+  padding: 1rem 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 5;
-  max-height: 6.5rem;
+  max-height: 5.3125rem;
+}
+@media (min-width: 47em) {
+  .header {
+    padding: 1.5rem 0;
+    max-height: 6.0625rem;
+  }
+}
+@media (min-width: 65em) {
+  .header {
+    padding: 1.875rem 0;
+    max-height: 6.5rem;
+  }
 }
 .header__wrapper {
   display: -webkit-box;
@@ -245,9 +257,19 @@ label {
   position: fixed;
   left: 0;
   right: 0;
-  top: 6.5rem;
+  top: 4.5rem;
   z-index: 10;
   height: 100svh;
+}
+@media (min-width: 47em) {
+  .sidebar {
+    top: 6.0625rem;
+  }
+}
+@media (min-width: 65em) {
+  .sidebar {
+    top: 6.5rem;
+  }
 }
 .sidebar__body {
   height: 100%;
@@ -265,6 +287,7 @@ label {
   height: 100%;
   width: 100%;
   padding: 1.875rem 1.25rem;
+  overflow-y: auto;
 }
 .sidebar__list {
   display: -webkit-box;

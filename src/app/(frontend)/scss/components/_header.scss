@@ -1,13 +1,23 @@
 @use '../_index' as *;
 
 .header {
-  padding: toRem(30) 0;
+  padding: toRem(16) 0;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 5;
-  max-height: toRem(104);
+  max-height: toRem(85);
+
+  @media (min-width: 47em) {
+    padding: toRem(24) 0;
+    max-height: toRem(97);
+  }
+
+  @media (min-width: 65em) {
+    padding: toRem(30) 0;
+    max-height: toRem(104);
+  }
 
   // .header__container
 

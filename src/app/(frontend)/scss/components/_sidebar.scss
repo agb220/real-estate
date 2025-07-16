@@ -4,9 +4,17 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: toRem(104);
+  top: toRem(72);
   z-index: 10;
   height: 100svh;
+
+  @media (min-width: 47em) {
+    top: toRem(97);
+  }
+
+  @media (min-width: 65em) {
+    top: toRem(104);
+  }
 
   // .sidebar_link
 
@@ -29,6 +37,7 @@
     height: 100%;
     width: 100%;
     padding: toRem(30) toRem(20);
+    overflow-y: auto;
   }
 
   // .sidebar__list
