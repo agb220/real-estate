@@ -1,0 +1,37 @@
+@use '_index' as *;
+@use 'components/_header';
+@use 'components/_sidebar';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: toRem(17);
+  font-weight: 400;
+  line-height: 1.5;
+  color: $colorDarkBlue;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper > main {
+  flex-grow: 1;
+}
+
+[class*='__container'] {
+  margin: 0 auto;
+  max-width: 1230px;
+  padding: 0 15px;
+}

@@ -1,0 +1,82 @@
+@use '../_index' as *;
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: toRem(104);
+  z-index: 10;
+  height: 100svh;
+
+  // .sidebar_link
+
+  &_link {
+  }
+
+  // .sidebar__body
+
+  &__body {
+    height: 100%;
+    width: 100%;
+    background-color: $bgLightGrey;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  // .sidebar__nav
+
+  &__nav {
+    height: 100%;
+    width: 100%;
+    padding: toRem(30) toRem(20);
+  }
+
+  // .sidebar__list
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(20);
+  }
+
+  // .sidebar__item
+
+  &__item {
+    padding: toRem(10) 0;
+    font-size: toRem(18);
+  }
+
+  // .sidebar__link
+
+  &__link {
+  }
+
+  &--open .sidebar__body {
+    animation: slideIn 0.3s ease forwards;
+  }
+
+  &--closing {
+  }
+
+  &--closing .sidebar__body {
+    animation: slideOut 0.3s ease forwards;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

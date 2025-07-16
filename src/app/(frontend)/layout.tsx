@@ -1,9 +1,8 @@
 import React from 'react'
-import './globals.css'
-
 import { Poppins } from 'next/font/google'
 import { Open_Sans } from 'next/font/google'
-import { cn } from '@/utilities/cn'
+
+import '../../../css/style.css'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,7 +25,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en" className={cn(poppins.variable, open_sans.variable)}>
+    <html lang="en" className={`${poppins.variable} ${open_sans.variable}`}>
       <body>
         <main>{children}</main>
       </body>
