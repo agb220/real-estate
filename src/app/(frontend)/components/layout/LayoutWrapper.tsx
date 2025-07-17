@@ -1,3 +1,4 @@
+import Footer from './Footer'
 import Header from './Header'
 
 const LayoutWrapper = (props: React.PropsWithChildren) => {
@@ -5,7 +6,7 @@ const LayoutWrapper = (props: React.PropsWithChildren) => {
     <>
       <Header />
       {props.children}
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

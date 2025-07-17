@@ -1,6 +1,7 @@
 @use '_index' as *;
 @use 'components/_header';
 @use 'components/_sidebar';
+@use 'components/_footer';
 
 html {
   scroll-behavior: smooth;
@@ -34,4 +35,8 @@ body {
   margin: 0 auto;
   max-width: 1230px;
   padding: 0 15px;
+}
+
+main {
+  height: 100vh;
 }

@@ -26,7 +26,7 @@
   &__body {
     height: 100%;
     width: 100%;
-    background-color: $bgLightGrey;
+    background-color: $bgBlue;
     transform: translateX(100%);
     transition: transform 0.3s ease;
   }
@@ -46,6 +46,7 @@
     display: flex;
     flex-direction: column;
     gap: toRem(20);
+    color: $colorWhite;
   }
 
   // .sidebar__item

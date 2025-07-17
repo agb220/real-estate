@@ -8,6 +8,7 @@
   right: 0;
   z-index: 5;
   max-height: toRem(85);
+  background-color: $colorWhite;
 
   @media (min-width: 47em) {
     padding: toRem(24) 0;

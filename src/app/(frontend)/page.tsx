@@ -13,5 +13,11 @@ export default async function HomePage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  return <LayoutWrapper />
+  return (
+    <div className="wrapper">
+      <LayoutWrapper>
+        <main></main>
+      </LayoutWrapper>
+    </div>
+  )
 }
