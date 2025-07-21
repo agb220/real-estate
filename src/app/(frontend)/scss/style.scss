@@ -2,6 +2,7 @@
 @use 'components/_header';
 @use 'components/_sidebar';
 @use 'components/_footer';
+@use 'components/_welcome-section';
 
 html {
   scroll-behavior: smooth;
@@ -20,16 +21,16 @@ body {
   height: 100%;
 }
 
-.wrapper {
-  min-height: 100%;
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-}
+// .wrapper {
+//   min-height: 100%;
+//   overflow: visible;
+//   display: flex;
+//   flex-direction: column;
+// }
 
-.wrapper > main {
-  flex-grow: 1;
-}
+// .wrapper > main {
+//   flex-grow: 1;
+// }
 
 [class*='__container'] {
   margin: 0 auto;
@@ -38,5 +39,143 @@ body {
 }
 
 main {
-  height: 100vh;
+  margin-top: toRem(85);
+
+  @media (min-width: 47em) {
+    margin-top: toRem(97);
+  }
+
+  @media (min-width: 65em) {
+    margin-top: toRem(104);
+  }
+}
+
+// --- ui kit ----- //
+
+.input-wrapper {
+  display: flex;
+  flex-basis: toRem(280);
+  gap: toRem(8);
+  align-items: center;
+  padding: toRem(15) toRem(16) toRem(15) toRem(16);
+  border-radius: 4px;
+  border: 1px solid $colorDarkGrey;
+  background: $colorWhite;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1) inset;
+  width: 100%;
+  max-height: toRem(56);
+
+  &:focus,
+  &:focus-visible {
+    outline: $colorBlue;
+  }
+
+  &:active {
+    border-color: $colorBlue;
+  }
+
+  @media (any-hover: hover), (pointer: fine) {
+    &:hover {
+      border-color: $colorBlue;
+    }
+  }
+
+  .input {
+    &::placeholder {
+      color: $colorDarkGrey;
+    }
+  }
+}
+
+.input--icon {
+}
+
+// --- input select --- ///
+
+.select {
+  position: relative;
+  width: 100%;
+
+  cursor: pointer;
+  width: 100%;
+  max-height: toRem(56);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: border-color 0.3s;
+  }
+
+  .chevron-icon {
+    transition: transform 0.3s ease;
+  }
+
+  &.open .chevron-icon {
+    transform: rotate(180deg);
+  }
+
+  &__options {
+    position: absolute;
+    z-index: 5;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $colorWhite;
+    border: 1px solid $colorBlue;
+    border-top: none;
+    overflow-y: auto;
+    max-height: toRem(200);
+  }
+
+  &__option {
+    padding: toRem(15) toRem(10) toRem(15) toRem(10);
+    transition: background-color 0.2s;
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        background-color: $colorBlue;
+      }
+    }
+
+    &.selected {
+      background: $colorLightBlue;
+    }
+  }
+}
+
+.button {
+  display: flex;
+  gap: toRem(8);
+  align-items: center;
+  padding: toRem(10) toRem(16) toRem(10) toRem(16);
+  border-radius: 4px;
+  border: 1px solid $colorBlue;
+  font-weight: 700;
+  width: 100%;
+  max-height: toRem(56);
+
+  &--btn {
+    background-color: $bgBlue;
+    color: $colorWhite;
+    flex-basis: toRem(148);
+    transition:
+      border-color 0.3s,
+      opacity 0.3s;
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        border-color: $colorDarkBlue;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &--outline {
+  }
+  // .button__icon
+
+  &__icon {
+  }
 }
