@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     locations: Location;
     'property-types': PropertyType;
+    products: Product;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,6 +82,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     locations: LocationsSelect<false> | LocationsSelect<true>;
     'property-types': PropertyTypesSelect<false> | PropertyTypesSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -244,6 +246,56 @@ export interface PropertyType {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  title: string;
+  slug: string;
+  main: ProductMain;
+  productDetails: ProductDetails;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductMain".
+ */
+export interface ProductMain {
+  title: string;
+  location: string | Location;
+  type: string | PropertyType;
+  mainImage: string | Media;
+  images: (string | Media)[];
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductDetails".
+ */
+export interface ProductDetails {
+  description?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
+  prices: {
+    fullPrice: number;
+    Payment: number;
+  };
+  address: string;
+  garages: string;
+  roomNumbers: string;
+  usableArea: string;
+  totalArea: string;
+  insulatedObject: boolean;
+  balcony: boolean;
+  terrace: boolean;
+  numberOfBathrooms: string;
+  mapLink?: string | null;
+  relatedProducts?: (string | Product)[] | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -264,6 +316,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'property-types';
         value: string | PropertyType;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: string | Product;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -441,6 +497,53 @@ export interface PropertyTypesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  main?: T | ProductMainSelect<T>;
+  productDetails?: T | ProductDetailsSelect<T>;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductMain_select".
+ */
+export interface ProductMainSelect<T extends boolean = true> {
+  title?: T;
+  location?: T;
+  type?: T;
+  mainImage?: T;
+  images?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProductDetails_select".
+ */
+export interface ProductDetailsSelect<T extends boolean = true> {
+  description?: T;
+  prices?:
+    | T
+    | {
+        fullPrice?: T;
+        Payment?: T;
+      };
+  address?: T;
+  garages?: T;
+  roomNumbers?: T;
+  usableArea?: T;
+  totalArea?: T;
+  insulatedObject?: T;
+  balcony?: T;
+  terrace?: T;
+  numberOfBathrooms?: T;
+  mapLink?: T;
+  relatedProducts?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -477,7 +580,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface MainPage {
   id: string;
-  mainPage?: IHeroSection[] | null;
+  mainPage?: (IHeroSection | ITopOffers)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -495,6 +598,18 @@ export interface IHeroSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ITopOffers".
+ */
+export interface ITopOffers {
+  title: string;
+  description: string;
+  relatedProducts?: (string | Product)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'top-offers';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "main-page_select".
  */
 export interface MainPageSelect<T extends boolean = true> {
@@ -502,6 +617,7 @@ export interface MainPageSelect<T extends boolean = true> {
     | T
     | {
         'hero-section'?: T | IHeroSectionSelect<T>;
+        'top-offers'?: T | ITopOffersSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -515,6 +631,17 @@ export interface IHeroSectionSelect<T extends boolean = true> {
   mainImage?: T;
   title?: T;
   description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ITopOffers_select".
+ */
+export interface ITopOffersSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  relatedProducts?: T;
   id?: T;
   blockName?: T;
 }

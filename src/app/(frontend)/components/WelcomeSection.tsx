@@ -15,7 +15,6 @@ interface WelcomeSectionProps {
 }
 
 const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
-  console.log('props', props.productTypes)
   return (
     <section className="hero">
       <div className="hero__container">
