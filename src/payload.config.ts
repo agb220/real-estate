@@ -13,6 +13,7 @@ import MainPage from './app/(payload)/_globals/MainPage'
 import Media from './collections/Media'
 import ProductLocation from './app/(payload)/_collections/product/ProductLocation'
 import PropertyTypes from './app/(payload)/_collections/product/PropertyTypes'
+import Product from './app/(payload)/_collections/product/Product'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,7 +51,7 @@ export default buildConfig({
   },
   collections: [
     ...groupCollections('Other', [Users, Media]),
-    ...groupCollections('Product', [ProductLocation, PropertyTypes]),
+    ...groupCollections('Product', [ProductLocation, PropertyTypes, Product]),
   ],
   globals: [...groupGlobals('Pages', [MainPage])],
   editor: lexicalEditor(),

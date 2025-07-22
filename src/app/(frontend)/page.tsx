@@ -9,6 +9,7 @@ import LayoutWrapper from './components/layout/LayoutWrapper'
 
 import '../../../css/style.css'
 import WelcomeSection from './components/WelcomeSection'
+import TopOffersSection from './components/TopOffersSection'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -37,6 +38,11 @@ export default async function HomePage() {
         {(findResult.mainPage || []).map((section, idx) => {
           if (section.blockType === 'hero-section') {
             return <WelcomeSection key={idx} data={section} productTypes={productTypes.docs} />
+          }
+        })}
+        {(findResult.mainPage || []).map((section, idx) => {
+          if (section.blockType === 'top-offers') {
+            return <TopOffersSection key={idx} data={section} />
           }
         })}
       </main>

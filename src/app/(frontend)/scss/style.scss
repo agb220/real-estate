@@ -3,6 +3,8 @@
 @use 'components/_sidebar';
 @use 'components/_footer';
 @use 'components/_welcome-section';
+@use 'components/_product-card';
+@use 'components/_top-offers';
 
 html {
   scroll-behavior: smooth;
@@ -147,7 +149,6 @@ main {
 
 .button {
   display: flex;
-  gap: toRem(8);
   align-items: center;
   padding: toRem(10) toRem(16) toRem(10) toRem(16);
   border-radius: 4px;
@@ -172,10 +173,55 @@ main {
     }
   }
 
-  &--outline {
-  }
-  // .button__icon
+  // .button--outline
 
-  &__icon {
+  &--outline {
+    color: $colorBlue;
+    transition:
+      border-color 0.3s,
+      color 0.3s;
+    width: fit-content;
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        background-color: $colorBlue;
+        color: $colorWhite;
+      }
+    }
   }
+
+  // .button--icon
+  &--icon {
+    background-color: $bgBlue;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: toRem(56);
+    padding: toRem(18) toRem(18) toRem(18) toRem(18);
+    transition: color 0.3s;
+
+    &:disabled {
+      background-color: $bgLightGrey;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        border-color: $colorDarkBlue;
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+// *---- embla ----* //
+
+.embla__arrow-left svg {
+  rotate: 180deg;
+}
+
+.embla__arrow-right {
 }

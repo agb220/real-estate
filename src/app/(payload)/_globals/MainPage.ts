@@ -1,6 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import HeroSection from '../_collections/HeroSection'
-import ProductLocation from '../_collections/product/ProductLocation'
+import TopOffers from '../_collections/TopOffers'
 
 const MainPage: GlobalConfig = {
   slug: 'main-page',
@@ -12,7 +12,7 @@ const MainPage: GlobalConfig = {
     {
       type: 'blocks',
       name: 'mainPage',
-      blocks: [HeroSection],
+      blocks: [HeroSection, TopOffers],
       label: {
         en: 'Page sections',
       },
