@@ -5,6 +5,7 @@
 @use 'components/_welcome-section';
 @use 'components/_product-card';
 @use 'components/_top-offers';
+@use 'components/_reviews-section';
 
 html {
   scroll-behavior: smooth;
@@ -224,4 +225,43 @@ main {
 }
 
 .embla__arrow-right {
+}
+
+//* ----- title ------- *//
+
+// .title-block
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(16);
+
+  @media (min-width: 47em) {
+    max-width: toRem(588);
+  }
+  // .title-block__title
+
+  &__title {
+    font-size: toRem(28);
+    font-weight: 700;
+    line-height: 1.2;
+
+    @media (min-width: 47em) {
+      font-size: toRem(33.2);
+    }
+
+    @media (min-width: 65em) {
+      font-size: toRem(41.504);
+    }
+  }
+
+  // .title-block__description
+
+  &__description {
+    font-size: toRem(16);
+
+    @media (min-width: 47em) {
+      font-size: toRem(17);
+    }
+  }
 }
