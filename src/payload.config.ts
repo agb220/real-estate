@@ -14,6 +14,7 @@ import Media from './collections/Media'
 import ProductLocation from './app/(payload)/_collections/product/ProductLocation'
 import PropertyTypes from './app/(payload)/_collections/product/PropertyTypes'
 import Product from './app/(payload)/_collections/product/Product'
+import { ReviewsCollection } from './app/(payload)/_collections/Reviews'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -52,6 +53,7 @@ export default buildConfig({
   collections: [
     ...groupCollections('Other', [Users, Media]),
     ...groupCollections('Product', [ProductLocation, PropertyTypes, Product]),
+    ...groupCollections('Reviews', [ReviewsCollection]),
   ],
   globals: [...groupGlobals('Pages', [MainPage])],
   editor: lexicalEditor(),

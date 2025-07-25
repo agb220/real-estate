@@ -763,7 +763,7 @@ option {
 }
 .top-offers {
   padding: 2.5rem 0 3.0625rem 0;
-  background-color: #b2ede7;
+  background-color: #f2fafa;
   overflow-x: auto;
 }
 @media (min-width: 47em) {
@@ -821,44 +821,6 @@ option {
     gap: 1.25rem;
   }
 }
-.top-offers__title-block {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 1rem;
-}
-@media (min-width: 47em) {
-  .top-offers__title-block {
-    max-width: 36.75rem;
-  }
-}
-.top-offers__title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-@media (min-width: 47em) {
-  .top-offers__title {
-    font-size: 2.075rem;
-  }
-}
-@media (min-width: 65em) {
-  .top-offers__title {
-    font-size: 2.594rem;
-  }
-}
-.top-offers__description {
-  font-size: 1rem;
-}
-@media (min-width: 47em) {
-  .top-offers__description {
-    font-size: 1.0625rem;
-  }
-}
 .top-offers__arrow-block {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -887,6 +849,210 @@ option {
 .button--top-offers {
   -ms-flex-item-align: center;
       align-self: center;
+}
+
+.reviews {
+  padding: 4rem 0 4rem 0;
+  overflow-x: auto;
+}
+@media (min-width: 65em) {
+  .reviews {
+    padding: 7.5rem 0 7.5rem 0;
+  }
+}
+.reviews__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 2.5rem;
+}
+.reviews__container {
+  width: 100%;
+}
+.reviews__title-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.5rem;
+}
+@media (min-width: 65em) {
+  .reviews__title-block {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    gap: 1.25rem;
+  }
+}
+.reviews__arrow-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.reviews__dots {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1rem;
+}
+.reviews__dots .dot {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background-color: #e1edec;
+}
+.reviews__dots .dot--active {
+  background-color: #17c2b1;
+}
+
+.reviews-list__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.review-card {
+  background-color: #f2fafa;
+  padding: 1rem 1rem 1rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  min-width: 20rem;
+}
+@media (min-width: 47em) {
+  .review-card {
+    padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+    min-width: 31.75rem;
+    gap: 1.5rem;
+  }
+}
+@media (min-width: 65em) {
+  .review-card {
+    min-width: 36.75rem;
+    gap: 1rem;
+  }
+}
+.review-card__decor {
+  width: 100%;
+  height: 100%;
+  max-width: 30px;
+  height: 30px;
+}
+.review-card__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1.5rem;
+}
+.review-card__content {
+  font-size: 1rem;
+}
+@media (min-width: 47em) {
+  .review-card__content {
+    font-size: 1.0625rem;
+  }
+}
+.review-card__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.1875rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media (min-width: 47em) {
+  .review-card__info {
+    gap: 0.5rem;
+  }
+}
+.review-card__photo {
+  -ms-flex-preferred-size: 4rem;
+      flex-basis: 4rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+.review-card .default--photo {
+  background-color: #d6d6d6;
+}
+.review-card__reviewer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.125rem;
+  height: 100%;
+}
+.review-card__name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.2;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+@media (min-width: 47em) {
+  .review-card__name {
+    font-size: 1.0625rem;
+  }
+}
+@media (min-width: 65em) {
+  .review-card__name {
+    font-size: 1.328rem;
+  }
+}
+.review-card__product-name {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  font-size: 1rem;
+}
+@media (min-width: 47em) {
+  .review-card__product-name {
+    font-size: 1.0625rem;
+  }
 }
 
 html {
@@ -1027,7 +1193,7 @@ main {
   }
 }
 .select__option.selected {
-  background: #b2ede7;
+  background: #f2fafa;
 }
 
 .button {
@@ -1104,4 +1270,43 @@ main {
 
 .embla__arrow-left svg {
   rotate: 180deg;
+}
+
+.title-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 47em) {
+  .title-block {
+    max-width: 36.75rem;
+  }
+}
+.title-block__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+@media (min-width: 47em) {
+  .title-block__title {
+    font-size: 2.075rem;
+  }
+}
+@media (min-width: 65em) {
+  .title-block__title {
+    font-size: 2.594rem;
+  }
+}
+.title-block__description {
+  font-size: 1rem;
+}
+@media (min-width: 47em) {
+  .title-block__description {
+    font-size: 1.0625rem;
+  }
 }

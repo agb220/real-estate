@@ -72,6 +72,7 @@ export interface Config {
     locations: Location;
     'property-types': PropertyType;
     products: Product;
+    reviews: Review;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +84,7 @@ export interface Config {
     locations: LocationsSelect<false> | LocationsSelect<true>;
     'property-types': PropertyTypesSelect<false> | PropertyTypesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -296,6 +298,19 @@ export interface ProductDetails {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: string;
+  reviewerName: string;
+  reviewProduct: string | Product;
+  reviewMessage: string;
+  mainImage?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -320,6 +335,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products';
         value: string | Product;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: string | Review;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -544,6 +563,18 @@ export interface ProductDetailsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  reviewerName?: T;
+  reviewProduct?: T;
+  reviewMessage?: T;
+  mainImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -580,7 +611,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface MainPage {
   id: string;
-  mainPage?: (IHeroSection | ITopOffers)[] | null;
+  section?: (IHeroSection | ITopOffers | IReviewsBlock)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -610,14 +641,27 @@ export interface ITopOffers {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IReviewsBlock".
+ */
+export interface IReviewsBlock {
+  title: string;
+  description: string;
+  reviews: (string | Review)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'reviews';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "main-page_select".
  */
 export interface MainPageSelect<T extends boolean = true> {
-  mainPage?:
+  section?:
     | T
     | {
         'hero-section'?: T | IHeroSectionSelect<T>;
         'top-offers'?: T | ITopOffersSelect<T>;
+        reviews?: T | IReviewsBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -642,6 +686,17 @@ export interface ITopOffersSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   relatedProducts?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IReviewsBlock_select".
+ */
+export interface IReviewsBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  reviews?: T;
   id?: T;
   blockName?: T;
 }

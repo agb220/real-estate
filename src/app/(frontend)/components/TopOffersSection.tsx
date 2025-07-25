@@ -6,6 +6,7 @@ import { ITopOffers, Product } from '@/payload-types'
 import { useDotButton } from './shared/embla-carousel/EmblaDot'
 import { NextButton, PrevButton, usePrevNextButtons } from './shared/embla-carousel/ArrowButton'
 import ProductCard from './shared/ProductCard'
+import Title from './shared/Title'
 
 interface TopOffersSectionProps {
   data: ITopOffers
@@ -27,10 +28,7 @@ const TopOffersSection = ({ ...props }: TopOffersSectionProps) => {
       <div className="top-offers__container">
         <div className="top-offers__wrapper">
           <div className="top-offers__block">
-            <div className="top-offers__title-block">
-              <h2 className="top-offers__title">{props.data.title}</h2>
-              <p className="top-offers__description">{props.data.description}</p>
-            </div>
+            <Title title={props.data.title} description={props.data.description} />
             <div className="top-offers__arrow-block">
               <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
               <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

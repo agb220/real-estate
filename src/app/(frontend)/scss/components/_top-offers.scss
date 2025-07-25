@@ -48,44 +48,6 @@
     }
   }
 
-  // .top-offers__title-block
-
-  &__title-block {
-    display: flex;
-    flex-direction: column;
-    gap: toRem(16);
-
-    @media (min-width: 47em) {
-      max-width: toRem(588);
-    }
-  }
-
-  // .top-offers__title
-
-  &__title {
-    font-size: toRem(28);
-    font-weight: 700;
-    line-height: 1.2;
-
-    @media (min-width: 47em) {
-      font-size: toRem(33.2);
-    }
-
-    @media (min-width: 65em) {
-      font-size: toRem(41.504);
-    }
-  }
-
-  // .top-offers__description
-
-  &__description {
-    font-size: toRem(16);
-
-    @media (min-width: 47em) {
-      font-size: toRem(17);
-    }
-  }
-
   // .top-offers__arrow-block
 
   &__arrow-block {
