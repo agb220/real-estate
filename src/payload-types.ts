@@ -611,7 +611,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface MainPage {
   id: string;
-  section?: (IHeroSection | ITopOffers | IReviewsBlock)[] | null;
+  section?: (IHeroSection | ITopOffers | IReviewsBlock | IAboutUs)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -653,6 +653,32 @@ export interface IReviewsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IAboutUs".
+ */
+export interface IAboutUs {
+  mainImage: string | Media;
+  title: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'about-us';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "main-page_select".
  */
 export interface MainPageSelect<T extends boolean = true> {
@@ -662,6 +688,7 @@ export interface MainPageSelect<T extends boolean = true> {
         'hero-section'?: T | IHeroSectionSelect<T>;
         'top-offers'?: T | ITopOffersSelect<T>;
         reviews?: T | IReviewsBlockSelect<T>;
+        'about-us'?: T | IAboutUsSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -697,6 +724,17 @@ export interface IReviewsBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   reviews?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "IAboutUs_select".
+ */
+export interface IAboutUsSelect<T extends boolean = true> {
+  mainImage?: T;
+  title?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }
