@@ -11,6 +11,7 @@ import '../../../css/style.css'
 import WelcomeSection from './components/WelcomeSection'
 import TopOffersSection from './components/TopOffersSection'
 import ReviewsSection from './components/ReviewsSection'
+import AboutUsSection from './components/AboutUsSection'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -49,6 +50,11 @@ export default async function HomePage() {
         {(findResult.section || []).map((section, idx) => {
           if (section.blockType === 'reviews') {
             return <ReviewsSection key={idx} data={section} />
+          }
+        })}
+        {(findResult.section || []).map((section, idx) => {
+          if (section.blockType === 'about-us') {
+            return <AboutUsSection key={idx} data={section} />
           }
         })}
       </main>
