@@ -3,5 +3,6 @@ import ChevronSvg from './ChevronSvg'
 import SearchSvg from './SearchSvg'
 import ArrowSvg from './ArrowSvg'
 import BracesSvg from './BracketsSvg'
+import SubscribeSvg from './SubscribeSvg'
 
-export { LocationSvg, ChevronSvg, SearchSvg, ArrowSvg, BracesSvg }
+export { LocationSvg, ChevronSvg, SearchSvg, ArrowSvg, BracesSvg, SubscribeSvg }

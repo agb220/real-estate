@@ -12,6 +12,7 @@ import WelcomeSection from './components/WelcomeSection'
 import TopOffersSection from './components/TopOffersSection'
 import ReviewsSection from './components/ReviewsSection'
 import AboutUsSection from './components/AboutUsSection'
+import SubscribeSection from './components/SubscribeSection'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -57,6 +58,7 @@ export default async function HomePage() {
             return <AboutUsSection key={idx} data={section} />
           }
         })}
+        <SubscribeSection />
       </main>
     </LayoutWrapper>
   )

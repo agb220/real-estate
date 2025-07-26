@@ -1,19 +1,27 @@
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 
-interface ButtonProp {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode
   titlebtn?: string
-  type: 'btn' | 'outline' | 'icon'
+  typeBtn: 'btn' | 'outline' | 'icon'
   className?: string
   onClick?: () => void
   disabled?: boolean
 }
 
-const Button = ({ icon, titlebtn, type, className, onClick, disabled }: ButtonProp) => {
+const Button = ({
+  icon,
+  titlebtn,
+  typeBtn,
+  className,
+  onClick,
+  disabled,
+  type = 'button',
+}: ButtonProps) => {
   return (
     <button
-      type="button"
-      className={`button button--${type} ${className}`}
+      type={type}
+      className={`button button--${typeBtn} ${className}`}
       onClick={onClick}
       disabled={disabled}
     >
