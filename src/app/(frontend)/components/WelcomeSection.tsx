@@ -24,10 +24,15 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
             <p className="content-block__description">{props.data.description}</p>
             <form action="" className="form-search">
               <div className="form-search__row">
-                <Input />
+                <Input placeholder="Search of location" icon />
                 <Select options={props.productTypes} className="select--hero" />
               </div>
-              <Button titlebtn={'Search'} type={'btn'} icon={<SearchSvg />} className="btn--hero" />
+              <Button
+                titlebtn={'Search'}
+                typeBtn={'btn'}
+                icon={<SearchSvg />}
+                className="btn--hero"
+              />
             </form>
           </div>
           <div className="hero__imgs imgs-block">
