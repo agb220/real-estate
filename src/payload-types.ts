@@ -275,11 +275,21 @@ export interface ProductMain {
  * via the `definition` "ProductDetails".
  */
 export interface ProductDetails {
-  description?:
-    | {
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
         [k: string]: unknown;
-      }[]
-    | null;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   prices: {
     fullPrice: number;
     Payment: number;
