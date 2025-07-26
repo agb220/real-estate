@@ -1,5 +1,5 @@
 import { CollectionConfig, CollectionSlug } from 'payload'
-import { slateEditor } from '@payloadcms/richtext-slate'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 const Product: CollectionConfig = {
   slug: 'products',
@@ -98,15 +98,11 @@ const Product: CollectionConfig = {
             {
               type: 'richText',
               name: 'description',
+              required: true,
               label: {
                 en: 'Description',
               },
-              editor: slateEditor({
-                admin: {
-                  elements: ['ul', 'ol', 'link'],
-                  leaves: ['bold', 'italic', 'underline'],
-                },
-              }),
+              editor: lexicalEditor(),
             },
             {
               type: 'group',
