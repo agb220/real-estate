@@ -14,14 +14,12 @@ const SubscribeForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('click', email) // ← додай це
 
     if (!validateEmail(email)) {
       setError('Invalid email')
     } else {
       setError('')
       setEmail('')
-      console.log('Subscribed with:', email)
     }
   }
 
