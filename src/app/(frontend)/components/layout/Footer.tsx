@@ -2,9 +2,12 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import ContactUsModal from '../modals/ContactUsModal'
+import { useScrollToSection } from '@/utilities/scrollTo'
 
 const Footer = () => {
   const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
+  const scrollToSection = useScrollToSection()
+
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -17,9 +20,9 @@ const Footer = () => {
           <div className="footer__menu footer-menu">
             <ul className="footer-menu__list">
               <li className="footer-menu__item">
-                <a href="#top-offers" className="footer-menu__link">
+                <button className="footer-menu__link" onClick={() => scrollToSection('top-offers')}>
                   Top offers
-                </a>
+                </button>
               </li>
               <li className="footer-menu__item">
                 <a href="/offers" className="footer-menu__link">
@@ -27,14 +30,17 @@ const Footer = () => {
                 </a>
               </li>
               <li className="footer-menu__item">
-                <a href="#testimonials" className="footer-menu__link">
+                <button
+                  className="footer-menu__link"
+                  onClick={() => scrollToSection('testimonials')}
+                >
                   Testimonials
-                </a>
+                </button>
               </li>
               <li className="footer-menu__item">
-                <a href="#about-us" className="footer-menu__link">
+                <button className="footer-menu__link" onClick={() => scrollToSection('about-us')}>
                   About us
-                </a>
+                </button>
               </li>
               <li className="footer-menu__item">
                 <button className="footer-menu__link" onClick={() => setContactUsModalOpen(true)}>

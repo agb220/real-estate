@@ -1,16 +1,21 @@
 'use client'
+
 import { useState } from 'react'
 import Image from 'next/image'
+
 import Sidebar from './Sidebar'
+import ContactUsModal from '../modals/ContactUsModal'
 
 import '../../../../../css/style.css'
-import ContactUsModal from '../modals/ContactUsModal'
+import { useScrollToSection } from '@/utilities/scrollTo'
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [isMenuActive, setIsMenuActive] = useState(false)
   const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
+
+  const scrollToSection = useScrollToSection()
 
   const handleCloseSidebar = () => {
     setIsClosing(true)
@@ -48,9 +53,9 @@ const Header = () => {
             <nav className="header__navigation menu">
               <ul className="menu__list">
                 <li className="menu__item">
-                  <a href="#top-offers" className="menu__link">
+                  <button className="menu__link" onClick={() => scrollToSection('top-offers')}>
                     Top offers
-                  </a>
+                  </button>
                 </li>
                 <li className="menu__item">
                   <a href="/offers" className="menu__link">
@@ -58,14 +63,14 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="menu__item">
-                  <a href="#testimonials" className="menu__link">
+                  <button className="menu__link" onClick={() => scrollToSection('testimonials')}>
                     Testimonials
-                  </a>
+                  </button>
                 </li>
                 <li className="menu__item">
-                  <a href="#about-us" className="menu__link">
+                  <button className="menu__link" onClick={() => scrollToSection('about-us')}>
                     About us
-                  </a>
+                  </button>
                 </li>
                 <li className="menu__item">
                   <button className="menu__link" onClick={() => setContactUsModalOpen(true)}>
