@@ -4,13 +4,15 @@ import Image from 'next/image'
 import Sidebar from './Sidebar'
 
 import '../../../../../css/style.css'
+import ContactUsModal from '../modals/ContactUsModal'
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [isMenuActive, setIsMenuActive] = useState(false)
+  const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
 
-  const handleClose = () => {
+  const handleCloseSidebar = () => {
     setIsClosing(true)
     setIsMenuActive(false)
 
@@ -20,9 +22,14 @@ const Header = () => {
     }, 300)
   }
 
-  const handleOpen = () => {
+  const handleOpenSidebar = () => {
     setModalOpen(true)
     setIsMenuActive(true)
+  }
+
+  const openContactUsModalFromSidebar = () => {
+    setContactUsModalOpen(true)
+    handleCloseSidebar()
   }
 
   return (
@@ -61,9 +68,9 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="menu__item">
-                  <a href="#contact-us" className="menu__link">
+                  <button className="menu__link" onClick={() => setContactUsModalOpen(true)}>
                     Contact us
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>
@@ -73,9 +80,9 @@ const Header = () => {
               type="button"
               onClick={() => {
                 if (modalOpen) {
-                  handleClose()
+                  handleCloseSidebar()
                 } else {
-                  handleOpen()
+                  handleOpenSidebar()
                 }
               }}
             >
@@ -85,7 +92,16 @@ const Header = () => {
         </div>
       </div>
 
-      {modalOpen && <Sidebar isClosing={isClosing} onClose={handleClose} />}
+      {modalOpen && (
+        <Sidebar
+          isClosing={isClosing}
+          onClose={handleCloseSidebar}
+          openContactUsModal={openContactUsModalFromSidebar}
+        />
+      )}
+      {contactUsModalOpen && (
+        <ContactUsModal isOpen={contactUsModalOpen} setIsOpenModal={setContactUsModalOpen} />
+      )}
     </header>
   )
 }

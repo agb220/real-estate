@@ -1,6 +1,10 @@
+'use client'
 import Image from 'next/image'
+import { useState } from 'react'
+import ContactUsModal from '../modals/ContactUsModal'
 
 const Footer = () => {
+  const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -33,14 +37,17 @@ const Footer = () => {
                 </a>
               </li>
               <li className="footer-menu__item">
-                <a href="#contact-us" className="footer-menu__link">
+                <button className="footer-menu__link" onClick={() => setContactUsModalOpen(true)}>
                   Contact us
-                </a>
+                </button>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      {contactUsModalOpen && (
+        <ContactUsModal isOpen={contactUsModalOpen} setIsOpenModal={setContactUsModalOpen} />
+      )}
     </footer>
   )
 }

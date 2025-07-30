@@ -96,7 +96,8 @@
     @media (min-width: 65em) {
       padding: toRem(6) 0;
 
-      a {
+      a,
+      button {
         position: relative;
         display: inline-block;
         transition: color 0.3s;

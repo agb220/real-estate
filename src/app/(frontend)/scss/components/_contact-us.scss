@@ -1,0 +1,14 @@
+@use '../_index' as *;
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(25);
+
+  .button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
