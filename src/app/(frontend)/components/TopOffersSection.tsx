@@ -24,7 +24,7 @@ const TopOffersSection = ({ ...props }: TopOffersSectionProps) => {
     usePrevNextButtons(emblaApi)
 
   return (
-    <section className="top-offers">
+    <section className="top-offers" id="top-offers">
       <div className="top-offers__container">
         <div className="top-offers__wrapper">
           <div className="top-offers__block">

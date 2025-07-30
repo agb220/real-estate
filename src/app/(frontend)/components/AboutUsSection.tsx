@@ -9,7 +9,7 @@ interface AboutUsSectionProps {
 
 const AboutUsSection = ({ ...data }: AboutUsSectionProps) => {
   return (
-    <section className="about-us">
+    <section className="about-us" id="about-us">
       <div className="about-us__container">
         <div className="about-us__wrapper">
           <div className="about-us__images">

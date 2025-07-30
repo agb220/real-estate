@@ -1407,6 +1407,7 @@ main {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 0.125rem;
+  width: 100%;
 }
 
 .label {

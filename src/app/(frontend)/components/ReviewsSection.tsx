@@ -24,7 +24,7 @@ const ReviewsSection = ({ ...data }: ReviewsSectionProps) => {
     usePrevNextButtons(emblaApi)
 
   return (
-    <section className="reviews">
+    <section className="reviews" id="testimonials">
       <div className="reviews__wrapper">
         <div className="reviews__container">
           <div className="reviews__title-block">
