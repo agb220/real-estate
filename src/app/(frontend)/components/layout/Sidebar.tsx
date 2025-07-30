@@ -1,4 +1,14 @@
-const Sidebar = ({ isClosing, onClose }: { isClosing: boolean; onClose: () => void }) => {
+'use client'
+import { useState } from 'react'
+import ContactUsModal from '../modals/ContactUsModal'
+
+interface SidebarProps {
+  isClosing: boolean
+  onClose: () => void
+  openContactUsModal: () => void
+}
+
+const Sidebar = ({ isClosing, onClose, openContactUsModal }: SidebarProps) => {
   return (
     <div
       className={`sidebar ${isClosing ? 'sidebar--closing' : 'sidebar--open'}`}
@@ -28,9 +38,9 @@ const Sidebar = ({ isClosing, onClose }: { isClosing: boolean; onClose: () => vo
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#contact-us" className="sidebar__link" onClick={onClose}>
+              <button className="sidebar__link" onClick={openContactUsModal}>
                 Contact us
-              </a>
+              </button>
             </li>
           </ul>
         </nav>

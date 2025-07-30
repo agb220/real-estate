@@ -41,7 +41,7 @@ export const usePrevNextButtons = (emblaApi: any) => {
 export const PrevButton = (props: any) => {
   return (
     <Button
-      type="icon"
+      typeBtn="icon"
       className="embla__arrow-left"
       icon={<ArrowSvg />}
       onClick={props.onClick}
@@ -55,7 +55,7 @@ export const NextButton = (props: any) => {
 
   return (
     <Button
-      type="icon"
+      typeBtn="icon"
       icon={<ArrowSvg />}
       className="embla__arrow-right"
       onClick={props.onClick}
