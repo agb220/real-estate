@@ -9,6 +9,7 @@
 @use 'components/_about-us';
 @use 'components/_subscribe';
 @use 'components/_contact-us';
+@use 'components/_offers';
 
 html {
   scroll-behavior: smooth;
@@ -157,6 +158,7 @@ main {
   &__header {
     display: flex;
     justify-content: space-between;
+    gap: toRem(25);
     align-items: center;
     width: 100%;
     transition: border-color 0.3s;
@@ -197,11 +199,16 @@ main {
       background: $colorLightBlue;
     }
   }
+
+  .placeholder {
+    color: $colorDarkGrey;
+  }
 }
 
 .button {
   display: flex;
   align-items: center;
+  gap: toRem(8);
   padding: toRem(10) toRem(16) toRem(10) toRem(16);
   border-radius: 4px;
   border: 1px solid $colorBlue;
@@ -266,6 +273,10 @@ main {
         opacity: 0.7;
       }
     }
+  }
+
+  span {
+    flex-grow: 0;
   }
 }
 

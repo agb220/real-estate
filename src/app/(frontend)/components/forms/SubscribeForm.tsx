@@ -28,7 +28,7 @@ const SubscribeForm = () => {
       <Input
         placeholder="Your e-mail address"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e: any) => setEmail(e.target.value)}
         error={error}
       />
       <Button typeBtn="outline" titlebtn="Subscribe" type="submit" />

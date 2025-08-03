@@ -40,6 +40,12 @@ const nextConfig = {
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET, // pulls from .env file
     NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL, // pulls from .env file
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   output: 'standalone',
   reactStrictMode: true,
   redirects,

@@ -1,5 +1,4 @@
 import React from 'react'
-import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
 import config from '@/payload.config'
@@ -9,8 +8,6 @@ import TopOffersSection from './components/TopOffersSection'
 import ReviewsSection from './components/ReviewsSection'
 import AboutUsSection from './components/AboutUsSection'
 import SubscribeSection from './components/SubscribeSection'
-
-import '../../../css/style.css'
 
 export default async function HomePage() {
   const payloadConfig = await config
