@@ -31,16 +31,12 @@ export default async function OffersPage(props: SearchProductsPageProps) {
 
   const sortParams: string[] = []
 
-  if (searchObj.sort === 'all') {
-    sortParams.push('all')
-  }
-
   if (searchObj.sort === 'price_high') {
-    sortParams.push('-price')
+    sortParams.push('-productDetails.prices.fullPrice')
   }
 
   if (searchObj.sort === 'price_low') {
-    sortParams.push('price')
+    sortParams.push('productDetails.prices.fullPrice')
   }
 
   let whereState = {}

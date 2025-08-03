@@ -22,8 +22,6 @@ const formatLabel = (value: string): string => {
       return 'Expensive at first'
     case 'price_low':
       return 'Cheaper at first'
-    case 'all':
-      return 'All'
     default:
       return value.charAt(0).toUpperCase() + value.slice(1).replace('_', ' ')
   }
@@ -51,17 +49,17 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
   const [selectedTypeOption, setSelectedTypeOption] = useState<IOption | null>(null)
   const [selectedBedroomsOption, setSelectedBedroomsOption] = useState<IOption | null>(null)
   const [locationInput, setLocationInput] = useState<string>('')
+  const [selectedSort, setSelectedSort] = useState<string>(selectedSearchParams?.sort || 'all')
 
   const locations = filterData?.locations?.docs || []
 
-  const handleSearch = () => {
+  const buildQueryParams = () => {
     const query = new URLSearchParams()
 
-    const matchedLocation = locations.find(
-      (loc) => loc?.name?.toLowerCase().trim() === locationInput?.toLowerCase().trim(),
-    )
-
     if (locationInput.trim()) {
+      const matchedLocation = locations.find(
+        (loc) => loc?.name?.toLowerCase().trim() === locationInput?.toLowerCase().trim(),
+      )
       query.append('locations', matchedLocation?.id ?? locationInput.trim().toLowerCase())
     }
 
@@ -73,7 +71,20 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
       query.append('bedrooms', selectedBedrooms.join(','))
     }
 
-    router.push(`/offers?${query.toString()}`)
+    if (selectedSort) {
+      query.append('sort', selectedSort)
+    }
+
+    return query.toString()
+  }
+
+  const handleSortChange = (val: IOption) => {
+    setSelectedSort(val.id)
+    router.push(`/offers?${buildQueryParams()}`)
+  }
+
+  const handleSearch = () => {
+    router.push(`/offers?${buildQueryParams()}`)
   }
 
   const resetFilters = () => {
@@ -82,6 +93,7 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
     setLocationInput('')
     setSelectedTypeOption(null)
     setSelectedBedroomsOption(null)
+    setSelectedSort('')
     router.push('/offers')
   }
 
@@ -117,11 +129,6 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
               setSelectedBedrooms([val.id])
             }}
           />
-          {/* <Select
-            options={mapDocsToOptions(filterData?.price.docs)}
-            label="Select price"
-            onChange={(val: IOption) => setSelectedPrice([val.id])}
-          /> */}
           <Button typeBtn={'btn'} titlebtn="Search" icon={<SearchSvg />} onClick={handleSearch} />
           <Button typeBtn={'outline'} titlebtn="Reset" onClick={resetFilters} />
         </div>
@@ -136,7 +143,8 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
             options={sortOptions}
             label="Sort by"
             className="offers--select"
-            onChange={(val: IOption) => setSelectedType([val.id])}
+            value={sortOptions.find((opt) => opt.id === selectedSort) || null}
+            onChange={handleSortChange}
           />
         </div>
         <div className="offers__products products">

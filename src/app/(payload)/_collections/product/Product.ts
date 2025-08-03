@@ -234,7 +234,6 @@ const Product: CollectionConfig = {
           page: 1,
         })
 
-        // Отримаємо всі продукти
         const allProducts = await req.payload.find({
           collection: 'products',
           limit: 1000,

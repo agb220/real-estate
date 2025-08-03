@@ -1,5 +1,4 @@
 export enum ProductCatalogSortByEnum {
-  all = 'all',
   price_high = 'price_high',
   price_low = 'price_low',
 }
