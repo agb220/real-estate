@@ -1614,7 +1614,7 @@ main {
   border: 1px solid #17c2b1;
   border-top: none;
   overflow-y: auto;
-  max-height: 12.5rem;
+  max-height: 10.3125rem;
 }
 .select__option {
   padding: 0.9375rem 0.625rem 0.9375rem 0.625rem;

@@ -64,7 +64,7 @@ const Select = ({
           {options.map((option, index) => (
             <li
               key={index}
-              className={`select__option ${option.name === selected?.name ? 'selected' : ''}`}
+              className={`select__option ${option.name === selectedOption?.name ? 'selected' : ''}`}
               onClick={() => handleSelect(option)}
             >
               {option.name}
