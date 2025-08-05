@@ -10,6 +10,8 @@ import Select, { IOption } from '../shared/Select'
 import Button from '../shared/Button'
 import { SearchSvg } from '../icons'
 
+export const MOCK_LIMIT_PRODUCT = 12
+
 interface OffersBlockProps {
   data: Product[]
   filterData?: FilterDataResponse
@@ -110,6 +112,7 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
             value={locationInput}
             onChange={(e: any) => setLocationInput(e.target.value)}
             onBlur={() => {}}
+            className="input-offers"
           />
           <Select
             options={mapDocsToOptions(filterData?.productType.docs)}
@@ -119,6 +122,7 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
               setSelectedTypeOption(val)
               setSelectedType([val.id])
             }}
+            className="offers--select"
           />
           <Select
             options={mapDocsToOptions(filterData?.bedrooms.docs)}
@@ -128,9 +132,15 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
               setSelectedBedroomsOption(val)
               setSelectedBedrooms([val.id])
             }}
+            className="offers--select"
           />
           <Button typeBtn={'btn'} titlebtn="Search" icon={<SearchSvg />} onClick={handleSearch} />
-          <Button typeBtn={'outline'} titlebtn="Reset" onClick={resetFilters} />
+          <Button
+            typeBtn={'outline'}
+            titlebtn="Reset"
+            onClick={resetFilters}
+            className="btn-offers-reset"
+          />
         </div>
       </div>
       <div className="offers__line"></div>
@@ -152,7 +162,7 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
             {data && data.map((product, index) => <ProductCard key={index} product={product} />)}
           </div>
         </div>
-        <Button typeBtn={'outline'} titlebtn="Show more" />
+        {data.length > MOCK_LIMIT_PRODUCT && <Button typeBtn={'outline'} titlebtn="Show more" />}
       </div>
     </section>
   )

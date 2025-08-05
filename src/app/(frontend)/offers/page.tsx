@@ -2,7 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import LayoutWrapper from '../components/layout/LayoutWrapper'
 import SubscribeSection from '../components/SubscribeSection'
-import OffersBlock from '../components/offersComponents/OffersBlock'
+import OffersBlock, { MOCK_LIMIT_PRODUCT } from '../components/offersComponents/OffersBlock'
 import {
   ProductCatalogSearchParams,
   SearchProductsPageProps,
@@ -70,7 +70,7 @@ export default async function OffersPage(props: SearchProductsPageProps) {
 
   const findResult = await payload.find({
     collection: 'products',
-    limit: 12,
+    limit: MOCK_LIMIT_PRODUCT,
     page: 1,
     sort: sortParams.length > 1 ? sortParams : sortParams[0] || undefined,
     where: whereState,

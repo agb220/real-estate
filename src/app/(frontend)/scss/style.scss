@@ -239,7 +239,7 @@ main {
     transition:
       border-color 0.3s,
       color 0.3s;
-    width: fit-content;
+    // width: fit-content;
 
     @media (any-hover: hover), (pointer: fine) {
       &:hover {

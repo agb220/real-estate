@@ -109,6 +109,8 @@
   }
 
   .input-block {
-    min-width: toRem(283);
+    @media (min-width: 47em) {
+      min-width: toRem(283);
+    }
   }
 }
