@@ -6,6 +6,7 @@ interface CommonProps {
   error?: string
   label?: string
   textarea?: boolean
+  className?: string
 }
 
 type InputProps =
@@ -16,7 +17,7 @@ const Input = (props: InputProps) => {
   const { label, icon, textarea, error, ...rest } = props
 
   return (
-    <div className="input-block">
+    <div className={`input-block ${props.className}`}>
       {label && (
         <label className="label" htmlFor={label}>
           {label}

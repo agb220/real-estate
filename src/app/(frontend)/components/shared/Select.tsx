@@ -2,25 +2,38 @@
 import { useState, useRef, useEffect } from 'react'
 import { ChevronSvg } from '../icons'
 
-type Option = {
-  id: string | number
+export type IOption = {
+  id: string
   name: string
 }
 
 interface CustomSelectProps {
-  options: Option[]
-  defaultValue?: Option
-  onChange?: (option: Option) => void
+  options: IOption[]
+  defaultValue?: IOption
+  value?: IOption | null
+  onChange?: (option: IOption) => void
   className?: string
+  label?: string
 }
 
-const Select = ({ options, defaultValue, onChange, className }: CustomSelectProps) => {
+const Select = ({
+  options,
+  defaultValue,
+  onChange,
+  className,
+  label,
+  value,
+}: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState(defaultValue || options[0])
+  const [selected, setSelected] = useState<IOption | null>(defaultValue || null)
   const selectRef = useRef<HTMLDivElement>(null)
 
-  const handleSelect = (option: any) => {
-    setSelected(option)
+  const selectedOption = value !== undefined ? value : selected
+
+  const handleSelect = (option: IOption) => {
+    if (value === undefined) {
+      setSelected(option)
+    }
     onChange?.(option)
     setIsOpen(false)
   }
@@ -41,7 +54,9 @@ const Select = ({ options, defaultValue, onChange, className }: CustomSelectProp
   return (
     <div className={`input-wrapper select ${isOpen ? 'open' : ''} ${className}`} ref={selectRef}>
       <div className="select__header" onClick={() => setIsOpen((prev) => !prev)}>
-        <span>{selected.name}</span>
+        <span className={!selectedOption ? 'placeholder' : ''}>
+          {selectedOption ? selectedOption.name : label}
+        </span>
         <ChevronSvg className="chevron-icon" />
       </div>
       {isOpen && (
@@ -49,7 +64,7 @@ const Select = ({ options, defaultValue, onChange, className }: CustomSelectProp
           {options.map((option, index) => (
             <li
               key={index}
-              className={`select__option ${option.name === selected.name ? 'selected' : ''}`}
+              className={`select__option ${option.name === selectedOption?.name ? 'selected' : ''}`}
               onClick={() => handleSelect(option)}
             >
               {option.name}

@@ -1,0 +1,140 @@
+@use '../_index' as *;
+
+.offers {
+  padding: toRem(24) 0 toRem(120) 0;
+  // .offers__container
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+    .button {
+      align-self: center;
+      min-width: toRem(152);
+      justify-content: center;
+    }
+  }
+
+  // .offers__title
+
+  &__title {
+    font-size: toRem(24);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: toRem(24);
+
+    @media (min-width: 47em) {
+      font-size: toRem(26.56);
+    }
+
+    @media (min-width: 65em) {
+      font-size: toRem(33.203);
+    }
+  }
+
+  // .offers__filters
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: toRem(30);
+
+    @media (min-width: 65em) {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: toRem(16);
+    }
+
+    .input-block {
+      max-width: toRem(388);
+    }
+
+    .button {
+      min-width: toRem(148);
+    }
+  }
+
+  // .offers__line
+
+  &__line {
+    margin: toRem(32) 0;
+    height: 1px;
+    background-color: $colorDarkGrey;
+  }
+
+  // .offers__sorting
+
+  &__sorting {
+    display: flex;
+    flex-direction: column-reverse;
+
+    gap: toRem(25);
+
+    @media (min-width: 47em) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  // .offers__counter
+
+  &__counter {
+    font-size: toRem(21.25);
+    line-height: 1.6;
+  }
+
+  // .offers__products
+
+  &__products {
+  }
+}
+.products {
+  padding: toRem(24) 0 toRem(24) 0;
+
+  // .products__wrapper
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: toRem(24);
+
+    @media (min-width: 47em) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 65em) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .product {
+      min-width: 100%;
+    }
+  }
+}
+
+//.offers--select
+
+.offers--select {
+  @media (min-width: 65em) {
+    max-width: fit-content;
+    min-width: toRem(200);
+  }
+}
+
+//.btn-offers-reset
+
+.btn-offers-reset {
+  width: 100%;
+  min-height: toRem(56);
+
+  @media (min-width: 65em) {
+    width: fit-content !important;
+  }
+}
+
+//.input-offers
+.input-offers {
+  max-width: 100% !important;
+}

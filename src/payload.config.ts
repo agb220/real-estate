@@ -50,19 +50,20 @@ export default buildConfig({
   },
   collections: [
     ...groupCollections('Other', [Users, Media]),
-    ...groupCollections('Product', [ProductLocation, PropertyTypes, Product]),
+    ...groupCollections('Producs', [ProductLocation, PropertyTypes, Product]),
     ...groupCollections('Reviews', [ReviewsCollection]),
   ],
   globals: [...groupGlobals('Pages', [MainPage])],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
+
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+  secret: process.env.PAYLOAD_SECRET || '',
   sharp,
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder

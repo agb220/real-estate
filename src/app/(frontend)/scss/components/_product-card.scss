@@ -9,10 +9,6 @@
     min-width: toRem(384);
   }
 
-  @media (min-width: 65em) {
-    flex-basis: toRem(411);
-    min-width: toRem(411);
-  }
   // .product__wrapper
 
   &__wrapper {
