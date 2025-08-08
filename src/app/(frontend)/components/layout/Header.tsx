@@ -1,16 +1,21 @@
 'use client'
+
 import { useState } from 'react'
 import Image from 'next/image'
-import Sidebar from './Sidebar'
 
-import '../../../../../css/style.css'
+import Sidebar from './Sidebar'
+import ContactUsModal from '../modals/ContactUsModal'
+import { useScrollToSection } from '@/utilities/scrollTo'
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [isMenuActive, setIsMenuActive] = useState(false)
+  const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
 
-  const handleClose = () => {
+  const scrollToSection = useScrollToSection()
+
+  const handleCloseSidebar = () => {
     setIsClosing(true)
     setIsMenuActive(false)
 
@@ -20,9 +25,14 @@ const Header = () => {
     }, 300)
   }
 
-  const handleOpen = () => {
+  const handleOpenSidebar = () => {
     setModalOpen(true)
     setIsMenuActive(true)
+  }
+
+  const openContactUsModalFromSidebar = () => {
+    setContactUsModalOpen(true)
+    handleCloseSidebar()
   }
 
   return (
@@ -41,9 +51,9 @@ const Header = () => {
             <nav className="header__navigation menu">
               <ul className="menu__list">
                 <li className="menu__item">
-                  <a href="#top-offers" className="menu__link">
+                  <button className="menu__link" onClick={() => scrollToSection('top-offers')}>
                     Top offers
-                  </a>
+                  </button>
                 </li>
                 <li className="menu__item">
                   <a href="/offers" className="menu__link">
@@ -51,19 +61,19 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="menu__item">
-                  <a href="#testimonials" className="menu__link">
+                  <button className="menu__link" onClick={() => scrollToSection('testimonials')}>
                     Testimonials
-                  </a>
+                  </button>
                 </li>
                 <li className="menu__item">
-                  <a href="#about-us" className="menu__link">
+                  <button className="menu__link" onClick={() => scrollToSection('about-us')}>
                     About us
-                  </a>
+                  </button>
                 </li>
                 <li className="menu__item">
-                  <a href="#contact-us" className="menu__link">
+                  <button className="menu__link" onClick={() => setContactUsModalOpen(true)}>
                     Contact us
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>
@@ -73,9 +83,9 @@ const Header = () => {
               type="button"
               onClick={() => {
                 if (modalOpen) {
-                  handleClose()
+                  handleCloseSidebar()
                 } else {
-                  handleOpen()
+                  handleOpenSidebar()
                 }
               }}
             >
@@ -85,7 +95,16 @@ const Header = () => {
         </div>
       </div>
 
-      {modalOpen && <Sidebar isClosing={isClosing} onClose={handleClose} />}
+      {modalOpen && (
+        <Sidebar
+          isClosing={isClosing}
+          onClose={handleCloseSidebar}
+          openContactUsModal={openContactUsModalFromSidebar}
+        />
+      )}
+      {contactUsModalOpen && (
+        <ContactUsModal isOpen={contactUsModalOpen} setIsOpenModal={setContactUsModalOpen} />
+      )}
     </header>
   )
 }

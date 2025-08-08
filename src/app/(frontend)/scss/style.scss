@@ -3,6 +3,16 @@
 @use 'components/_sidebar';
 @use 'components/_footer';
 @use 'components/_welcome-section';
+@use 'components/_product-card';
+@use 'components/_top-offers';
+@use 'components/_reviews-section';
+@use 'components/_about-us';
+@use 'components/_subscribe';
+@use 'components/_contact-us';
+@use 'components/_offers';
+@use 'components/_images-slider';
+@use 'components/_product-block';
+@use 'components/_related-products';
 
 html {
   scroll-behavior: smooth;
@@ -52,6 +62,18 @@ main {
 
 // --- ui kit ----- //
 
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(2);
+  width: 100%;
+}
+
+.label {
+  line-height: 1.58;
+  margin-bottom: toRem(4);
+}
+
 .input-wrapper {
   display: flex;
   flex-basis: toRem(280);
@@ -87,7 +109,43 @@ main {
   }
 }
 
+.input-error {
+  font-size: toRem(14);
+  margin-top: toRem(2);
+  color: red;
+}
+
 .input--icon {
+}
+
+.textarea--input {
+  min-height: toRem(235);
+  padding: toRem(15) toRem(16) toRem(15) toRem(16);
+  border-radius: 4px;
+  border: 1px solid $colorDarkGrey;
+  background: $colorWhite;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1) inset;
+
+  &:focus,
+  &:focus-visible {
+    outline: $colorBlue;
+  }
+
+  &:active {
+    border-color: $colorBlue;
+  }
+
+  @media (any-hover: hover), (pointer: fine) {
+    &:hover {
+      border-color: $colorBlue;
+    }
+  }
+
+  .input {
+    &::placeholder {
+      color: $colorDarkGrey;
+    }
+  }
 }
 
 // --- input select --- ///
@@ -103,6 +161,7 @@ main {
   &__header {
     display: flex;
     justify-content: space-between;
+    gap: toRem(25);
     align-items: center;
     width: 100%;
     transition: border-color 0.3s;
@@ -126,7 +185,7 @@ main {
     border: 1px solid $colorBlue;
     border-top: none;
     overflow-y: auto;
-    max-height: toRem(200);
+    max-height: toRem(165);
   }
 
   &__option {
@@ -143,23 +202,26 @@ main {
       background: $colorLightBlue;
     }
   }
+
+  .placeholder {
+    color: $colorDarkGrey;
+  }
 }
 
 .button {
   display: flex;
-  gap: toRem(8);
   align-items: center;
+  gap: toRem(8);
   padding: toRem(10) toRem(16) toRem(10) toRem(16);
   border-radius: 4px;
   border: 1px solid $colorBlue;
   font-weight: 700;
-  width: 100%;
+  width: fit-content;
   max-height: toRem(56);
 
   &--btn {
     background-color: $bgBlue;
     color: $colorWhite;
-    flex-basis: toRem(148);
     transition:
       border-color 0.3s,
       opacity 0.3s;
@@ -172,10 +234,204 @@ main {
     }
   }
 
-  &--outline {
-  }
-  // .button__icon
+  // .button--outline
 
-  &__icon {
+  &--outline {
+    color: $colorBlue;
+    transition:
+      border-color 0.3s,
+      color 0.3s;
+    // width: fit-content;
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        background-color: $colorBlue;
+        color: $colorWhite;
+      }
+    }
   }
+
+  // .button--icon
+  &--icon {
+    background-color: $bgBlue;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: toRem(56);
+    padding: toRem(18) toRem(18) toRem(18) toRem(18);
+    transition: color 0.3s;
+
+    &:disabled {
+      background-color: $bgLightGrey;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        border-color: $colorDarkBlue;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  span {
+    flex-grow: 0;
+  }
+}
+
+// *---- embla ----* //
+
+.embla__arrow-left svg {
+  rotate: 180deg;
+}
+
+.embla__arrow-right {
+}
+
+//* ----- title ------- *//
+
+// .title-block
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(16);
+
+  @media (min-width: 47em) {
+    max-width: toRem(588);
+  }
+  // .title-block__title
+
+  &__title {
+    font-size: toRem(28);
+    font-weight: 700;
+    line-height: 1.2;
+
+    @media (min-width: 47em) {
+      font-size: toRem(33.2);
+    }
+
+    @media (min-width: 65em) {
+      font-size: toRem(41.504);
+    }
+  }
+
+  // .title-block__description
+
+  &__description {
+    font-size: toRem(16);
+
+    @media (min-width: 47em) {
+      font-size: toRem(17);
+    }
+  }
+}
+
+//*----- Modal ----------*//
+
+.modal {
+  max-height: 100svh;
+  max-width: toRem(600);
+  padding: toRem(40) toRem(20);
+
+  opacity: 0;
+  transform: translateY(-30px);
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+
+  // .modal--open
+  &--open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // .modal--close
+
+  &--close {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  // .modal__wrapper
+
+  &__wrapper {
+    position: relative;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: toRem(30);
+  }
+
+  // .modal__button
+
+  &__button {
+    position: absolute;
+    top: toRem(-35);
+    right: toRem(-4);
+    align-self: flex-end;
+  }
+
+  // .modal-button
+
+  .modal-button {
+    background-color: $colorWhite;
+  }
+
+  // .modal__content
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(25);
+    overflow-y: auto;
+  }
+}
+
+.modal-overlay {
+  opacity: 0;
+  transition: opacity 300ms ease;
+
+  &--open {
+    opacity: 1;
+  }
+
+  &--close {
+    opacity: 0;
+  }
+}
+
+//*----- bread crumbs --------*//
+
+.bread-crumbs {
+  padding: toRem(24) 0 toRem(16) 0;
+  // .bread-crumbs__container
+
+  &__container {
+  }
+
+  // .bread-crumbs__link
+
+  &__link {
+    display: flex;
+    gap: toRem(8);
+    align-items: center;
+    transform: opacity 0.3s;
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+//*---- MAP -----*//
+//.map
+
+.map {
+  height: toRem(340);
 }

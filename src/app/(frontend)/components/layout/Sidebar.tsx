@@ -1,4 +1,21 @@
-const Sidebar = ({ isClosing, onClose }: { isClosing: boolean; onClose: () => void }) => {
+'use client'
+
+import { useScrollToSection } from '@/utilities/scrollTo'
+
+interface SidebarProps {
+  isClosing: boolean
+  onClose: () => void
+  openContactUsModal: () => void
+}
+
+const Sidebar = ({ isClosing, onClose, openContactUsModal }: SidebarProps) => {
+  const scrollToSection = useScrollToSection()
+
+  const handleClick = (id: string) => {
+    onClose()
+    scrollToSection(id)
+  }
+
   return (
     <div
       className={`sidebar ${isClosing ? 'sidebar--closing' : 'sidebar--open'}`}
@@ -8,9 +25,9 @@ const Sidebar = ({ isClosing, onClose }: { isClosing: boolean; onClose: () => vo
         <nav className="sidebar__nav">
           <ul className="sidebar__list">
             <li className="sidebar__item">
-              <a href="#top-offers" onClick={onClose} className="sidebar__link">
+              <button className="sidebar__link" onClick={() => handleClick('top-offers')}>
                 Top offers
-              </a>
+              </button>
             </li>
             <li className="sidebar__item">
               <a href="/offers" className="sidebar__link" onClick={onClose}>
@@ -18,19 +35,19 @@ const Sidebar = ({ isClosing, onClose }: { isClosing: boolean; onClose: () => vo
               </a>
             </li>
             <li className="sidebar__item">
-              <a href="#testimonials" className="sidebar__link" onClick={onClose}>
+              <button className="sidebar__link" onClick={() => handleClick('testimonials')}>
                 Testimonials
-              </a>
+              </button>
             </li>
             <li className="sidebar__item">
-              <a href="#about-us" className="sidebar_link" onClick={onClose}>
+              <button className="sidebar_link" onClick={() => handleClick('about-us')}>
                 About us
-              </a>
+              </button>
             </li>
             <li className="sidebar__item">
-              <a href="#contact-us" className="sidebar__link" onClick={onClose}>
+              <button className="sidebar__link" onClick={openContactUsModal}>
                 Contact us
-              </a>
+              </button>
             </li>
           </ul>
         </nav>

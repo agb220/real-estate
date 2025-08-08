@@ -1,0 +1,136 @@
+@use '../_index' as *;
+
+.about-us {
+  padding: toRem(40) 0 toRem(64) 0;
+
+  @media (min-width: 47em) {
+    padding: toRem(64) 0 toRem(64) 0;
+  }
+
+  @media (min-width: 65em) {
+    padding: toRem(120) 0 toRem(120) 0;
+  }
+  // .about-us__container
+
+  &__container {
+  }
+
+  // .about-us__wrapper
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: toRem(40);
+    overflow: hidden;
+
+    @media (min-width: 65em) {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: toRem(24);
+    }
+  }
+
+  // .about-us__images
+
+  &__images {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+    @media (min-width: 65em) {
+      width: auto;
+    }
+  }
+
+  // .about-us__decor
+
+  &__decor {
+    position: absolute;
+    top: toRem(-12);
+    left: toRem(-20);
+    aspect-ratio: 294 / 275;
+
+    @media (min-width: 47em) {
+      aspect-ratio: 442 / 289;
+    }
+
+    @media (min-width: 65em) {
+      aspect-ratio: 447 / 312;
+    }
+  }
+
+  // .about-us__image
+
+  &__image {
+    display: block;
+    position: relative;
+    top: toRem(40);
+    left: toRem(40);
+    z-index: 1;
+    max-height: toRem(385);
+    width: 100%;
+    overflow: hidden;
+
+    border-radius: 4px;
+    background: #c4c4c4;
+    box-shadow: 0 4px 20px 0 rgba(71, 100, 195, 0.1);
+
+    img {
+      object-fit: cover !important;
+      object-position: 38% center !important;
+      width: 100%;
+
+      @media (min-width: 47em) {
+        object-position: center !important;
+      }
+    }
+
+    @media (min-width: 47em) {
+      object-position: center !important;
+    }
+
+    @media (min-width: 65em) {
+      top: toRem(30);
+      left: toRem(60);
+      max-height: toRem(416);
+      max-width: toRem(626);
+    }
+  }
+
+  // .about-us__content
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(16);
+
+    p {
+      font-size: toRem(16);
+
+      @media (min-width: 47em) {
+        font-size: toRem(17);
+      }
+    }
+
+    @media (min-width: 65em) {
+      flex-basis: toRem(384);
+    }
+  }
+
+  // .about-us__title
+
+  &__title {
+    font-size: toRem(38);
+    font-weight: 700;
+    line-height: 1.2;
+
+    @media (min-width: 47em) {
+      font-size: toRem(33.2);
+    }
+
+    @media (min-width: 65em) {
+      font-size: toRem(41.504);
+    }
+  }
+}

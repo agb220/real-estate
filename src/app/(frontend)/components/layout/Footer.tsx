@@ -1,21 +1,28 @@
+'use client'
 import Image from 'next/image'
+import { useState } from 'react'
+import ContactUsModal from '../modals/ContactUsModal'
+import { useScrollToSection } from '@/utilities/scrollTo'
 
 const Footer = () => {
+  const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
+  const scrollToSection = useScrollToSection()
+
   return (
     <footer className="footer">
       <div className="footer__container">
         <div className="footer__wrapper">
           <div className="footer__logo">
             <a href="/">
-              <Image src="images/logo-white.svg" alt="Real estate" width="201" height="40" />
+              <Image src="/images/logo-white.svg" alt="Real estate" width="201" height="40" />
             </a>
           </div>
           <div className="footer__menu footer-menu">
             <ul className="footer-menu__list">
               <li className="footer-menu__item">
-                <a href="#top-offers" className="footer-menu__link">
+                <button className="footer-menu__link" onClick={() => scrollToSection('top-offers')}>
                   Top offers
-                </a>
+                </button>
               </li>
               <li className="footer-menu__item">
                 <a href="/offers" className="footer-menu__link">
@@ -23,24 +30,30 @@ const Footer = () => {
                 </a>
               </li>
               <li className="footer-menu__item">
-                <a href="#testimonials" className="footer-menu__link">
+                <button
+                  className="footer-menu__link"
+                  onClick={() => scrollToSection('testimonials')}
+                >
                   Testimonials
-                </a>
+                </button>
               </li>
               <li className="footer-menu__item">
-                <a href="#about-us" className="footer-menu__link">
+                <button className="footer-menu__link" onClick={() => scrollToSection('about-us')}>
                   About us
-                </a>
+                </button>
               </li>
               <li className="footer-menu__item">
-                <a href="#contact-us" className="footer-menu__link">
+                <button className="footer-menu__link" onClick={() => setContactUsModalOpen(true)}>
                   Contact us
-                </a>
+                </button>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      {contactUsModalOpen && (
+        <ContactUsModal isOpen={contactUsModalOpen} setIsOpenModal={setContactUsModalOpen} />
+      )}
     </footer>
   )
 }
