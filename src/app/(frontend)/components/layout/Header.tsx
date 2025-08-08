@@ -5,8 +5,6 @@ import Image from 'next/image'
 
 import Sidebar from './Sidebar'
 import ContactUsModal from '../modals/ContactUsModal'
-
-import '../../../../../css/style.css'
 import { useScrollToSection } from '@/utilities/scrollTo'
 
 const Header = () => {

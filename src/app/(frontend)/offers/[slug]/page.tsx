@@ -6,6 +6,7 @@ import SubscribeSection from '../../components/SubscribeSection'
 import { Product } from '@/payload-types'
 import ProductBlock from '../../components/ProductBlock/ProductBlock'
 import { BackSvg } from '../../components/icons'
+import RelatedProductsSection from '../../components/RelatedProductsSection'
 
 export default async function OfferBySlugPage({ params }: any) {
   const { slug } = await params
@@ -46,6 +47,13 @@ export default async function OfferBySlugPage({ params }: any) {
           </div>
         </div>
         {productObj && <ProductBlock {...productObj} />}
+        {Array.isArray(productObj.productDetails.relatedProducts) && (
+          <RelatedProductsSection
+            products={productObj.productDetails.relatedProducts.filter(
+              (p): p is Product => typeof p !== 'string',
+            )}
+          />
+        )}
         <SubscribeSection />
       </main>
     </LayoutWrapper>

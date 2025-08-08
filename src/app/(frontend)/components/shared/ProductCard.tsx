@@ -20,6 +20,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             width={384}
             height={269}
             className="product-card__img"
+            draggable={false}
           />
         </a>
         <div className="product-card__content">
