@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="footer__wrapper">
           <div className="footer__logo">
             <a href="/">
-              <Image src="images/logo-white.svg" alt="Real estate" width="201" height="40" />
+              <Image src="/images/logo-white.svg" alt="Real estate" width="201" height="40" />
             </a>
           </div>
           <div className="footer__menu footer-menu">

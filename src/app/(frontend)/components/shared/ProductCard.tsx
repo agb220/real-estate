@@ -8,9 +8,9 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <article className="product">
-      <div className="product__wrapper">
-        <a href={product.slug} className="product__link">
+    <article className="product-card">
+      <div className="product-card__wrapper">
+        <a href={`offers/${product.slug}`} className="product-card__link">
           <Image
             src={getImageUrl({
               media: product.main.mainImage,
@@ -19,15 +19,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
             alt={product.title}
             width={384}
             height={269}
-            className="product__img"
+            className="product-card__img"
           />
         </a>
-        <div className="product__content">
-          <h3 className="product__name">
-            <a href={product.slug}>{product.title}</a>
+        <div className="product-card__content">
+          <h3 className="product-card__name">
+            <a href={`offers/${product.slug}`}>{product.title}</a>
           </h3>
-          <p className="product__price">{product.productDetails.prices.Payment}</p>
-          <p className="product__location">
+          <p className="product-card__price">{product.productDetails.prices.Payment}</p>
+          <p className="product-card__location">
             {typeof product.main.location === 'object' && product.main.location !== null
               ? product.main.location.name
               : product.main.location}

@@ -10,6 +10,8 @@
 @use 'components/_subscribe';
 @use 'components/_contact-us';
 @use 'components/_offers';
+@use 'components/_images-slider';
+@use 'components/_product-block';
 
 html {
   scroll-behavior: smooth;
@@ -213,13 +215,12 @@ main {
   border-radius: 4px;
   border: 1px solid $colorBlue;
   font-weight: 700;
-  width: 100%;
+  width: fit-content;
   max-height: toRem(56);
 
   &--btn {
     background-color: $bgBlue;
     color: $colorWhite;
-    flex-basis: toRem(148);
     transition:
       border-color 0.3s,
       opacity 0.3s;
@@ -400,4 +401,36 @@ main {
   &--close {
     opacity: 0;
   }
+}
+
+//*----- bread crumbs --------*//
+
+.bread-crumbs {
+  padding: toRem(24) 0 toRem(16) 0;
+  // .bread-crumbs__container
+
+  &__container {
+  }
+
+  // .bread-crumbs__link
+
+  &__link {
+    display: flex;
+    gap: toRem(8);
+    align-items: center;
+    transform: opacity 0.3s;
+
+    @media (any-hover: hover), (pointer: fine) {
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+//*---- MAP -----*//
+//.map
+
+.map {
+  height: toRem(340);
 }
