@@ -185,4 +185,22 @@
 }
 
 .btn--hero {
+  width: 100% !important;
+  justify-content: center;
+
+  @media (min-width: 67em) {
+    max-width: toRem(148);
+  }
+}
+
+//.input-form-search
+
+.input-form-search {
+  @media (min-width: 67em) {
+    max-width: toRem(288);
+  }
+
+  @media (min-width: 67em) {
+    max-width: toRem(280);
+  }
 }

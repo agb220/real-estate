@@ -2,15 +2,17 @@
 import type { Styles } from 'react-modal'
 import Modal from 'react-modal'
 import Button from '../shared/Button'
-import ContactUsForm from '../forms/ContactUsForm'
+import { Product } from '@/payload-types'
 import { CloseSvg } from '../icons'
+import ProductCard from '../shared/ProductCard'
 
-interface ModalFormProps {
+interface ProductSearchModalProps {
   isOpen: boolean
   setIsOpenModal: (arg0: boolean) => void
+  findResult: Product[]
 }
 
-const ContactUsModal = (props: ModalFormProps) => {
+const ProductSearchModal = (props: ProductSearchModalProps) => {
   const closeModal = () => {
     document.body.style.overflow = ''
     props.setIsOpenModal(false)
@@ -47,8 +49,12 @@ const ContactUsModal = (props: ModalFormProps) => {
             icon={<CloseSvg />}
           />
         </div>
-        <div className="modal__content">
-          <ContactUsForm />
+        <div className="modal__content product-modal">
+          <div className="product-modal__wrapper">
+            {props.findResult.map((product, index) => (
+              <ProductCard product={product} key={index} />
+            ))}
+          </div>
         </div>
       </div>
     </Modal>
@@ -83,4 +89,4 @@ const modalStyles: Styles = {
   },
 }
 
-export default ContactUsModal
+export default ProductSearchModal

@@ -1,10 +1,13 @@
+'use client'
+import { useState } from 'react'
 import Image from 'next/image'
-import { IHeroSection } from '@/payload-types'
-import { getImageUrl } from '@/utilities/getUrl'
 import Input from './shared/Input'
 import Select from './shared/Select'
 import Button from './shared/Button'
+import { getImageUrl } from '@/utilities/getUrl'
+import { IHeroSection, Product } from '@/payload-types'
 import { SearchSvg } from './icons'
+import ProductSearchModal from './modals/ProductSearchModal'
 
 interface WelcomeSectionProps {
   data: IHeroSection
@@ -12,9 +15,11 @@ interface WelcomeSectionProps {
     id: string
     name: string
   }[]
+  products: Product[]
 }
 
 const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
+  const [modalOpen, setModalOpen] = useState(false)
   return (
     <section className="hero">
       <div className="hero__container">
@@ -24,8 +29,12 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
             <p className="content-block__description">{props.data.description}</p>
             <form action="" className="form-search">
               <div className="form-search__row">
-                <Input placeholder="Search of location" icon />
-                <Select options={props.productTypes} className="select--hero" />
+                <Input placeholder="Search of location" icon className="input-form-search" />
+                <Select
+                  options={props.productTypes}
+                  className="select--hero"
+                  label="Property type"
+                />
               </div>
               <Button
                 titlebtn={'Search'}
@@ -58,6 +67,13 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
           </div>
         </div>
       </div>
+      {modalOpen && (
+        <ProductSearchModal
+          isOpen={modalOpen}
+          setIsOpenModal={setModalOpen}
+          findResult={props.products}
+        />
+      )}
     </section>
   )
 }

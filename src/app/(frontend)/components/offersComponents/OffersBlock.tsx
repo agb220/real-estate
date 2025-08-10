@@ -134,7 +134,13 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
             }}
             className="offers--select"
           />
-          <Button typeBtn={'btn'} titlebtn="Search" icon={<SearchSvg />} onClick={handleSearch} />
+          <Button
+            typeBtn={'btn'}
+            titlebtn="Search"
+            icon={<SearchSvg />}
+            onClick={handleSearch}
+            className="btn-offers-search"
+          />
           <Button
             typeBtn={'outline'}
             titlebtn="Reset"

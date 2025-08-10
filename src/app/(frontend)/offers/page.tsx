@@ -9,6 +9,8 @@ import {
   ShopPageSearchParams,
 } from '@/utilities/types'
 import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
+import { useSearch } from '../context/SearchContext'
+import { useEffect } from 'react'
 
 export const dynamic = 'force-dynamic'
 
@@ -75,6 +77,12 @@ export default async function OffersPage(props: SearchProductsPageProps) {
     sort: sortParams.length > 1 ? sortParams : sortParams[0] || undefined,
     where: whereState,
   })
+
+  // const { products, filterData, fetchProducts } = useSearch()
+
+  // useEffect(() => {
+  //   fetchProducts()
+  // }, [fetchProducts])
 
   return (
     <LayoutWrapper>
