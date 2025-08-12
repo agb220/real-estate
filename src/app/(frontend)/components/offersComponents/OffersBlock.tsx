@@ -6,9 +6,9 @@ import Select, { IOption } from '../shared/Select'
 import Button from '../shared/Button'
 import { SearchSvg } from '../icons'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useSearch } from '../../_context/SearchContext'
+import { MOCK_LIMIT_PRODUCT, useSearch } from '../../_context/SearchContext'
 import { ProductCatalogSearchParams, ProductCatalogSortByEnum } from '@/utilities/types'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import qs from 'qs'
 import { updateStateIfChanged } from '@/utilities/updateStateIfChanged'
 
@@ -21,6 +21,7 @@ interface QsStringifyOptions {
 const OffersBlock = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [loadMoreLimit, setLoadMoreLimit] = useState(MOCK_LIMIT_PRODUCT)
 
   const currentParams = useMemo(() => {
     return qs.parse(searchParams.toString(), {
@@ -131,6 +132,12 @@ const OffersBlock = () => {
     router.push('/offers')
   }
 
+  const handleLoadMore = () => {
+    const newLimit = loadMoreLimit + MOCK_LIMIT_PRODUCT
+    setLoadMoreLimit(newLimit)
+    loadProducts({ limit: newLimit })
+  }
+
   return (
     <section className="offers">
       <div className="offers__container">
@@ -193,6 +200,9 @@ const OffersBlock = () => {
             ))}
           </div>
         </div>
+        {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
+          <Button typeBtn={'outline'} titlebtn="Show more" onClick={handleLoadMore} />
+        )}
       </div>
     </section>
   )

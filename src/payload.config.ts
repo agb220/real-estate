@@ -55,7 +55,8 @@ export default buildConfig({
   ],
   globals: [...groupGlobals('Pages', [MainPage])],
   editor: lexicalEditor(),
-
+  defaultDepth: 3,
+  maxDepth: 10,
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),

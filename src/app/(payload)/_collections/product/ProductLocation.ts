@@ -5,6 +5,9 @@ const ProductLocation: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
   },
+  defaultPopulate: {
+    name: true,
+  },
   fields: [
     {
       name: 'name',

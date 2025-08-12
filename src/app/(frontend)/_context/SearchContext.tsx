@@ -14,7 +14,7 @@ import { Product } from '@/payload-types'
 import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
 import { ProductCatalogSearchParams, ProductCatalogSortByKeys } from '@/utilities/types'
 
-export const MOCK_LIMIT_PRODUCT = 12
+export const MOCK_LIMIT_PRODUCT = 2
 
 interface SearchContextType {
   products?: PaginatedDocs<Product>
@@ -57,12 +57,6 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined)
 export const SearchProvider = (props: SearchProviderProps) => {
   const [products, setProducts] = useState<PaginatedDocs<Product> | undefined>(props.products)
   const [filterData, setFilterData] = useState<FilterDataResponse | undefined>(props.filterData)
-  // const [searchParams, setSearchParams] = useState<ProductCatalogSearchParams>({
-  //   sort: undefined,
-  //   productType: [],
-  //   bedrooms: [],
-  //   locations: [],
-  // })
   const [selectedSearchParams, setSelectedSearchParams] = useState<
     ProductCatalogSearchParams | undefined
   >(props.selectedSearchParams)
@@ -83,24 +77,37 @@ export const SearchProvider = (props: SearchProviderProps) => {
     setLoading(true)
     try {
       let searchRequestParams: any = {
+        depth: 3,
         where: {},
         sort: [],
       }
+
+      console.log(
+        'Existing products locations:',
+        products?.docs.map((p) => p.main.location),
+      )
+
       if (selectedSearchParams) {
         searchRequestParams = generateRequestQuery(selectedSearchParams)
       }
       const requestQuery = qs.stringify(
         {
           pagination: false,
-          depth: 1,
+          depth: 3,
           limit: params.limit,
           sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
           where: searchRequestParams.where,
+          populate: ['main.location', 'main.type', 'main.mainImage', 'main.images'],
         },
         { encode: false },
       )
       const response = await fetch(`/api/products?${requestQuery}`)
       const searchProducts = (await response.json()) as PaginatedDocs<Product>
+
+      console.log(
+        'New products locations:',
+        searchProducts.docs.map((p) => p.main.location),
+      )
 
       setLoading(false)
       if (searchProducts && searchProducts.page === 1) {
@@ -121,12 +128,6 @@ export const SearchProvider = (props: SearchProviderProps) => {
   }
 
   const resetSearch = useCallback(() => {
-    // setSearchParams({
-    //   sort: undefined,
-    //   productType: [],
-    //   bedrooms: [],
-    //   locations: [],
-    // })
     setLocationInput('')
     setSelectedTypeOption([])
     setSelectedBedroomsOption([])
@@ -205,10 +206,6 @@ export const generateRequestQuery = (searchObj: ProductCatalogSearchParams) => {
     sortParams.push('price')
   }
 
-  if (!searchObj.sort) {
-    sortParams.push('-inStock')
-  }
-
   let whereState = {}
 
   if (searchObj.bedrooms.length) {
@@ -241,5 +238,6 @@ export const generateRequestQuery = (searchObj: ProductCatalogSearchParams) => {
   return {
     sort: sortParams,
     where: whereState,
+    depth: 3,
   }
 }
