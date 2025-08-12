@@ -12,7 +12,7 @@ import { useEffect, useMemo, useState } from 'react'
 import qs from 'qs'
 import { updateStateIfChanged } from '@/utilities/updateStateIfChanged'
 
-interface QsStringifyOptions {
+export interface QsStringifyOptions {
   skipEmptyString?: boolean
   skipNull?: boolean
   arrayFormat?: 'indices' | 'brackets' | 'repeat' | 'comma'
@@ -22,12 +22,6 @@ const OffersBlock = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [loadMoreLimit, setLoadMoreLimit] = useState(MOCK_LIMIT_PRODUCT)
-
-  const currentParams = useMemo(() => {
-    return qs.parse(searchParams.toString(), {
-      ...({ arrayFormat: 'comma', parseNumbers: true } as any),
-    }) as unknown as ProductCatalogSearchParams
-  }, [searchParams])
 
   const {
     products,
@@ -43,6 +37,12 @@ const OffersBlock = () => {
     sort,
     resetSearch,
   } = useSearch()
+
+  const currentParams = useMemo(() => {
+    return qs.parse(searchParams.toString(), {
+      ...({ arrayFormat: 'comma', parseNumbers: true } as any),
+    }) as unknown as ProductCatalogSearchParams
+  }, [searchParams])
 
   const mapDocsToOptions = (arr?: { id: string; name: string }[]): IOption[] =>
     arr?.map((val) => ({ id: val.id, name: val.name })) || []
@@ -175,8 +175,19 @@ const OffersBlock = () => {
             onChange={(val) => setSelectedBedroomsOption([val.id])}
             className="offers--select"
           />
-          <Button typeBtn="btn" titlebtn="Search" icon={<SearchSvg />} onClick={handleSearch} />
-          <Button typeBtn="outline" titlebtn="Reset" onClick={handleResetFilters} />
+          <Button
+            typeBtn="btn"
+            titlebtn="Search"
+            icon={<SearchSvg />}
+            onClick={handleSearch}
+            className="btn-offers-search"
+          />
+          <Button
+            typeBtn="outline"
+            titlebtn="Reset"
+            onClick={handleResetFilters}
+            className="btn-offers-reset "
+          />
         </div>
       </div>
       <div className="offers__line"></div>

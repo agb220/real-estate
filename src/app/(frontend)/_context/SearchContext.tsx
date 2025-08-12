@@ -82,11 +82,6 @@ export const SearchProvider = (props: SearchProviderProps) => {
         sort: [],
       }
 
-      console.log(
-        'Existing products locations:',
-        products?.docs.map((p) => p.main.location),
-      )
-
       if (selectedSearchParams) {
         searchRequestParams = generateRequestQuery(selectedSearchParams)
       }
@@ -103,11 +98,6 @@ export const SearchProvider = (props: SearchProviderProps) => {
       )
       const response = await fetch(`/api/products?${requestQuery}`)
       const searchProducts = (await response.json()) as PaginatedDocs<Product>
-
-      console.log(
-        'New products locations:',
-        searchProducts.docs.map((p) => p.main.location),
-      )
 
       setLoading(false)
       if (searchProducts && searchProducts.page === 1) {

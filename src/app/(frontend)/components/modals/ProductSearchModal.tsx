@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import type { Styles } from 'react-modal'
 import Modal from 'react-modal'
 import Button from '../shared/Button'
@@ -17,9 +18,12 @@ const ProductSearchModal = (props: ProductSearchModalProps) => {
     document.body.style.overflow = ''
     props.setIsOpenModal(false)
   }
+
   if (props.isOpen) {
     document.body.style.overflow = 'hidden'
   }
+
+  console.log('props.findResult', props.findResult)
 
   return (
     <Modal
@@ -51,10 +55,21 @@ const ProductSearchModal = (props: ProductSearchModalProps) => {
         </div>
         <div className="modal__content product-modal">
           <div className="product-modal__wrapper">
-            {props.findResult.map((product, index) => (
-              <ProductCard product={product} key={index} />
-            ))}
+            {props.findResult.length > 0 ? (
+              props.findResult.map((product, index) => (
+                <ProductCard product={product} key={index} />
+              ))
+            ) : (
+              <>Not found, please check your search parametrs</>
+            )}
           </div>
+          <Link
+            href={'/offers'}
+            className="button button--outline link--outline"
+            onClick={closeModal}
+          >
+            See all
+          </Link>
         </div>
       </div>
     </Modal>

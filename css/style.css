@@ -2371,8 +2371,8 @@ main {
 }
 .modal__button {
   position: absolute;
-  top: -2.1875rem;
-  right: -0.25rem;
+  top: -3.125rem;
+  right: -0.3125rem;
   -ms-flex-item-align: end;
       align-self: flex-end;
 }
@@ -2426,4 +2426,9 @@ main {
 
 .map {
   height: 21.25rem;
+}
+
+.link--outline {
+  -ms-flex-item-align: center;
+      align-self: center;
 }
