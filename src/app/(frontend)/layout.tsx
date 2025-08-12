@@ -1,7 +1,6 @@
 import React from 'react'
 import { Poppins } from 'next/font/google'
 import { Open_Sans } from 'next/font/google'
-import { SearchProvider } from './context/SearchContext'
 
 import '../../../css/style.css'
 
@@ -36,9 +35,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <link rel="manifest" href="/images/site.webmanifest" />
       </head>
       <body>
-        <SearchProvider>
-          <main>{children}</main>
-        </SearchProvider>
+        <main>{children}</main>
       </body>
     </html>
   )

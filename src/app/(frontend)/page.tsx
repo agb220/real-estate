@@ -14,7 +14,7 @@ import {
   SearchProductsPageProps,
   ShopPageSearchParams,
 } from '@/utilities/types'
-import { MOCK_LIMIT_PRODUCT } from './components/offersComponents/OffersBlock'
+import { MOCK_LIMIT_PRODUCT } from './_context/SearchContext'
 
 export const dynamic = 'force-dynamic'
 
