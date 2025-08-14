@@ -14,7 +14,7 @@ import { Product } from '@/payload-types'
 import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
 import { ProductCatalogSearchParams, ProductCatalogSortByKeys } from '@/utilities/types'
 
-export const MOCK_LIMIT_PRODUCT = 2
+export const MOCK_LIMIT_PRODUCT = 8
 
 interface SearchContextType {
   products?: PaginatedDocs<Product>

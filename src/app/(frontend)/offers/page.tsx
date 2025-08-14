@@ -72,7 +72,7 @@ export default async function OffersPage(props: SearchProductsPageProps) {
   const findResult = await payload.find({
     collection: 'products',
     depth: 3,
-    limit: 2,
+    limit: MOCK_LIMIT_PRODUCT,
     page: 1,
     sort: sortParams.length > 1 ? sortParams : sortParams[0] || undefined,
     where: whereState,

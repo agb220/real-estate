@@ -23,8 +23,6 @@ const ProductSearchModal = (props: ProductSearchModalProps) => {
     document.body.style.overflow = 'hidden'
   }
 
-  console.log('props.findResult', props.findResult)
-
   return (
     <Modal
       isOpen={props.isOpen}
