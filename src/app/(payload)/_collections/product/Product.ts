@@ -3,6 +3,10 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 const Product: CollectionConfig = {
   slug: 'products',
+  access: {
+    read: () => true,
+  },
+
   labels: {
     plural: {
       en: 'Products',
@@ -236,7 +240,7 @@ const Product: CollectionConfig = {
 
         const allProducts = await req.payload.find({
           collection: 'products',
-          limit: 1000,
+          limit: 2,
           page: 1,
         })
 

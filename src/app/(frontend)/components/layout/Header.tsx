@@ -100,6 +100,7 @@ const Header = () => {
           isClosing={isClosing}
           onClose={handleCloseSidebar}
           openContactUsModal={openContactUsModalFromSidebar}
+          isOpen={modalOpen}
         />
       )}
       {contactUsModalOpen && (

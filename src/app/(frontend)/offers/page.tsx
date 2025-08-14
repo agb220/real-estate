@@ -2,13 +2,14 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import LayoutWrapper from '../components/layout/LayoutWrapper'
 import SubscribeSection from '../components/SubscribeSection'
-import OffersBlock, { MOCK_LIMIT_PRODUCT } from '../components/offersComponents/OffersBlock'
+import OffersBlock from '../components/offersComponents/OffersBlock'
 import {
   ProductCatalogSearchParams,
   SearchProductsPageProps,
   ShopPageSearchParams,
 } from '@/utilities/types'
 import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
+import { MOCK_LIMIT_PRODUCT, SearchProvider } from '../_context/SearchContext'
 
 export const dynamic = 'force-dynamic'
 
@@ -70,7 +71,8 @@ export default async function OffersPage(props: SearchProductsPageProps) {
 
   const findResult = await payload.find({
     collection: 'products',
-    limit: MOCK_LIMIT_PRODUCT,
+    depth: 3,
+    limit: 2,
     page: 1,
     sort: sortParams.length > 1 ? sortParams : sortParams[0] || undefined,
     where: whereState,
@@ -79,12 +81,14 @@ export default async function OffersPage(props: SearchProductsPageProps) {
   return (
     <LayoutWrapper>
       <main>
-        <OffersBlock
-          data={findResult.docs}
+        <SearchProvider
+          products={findResult}
           filterData={filterData}
           selectedSearchParams={searchObj}
-        />
-        <SubscribeSection />
+        >
+          <OffersBlock />
+          <SubscribeSection />
+        </SearchProvider>
       </main>
     </LayoutWrapper>
   )

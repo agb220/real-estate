@@ -370,8 +370,8 @@ main {
 
   &__button {
     position: absolute;
-    top: toRem(-35);
-    right: toRem(-4);
+    top: toRem(-50);
+    right: toRem(-5);
     align-self: flex-end;
   }
 
@@ -434,4 +434,10 @@ main {
 
 .map {
   height: toRem(340);
+}
+
+//*-------.link--outline-------*//
+
+.link--outline {
+  align-self: center;
 }

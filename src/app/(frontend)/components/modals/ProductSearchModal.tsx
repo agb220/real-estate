@@ -1,23 +1,29 @@
 'use client'
+import Link from 'next/link'
 import type { Styles } from 'react-modal'
 import Modal from 'react-modal'
 import Button from '../shared/Button'
-import ContactUsForm from '../forms/ContactUsForm'
+import { Product } from '@/payload-types'
 import { CloseSvg } from '../icons'
+import ProductCard from '../shared/ProductCard'
 
-interface ModalFormProps {
+interface ProductSearchModalProps {
   isOpen: boolean
   setIsOpenModal: (arg0: boolean) => void
+  findResult: Product[]
 }
 
-const ContactUsModal = (props: ModalFormProps) => {
+const ProductSearchModal = (props: ProductSearchModalProps) => {
   const closeModal = () => {
     document.body.style.overflow = ''
     props.setIsOpenModal(false)
   }
+
   if (props.isOpen) {
     document.body.style.overflow = 'hidden'
   }
+
+  console.log('props.findResult', props.findResult)
 
   return (
     <Modal
@@ -47,8 +53,23 @@ const ContactUsModal = (props: ModalFormProps) => {
             icon={<CloseSvg />}
           />
         </div>
-        <div className="modal__content">
-          <ContactUsForm />
+        <div className="modal__content product-modal">
+          <div className="product-modal__wrapper">
+            {props.findResult.length > 0 ? (
+              props.findResult.map((product, index) => (
+                <ProductCard product={product} key={index} />
+              ))
+            ) : (
+              <>Not found, please check your search parametrs</>
+            )}
+          </div>
+          <Link
+            href={'/offers'}
+            className="button button--outline link--outline"
+            onClick={closeModal}
+          >
+            See all
+          </Link>
         </div>
       </div>
     </Modal>
@@ -83,4 +104,4 @@ const modalStyles: Styles = {
   },
 }
 
-export default ContactUsModal
+export default ProductSearchModal

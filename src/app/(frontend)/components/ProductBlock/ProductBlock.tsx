@@ -1,13 +1,18 @@
+'use client'
+import { useState } from 'react'
 import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import ImagesSlider from '../ImagesSlider'
 import Button from '../shared/Button'
 import LocationMap from '../LocationMap'
 import ContactUsForm from '../forms/ContactUsForm'
+import ContactUsModal from '../modals/ContactUsModal'
 import { Product } from '@/payload-types'
 import { FaltSvg, LocationGreenSvg, MetersSvg, PhoneSvg } from '../icons'
 
 const ProductBlock = (props: Product) => {
+  const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
+
   return (
     <section className="product">
       <div className="product__container">
@@ -56,7 +61,12 @@ const ProductBlock = (props: Product) => {
                       {props.productDetails.prices.Payment}/ month
                     </span>
                   </div>
-                  <Button typeBtn={'btn'} titlebtn="Get a mortage" className="btn-product-block" />
+                  <Button
+                    typeBtn={'btn'}
+                    titlebtn="Get a mortage"
+                    className="btn-product-block"
+                    onClick={() => setContactUsModalOpen(true)}
+                  />
                 </div>
               </div>
               <RichText data={props.productDetails.description} className="product__content" />
@@ -183,6 +193,9 @@ const ProductBlock = (props: Product) => {
           </div>
         </div>
       </div>
+      {contactUsModalOpen && (
+        <ContactUsModal isOpen={contactUsModalOpen} setIsOpenModal={setContactUsModalOpen} />
+      )}
     </section>
   )
 }
