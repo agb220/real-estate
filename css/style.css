@@ -1967,7 +1967,6 @@ option {
 
 .related-products {
   margin-bottom: 2.75rem;
-  background-color: #fff;
 }
 @media (min-width: 47em) {
   .related-products {
@@ -2001,13 +2000,14 @@ option {
   display: -ms-flexbox;
   display: flex;
   gap: 1.25rem;
+  margin: 0 -1.25rem 0 -1.25rem;
   padding: 1.5rem 1.25rem 1.25rem;
 }
 @media (min-width: 47em) {
   .related-products__items {
     gap: 1.5rem;
+    margin: 0 0 0 0;
     padding: 1.5rem 1.25rem 1.25rem 1.25rem;
-    margin: 0 1.25rem;
   }
 }
 html {
