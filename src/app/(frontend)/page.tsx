@@ -41,7 +41,7 @@ export default async function HomePage(props: SearchProductsPageProps) {
 
   const productTypes = await payload.find({
     collection: 'property-types',
-    pagination: false,
+    pagination: true,
     depth: 3,
     limit: 100,
     select: { name: true },
@@ -74,6 +74,7 @@ export default async function HomePage(props: SearchProductsPageProps) {
 
   const findProducts = await payload.find({
     collection: 'products',
+    pagination: true,
     depth: 3,
     limit: MOCK_LIMIT_PRODUCT,
     page: 1,

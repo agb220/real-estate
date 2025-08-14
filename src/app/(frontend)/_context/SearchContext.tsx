@@ -77,7 +77,6 @@ export const SearchProvider = (props: SearchProviderProps) => {
     setLoading(true)
     try {
       let searchRequestParams: any = {
-        depth: 3,
         where: {},
         sort: [],
       }
@@ -85,17 +84,13 @@ export const SearchProvider = (props: SearchProviderProps) => {
       if (selectedSearchParams) {
         searchRequestParams = generateRequestQuery(selectedSearchParams)
       }
-      const requestQuery = qs.stringify(
-        {
-          pagination: false,
-          depth: 3,
-          limit: params.limit,
-          sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
-          where: searchRequestParams.where,
-          populate: ['main.location', 'main.type', 'main.mainImage', 'main.images'],
-        },
-        { encode: false },
-      )
+      const requestQuery = qs.stringify({
+        pagination: true,
+        depth: 3,
+        limit: params.limit,
+        sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
+        where: searchRequestParams.where,
+      })
       const response = await fetch(`/api/products?${requestQuery}`)
       const searchProducts = (await response.json()) as PaginatedDocs<Product>
 
@@ -228,6 +223,5 @@ export const generateRequestQuery = (searchObj: ProductCatalogSearchParams) => {
   return {
     sort: sortParams,
     where: whereState,
-    depth: 3,
   }
 }
