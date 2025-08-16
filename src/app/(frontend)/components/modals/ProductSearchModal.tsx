@@ -51,7 +51,7 @@ const ProductSearchModal = (props: ProductSearchModalProps) => {
                   <ProductCard product={product} key={index} />
                 ))
               ) : (
-                <>Not found, please check your search parametrs</>
+                <>Not found, please check your search parameters</>
               )}
             </div>
             <Link
@@ -94,7 +94,6 @@ const modalStyles: Styles = {
     maxWidth: '600px',
     maxHeight: '90svh',
     width: '90%',
-    padding: '40px 20px',
     border: '1px solid #colorBlue',
     backgroundColor: '#fff',
     overflowY: 'auto',

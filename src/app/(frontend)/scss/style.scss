@@ -359,10 +359,6 @@ main {
   // .modal__wrapper
 
   &__wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: toRem(30);
-    height: 100%;
   }
 
   // .modal__button
@@ -381,7 +377,14 @@ main {
     display: flex;
     flex-direction: column;
     gap: toRem(25);
-    overflow-y: auto;
+  }
+}
+
+.product-modal {
+  &__wrapper {
+    text-align: center;
+    font-size: toRem(24);
+    font-weight: 500;
   }
 }
 
