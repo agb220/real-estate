@@ -1,20 +1,33 @@
 'use client'
-
+import { useEffect } from 'react'
 import { useScrollToSection } from '@/utilities/scrollTo'
 
 interface SidebarProps {
   isClosing: boolean
   onClose: () => void
   openContactUsModal: () => void
+  isOpen: boolean
 }
 
-const Sidebar = ({ isClosing, onClose, openContactUsModal }: SidebarProps) => {
+const Sidebar = ({ isClosing, onClose, openContactUsModal, isOpen }: SidebarProps) => {
   const scrollToSection = useScrollToSection()
 
   const handleClick = (id: string) => {
     onClose()
     scrollToSection(id)
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   return (
     <div

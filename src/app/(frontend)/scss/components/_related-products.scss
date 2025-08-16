@@ -2,7 +2,6 @@
 
 .related-products {
   margin-bottom: toRem(44);
-  background-color: $colorWhite;
 
   @media (min-width: 47em) {
     margin-bottom: toRem(71);
@@ -39,17 +38,22 @@
     }
   }
 
-  // .related-products__items
+  //.products__viewport
+  &__viewport {
+  }
+
+  //.related-products__items
 
   &__items {
     display: flex;
     gap: toRem(20);
+    margin: 0 toRem(-20) 0 toRem(-20);
     padding: toRem(24) toRem(20) toRem(20);
 
     @media (min-width: 47em) {
       gap: toRem(24);
+      margin: 0 0 0 0;
       padding: toRem(24) toRem(20) toRem(20) toRem(20);
-      margin: 0 toRem(20);
     }
 
     @media (min-width: 65em) {

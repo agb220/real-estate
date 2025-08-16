@@ -2,11 +2,10 @@
 
 import Link from 'next/link'
 import useEmblaCarousel from 'embla-carousel-react'
-import { ITopOffers, Product } from '@/payload-types'
-import { useDotButton } from './shared/embla-carousel/EmblaDot'
 import { NextButton, PrevButton, usePrevNextButtons } from './shared/embla-carousel/ArrowButton'
 import ProductCard from './shared/ProductCard'
 import Title from './shared/Title'
+import { ITopOffers, Product } from '@/payload-types'
 
 interface TopOffersSectionProps {
   data: ITopOffers
@@ -18,7 +17,6 @@ const TopOffersSection = ({ ...props }: TopOffersSectionProps) => {
     align: 'start',
     containScroll: 'trimSnaps',
   })
-  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi)
 
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
     usePrevNextButtons(emblaApi)
@@ -34,8 +32,8 @@ const TopOffersSection = ({ ...props }: TopOffersSectionProps) => {
               <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
             </div>
           </div>
-          <div className="top-offers__products products" ref={emblaRef}>
-            <div className="products__wrapper">
+          <div className="top-offers__products products-slider" ref={emblaRef}>
+            <div className="products-slider__wrapper">
               {props.data.relatedProducts &&
                 props.data.relatedProducts
                   .filter((product): product is Product => typeof product !== 'string')

@@ -291,12 +291,12 @@ option {
 }
 @media (min-width: 47em) {
   .sidebar {
-    top: 6.0625rem;
+    top: 5rem;
   }
 }
 @media (min-width: 65em) {
   .sidebar {
-    top: 6.5rem;
+    top: 5.625rem;
   }
 }
 .sidebar__body {
@@ -660,6 +660,29 @@ option {
           flex-grow: 1;
 }
 
+.btn--hero {
+  width: 100% !important;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+@media (min-width: 67em) {
+  .btn--hero {
+    max-width: 9.25rem;
+  }
+}
+
+@media (min-width: 67em) {
+  .input-form-search {
+    max-width: 18rem;
+  }
+}
+@media (min-width: 67em) {
+  .input-form-search {
+    max-width: 17.5rem;
+  }
+}
+
 .product-card {
   -ms-flex-preferred-size: 18.8125rem;
       flex-basis: 18.8125rem;
@@ -724,13 +747,13 @@ option {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 0.25rem;
-  height: 100%;
-  padding: 1rem 1rem 1rem 1rem;
-}
-.product-card__name {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+  padding: 1rem 1rem 1rem 1rem;
+}
+.product-card__name {
+  height: 100%;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.2;
@@ -836,14 +859,14 @@ option {
   width: 100%;
 }
 
-.products__wrapper {
+.products-slider__wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 1rem;
 }
 @media (min-width: 47em) {
-  .products__wrapper {
+  .products-slider__wrapper {
     gap: 1.5rem;
   }
 }
@@ -1491,7 +1514,7 @@ option {
 }
 
 .btn-offers-reset {
-  width: 100%;
+  width: 100% !important;
   min-height: 3.5rem;
 }
 @media (min-width: 65em) {
@@ -1504,6 +1527,18 @@ option {
 
 .input-offers {
   max-width: 100% !important;
+}
+
+.btn-offers-search {
+  width: 100% !important;
+  min-height: 3.5rem;
+}
+@media (min-width: 65em) {
+  .btn-offers-search {
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+  }
 }
 
 .images-slider {
@@ -1820,6 +1855,14 @@ option {
           flex-direction: column-reverse;
   gap: 2.5rem;
 }
+@media (min-width: 65em) {
+  .aside__wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
 
 .form {
   background-color: #f2fafa;
@@ -1932,7 +1975,6 @@ option {
 
 .related-products {
   margin-bottom: 2.75rem;
-  background-color: #fff;
 }
 @media (min-width: 47em) {
   .related-products {
@@ -1966,13 +2008,14 @@ option {
   display: -ms-flexbox;
   display: flex;
   gap: 1.25rem;
+  margin: 0 -1.25rem 0 -1.25rem;
   padding: 1.5rem 1.25rem 1.25rem;
 }
 @media (min-width: 47em) {
   .related-products__items {
     gap: 1.5rem;
+    margin: 0 0 0 0;
     padding: 1.5rem 1.25rem 1.25rem 1.25rem;
-    margin: 0 1.25rem;
   }
 }
 html {
@@ -2301,6 +2344,7 @@ main {
   max-height: 100svh;
   max-width: 37.5rem;
   padding: 2.5rem 1.25rem;
+  position: relative;
   opacity: 0;
   -webkit-transform: translateY(-30px);
       -ms-transform: translateY(-30px);
@@ -2323,8 +2367,6 @@ main {
           transform: translateY(-30px);
 }
 .modal__wrapper {
-  position: relative;
-  inset: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2333,16 +2375,7 @@ main {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1.875rem;
-}
-.modal__button {
-  position: absolute;
-  top: -2.1875rem;
-  right: -0.25rem;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-}
-.modal .modal-button {
-  background-color: #fff;
+  height: 100%;
 }
 .modal__content {
   display: -webkit-box;
@@ -2368,6 +2401,30 @@ main {
   opacity: 0;
 }
 
+.modal-close-fixed {
+  position: fixed;
+  top: 3.5%;
+  right: 0.625rem;
+  z-index: 10000000;
+}
+@media (min-width: 47em) {
+  .modal-close-fixed {
+    right: 1.25rem;
+  }
+}
+.modal-close-fixed.button--icon {
+  background-color: transparent;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+@media (min-width: 47em) {
+  .modal-close-fixed.button--icon {
+    background-color: #fff;
+    border-radius: 4px;
+  }
+}
+
 .bread-crumbs {
   padding: 1.5rem 0 1rem 0;
 }
@@ -2391,4 +2448,9 @@ main {
 
 .map {
   height: 21.25rem;
+}
+
+.link--outline {
+  -ms-flex-item-align: center;
+      align-self: center;
 }

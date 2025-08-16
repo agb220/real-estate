@@ -1,105 +1,142 @@
 'use client'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { Product } from '@/payload-types'
+
 import ProductCard from '../shared/ProductCard'
 import Input from '../shared/Input'
-import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
-import { ProductCatalogSearchParams, ProductCatalogSortByEnum } from '@/utilities/types'
 import Select, { IOption } from '../shared/Select'
 import Button from '../shared/Button'
 import { SearchSvg } from '../icons'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { MOCK_LIMIT_PRODUCT, useSearch } from '../../_context/SearchContext'
+import { ProductCatalogSearchParams, ProductCatalogSortByEnum } from '@/utilities/types'
+import { useEffect, useMemo, useState } from 'react'
+import qs from 'qs'
+import { updateStateIfChanged } from '@/utilities/updateStateIfChanged'
 
-export const MOCK_LIMIT_PRODUCT = 12
-
-interface OffersBlockProps {
-  data: Product[]
-  filterData?: FilterDataResponse
-  selectedSearchParams?: ProductCatalogSearchParams
+export interface QsStringifyOptions {
+  skipEmptyString?: boolean
+  skipNull?: boolean
+  arrayFormat?: 'indices' | 'brackets' | 'repeat' | 'comma'
 }
 
-const formatLabel = (value: string): string => {
-  switch (value) {
-    case 'price_high':
-      return 'Expensive at first'
-    case 'price_low':
-      return 'Cheaper at first'
-    default:
-      return value.charAt(0).toUpperCase() + value.slice(1).replace('_', ' ')
-  }
-}
-
-const mapDocsToOptions = (arr: { id: string; name: string }[] | undefined): IOption[] => {
-  if (!arr || !Array.isArray(arr)) return []
-  return arr.map((val) => ({
-    id: val.id,
-    name: val.name,
-  }))
-}
-
-const mapSortEnumToOptions = (): IOption[] => {
-  return Object.values(ProductCatalogSortByEnum).map((val) => ({
-    id: val,
-    name: formatLabel(val),
-  }))
-}
-
-const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProps) => {
+const OffersBlock = () => {
   const router = useRouter()
-  const [selectedType, setSelectedType] = useState<string[]>([])
-  const [selectedBedrooms, setSelectedBedrooms] = useState<string[]>([])
-  const [selectedTypeOption, setSelectedTypeOption] = useState<IOption | null>(null)
-  const [selectedBedroomsOption, setSelectedBedroomsOption] = useState<IOption | null>(null)
-  const [locationInput, setLocationInput] = useState<string>('')
-  const [selectedSort, setSelectedSort] = useState<string>(selectedSearchParams?.sort || 'all')
+  const searchParams = useSearchParams()
+  const [loadMoreLimit, setLoadMoreLimit] = useState(MOCK_LIMIT_PRODUCT)
 
-  const locations = filterData?.locations?.docs || []
+  const {
+    products,
+    loading,
+    loadProducts,
+    filterData,
+    locationInput,
+    setLocationInput,
+    selectedTypeOption,
+    setSelectedTypeOption,
+    selectedBedroomsOption,
+    setSelectedBedroomsOption,
+    sort,
+    resetSearch,
+  } = useSearch()
 
-  const buildQueryParams = () => {
-    const query = new URLSearchParams()
+  const currentParams = useMemo(() => {
+    return qs.parse(searchParams.toString(), {
+      ...({ arrayFormat: 'comma', parseNumbers: true } as any),
+    }) as unknown as ProductCatalogSearchParams
+  }, [searchParams])
 
-    if (locationInput.trim()) {
-      const matchedLocation = locations.find(
-        (loc) => loc?.name?.toLowerCase().trim() === locationInput?.toLowerCase().trim(),
-      )
-      query.append('locations', matchedLocation?.id ?? locationInput.trim().toLowerCase())
-    }
+  const mapDocsToOptions = (arr?: { id: string; name: string }[]): IOption[] =>
+    arr?.map((val) => ({ id: val.id, name: val.name })) || []
 
-    if (selectedType.length) {
-      query.append('productType', selectedType.join(','))
-    }
-
-    if (selectedBedrooms.length) {
-      query.append('bedrooms', selectedBedrooms.join(','))
-    }
-
-    if (selectedSort) {
-      query.append('sort', selectedSort)
-    }
-
-    return query.toString()
-  }
-
-  const handleSortChange = (val: IOption) => {
-    setSelectedSort(val.id)
-    router.push(`/offers?${buildQueryParams()}`)
-  }
+  const mapSortEnumToOptions = (): IOption[] => [
+    { id: 'price_high', name: 'Expensive at first' },
+    { id: 'price_low', name: 'Cheaper at first' },
+  ]
 
   const handleSearch = () => {
-    router.push(`/offers?${buildQueryParams()}`)
+    const currentParams = qs.parse(window.location.search, {
+      ignoreQueryPrefix: true,
+    })
+
+    const locationDoc = filterData?.locations?.docs.find(
+      (doc) => doc.name.toLowerCase() === locationInput.toLowerCase(),
+    )
+    const locationId = locationDoc ? locationDoc.id : undefined
+
+    const updatedParams = {
+      ...currentParams,
+      locations: locationId ? [locationId] : locationInput.trim() === '' ? [] : [locationInput],
+      productType: selectedTypeOption,
+      bedrooms: selectedBedroomsOption,
+    }
+
+    const queryString = qs.stringify(updatedParams, {
+      skipEmptyString: true,
+      skipNull: true,
+      arrayFormat: 'comma',
+    } as QsStringifyOptions)
+
+    router.push(`${window.location.pathname}${queryString ? `?${queryString}` : ''}`, {
+      scroll: false,
+    })
   }
 
-  const resetFilters = () => {
-    setSelectedType([])
-    setSelectedBedrooms([])
-    setLocationInput('')
-    setSelectedTypeOption(null)
-    setSelectedBedroomsOption(null)
-    setSelectedSort('')
+  useEffect(() => {
+    if (!currentParams) return
+
+    updateStateIfChanged(currentParams.productType, selectedTypeOption, setSelectedTypeOption)
+    updateStateIfChanged(currentParams.bedrooms, selectedBedroomsOption, setSelectedBedroomsOption)
+
+    const locationsParam = Array.isArray(currentParams.locations)
+      ? currentParams.locations
+      : currentParams.locations
+        ? [currentParams.locations]
+        : []
+
+    if (locationsParam.length) {
+      const locValue = locationsParam[0]
+      const locationDocById = filterData?.locations?.docs.find((doc) => doc.id === locValue)
+
+      if (locationDocById) {
+        setLocationInput(locationDocById.name)
+      } else {
+        setLocationInput(String(locValue))
+      }
+    } else {
+      setLocationInput('')
+    }
+  }, [currentParams, filterData])
+
+  const handleSortChange = (val: IOption) => {
+    const currentParams = qs.parse(window.location.search, {
+      ignoreQueryPrefix: true,
+    }) as unknown as ProductCatalogSearchParams
+
+    const updatedParams: ProductCatalogSearchParams = {
+      ...currentParams,
+      sort: val?.id as ProductCatalogSortByEnum,
+    }
+
+    const queryString = qs.stringify(updatedParams, {
+      skipEmptyString: true,
+      skipNull: true,
+      arrayFormat: 'comma',
+    } as QsStringifyOptions)
+
+    router.push(`${window.location.pathname}${queryString ? `?${queryString}` : ''}`, {
+      scroll: false,
+    })
+  }
+
+  const handleResetFilters = () => {
+    resetSearch()
     router.push('/offers')
   }
 
-  const sortOptions = mapSortEnumToOptions()
+  const handleLoadMore = () => {
+    const newLimit = loadMoreLimit + MOCK_LIMIT_PRODUCT
+    setLoadMoreLimit(newLimit)
+    loadProducts({ limit: newLimit })
+  }
 
   return (
     <section className="offers">
@@ -110,36 +147,46 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
             icon
             placeholder="Search of location"
             value={locationInput}
-            onChange={(e: any) => setLocationInput(e.target.value)}
-            onBlur={() => {}}
+            onChange={(e: any) => {
+              setLocationInput(e.target.value)
+            }}
             className="input-offers"
+            onBlur={() => {}}
           />
           <Select
-            options={mapDocsToOptions(filterData?.productType.docs)}
+            options={mapDocsToOptions(filterData?.productType?.docs)}
             label="Property type"
-            value={selectedTypeOption}
-            onChange={(val: IOption) => {
-              setSelectedTypeOption(val)
-              setSelectedType([val.id])
-            }}
+            value={
+              mapDocsToOptions(filterData?.productType?.docs).find(
+                (opt) => opt.id === selectedTypeOption[0],
+              ) || null
+            }
+            onChange={(val) => setSelectedTypeOption([val.id])}
             className="offers--select"
           />
           <Select
-            options={mapDocsToOptions(filterData?.bedrooms.docs)}
+            options={mapDocsToOptions(filterData?.bedrooms?.docs)}
             label="Bedrooms"
-            value={selectedBedroomsOption}
-            onChange={(val: IOption) => {
-              setSelectedBedroomsOption(val)
-              setSelectedBedrooms([val.id])
-            }}
+            value={
+              mapDocsToOptions(filterData?.bedrooms?.docs).find(
+                (opt) => opt.id === selectedBedroomsOption[0],
+              ) || null
+            }
+            onChange={(val) => setSelectedBedroomsOption([val.id])}
             className="offers--select"
           />
-          <Button typeBtn={'btn'} titlebtn="Search" icon={<SearchSvg />} onClick={handleSearch} />
           <Button
-            typeBtn={'outline'}
+            typeBtn="btn"
+            titlebtn="Search"
+            icon={<SearchSvg />}
+            onClick={handleSearch}
+            className="btn-offers-search"
+          />
+          <Button
+            typeBtn="outline"
             titlebtn="Reset"
-            onClick={resetFilters}
-            className="btn-offers-reset"
+            onClick={handleResetFilters}
+            className="btn-offers-reset "
           />
         </div>
       </div>
@@ -147,22 +194,26 @@ const OffersBlock = ({ data, filterData, selectedSearchParams }: OffersBlockProp
       <div className="offers__container">
         <div className="offers__sorting">
           <div className="offers__counter">
-            {data.length} <span>results found</span>
+            {products?.docs.length} <span>results found</span>
           </div>
           <Select
-            options={sortOptions}
+            options={mapSortEnumToOptions()}
             label="Sort by"
             className="offers--select"
-            value={sortOptions.find((opt) => opt.id === selectedSort) || null}
+            value={mapSortEnumToOptions().find((opt) => opt.id === sort) || null}
             onChange={handleSortChange}
           />
         </div>
         <div className="offers__products products">
           <div className="products__wrapper">
-            {data && data.map((product, index) => <ProductCard key={index} product={product} />)}
+            {products?.docs.map((product, i) => (
+              <ProductCard key={i} product={product} />
+            ))}
           </div>
         </div>
-        {data.length > MOCK_LIMIT_PRODUCT && <Button typeBtn={'outline'} titlebtn="Show more" />}
+        {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
+          <Button typeBtn={'outline'} titlebtn="Show more" onClick={handleLoadMore} />
+        )}
       </div>
     </section>
   )

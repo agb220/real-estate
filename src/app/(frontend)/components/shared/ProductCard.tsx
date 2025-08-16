@@ -1,6 +1,6 @@
-import { Product } from '@/payload-types'
-import { getImageUrl } from '@/utilities/getUrl'
 import Image from 'next/image'
+import { getImageUrl } from '@/utilities/getUrl'
+import { Product } from '@/payload-types'
 
 interface ProductCardProps {
   product: Product

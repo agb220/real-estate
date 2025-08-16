@@ -126,7 +126,7 @@
 //.btn-offers-reset
 
 .btn-offers-reset {
-  width: 100%;
+  width: 100% !important;
   min-height: toRem(56);
 
   @media (min-width: 65em) {
@@ -137,4 +137,13 @@
 //.input-offers
 .input-offers {
   max-width: 100% !important;
+}
+
+//.btn-offers-search
+.btn-offers-search {
+  width: 100% !important;
+  min-height: toRem(56);
+  @media (min-width: 65em) {
+    width: fit-content !important;
+  }
 }

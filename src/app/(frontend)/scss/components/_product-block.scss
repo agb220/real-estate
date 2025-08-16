@@ -199,6 +199,10 @@
     display: flex;
     flex-direction: column-reverse;
     gap: toRem(40);
+
+    @media (min-width: 65em) {
+      flex-direction: column;
+    }
   }
 }
 .form {
