@@ -20,38 +20,40 @@ const ContactUsModal = (props: ModalFormProps) => {
   }
 
   return (
-    <Modal
-      isOpen={props.isOpen}
-      style={modalStyles}
-      closeTimeoutMS={300}
-      className={{
-        base: 'modal',
-        afterOpen: 'modal--open',
-        beforeClose: 'modal--close',
-      }}
-      overlayClassName={{
-        base: 'modal-overlay',
-        afterOpen: 'modal-overlay--open',
-        beforeClose: 'modal-overlay--close',
-      }}
-      ariaHideApp={false}
-      shouldCloseOnOverlayClick={true}
-      onRequestClose={closeModal}
-    >
-      <div className="modal__wrapper">
-        <div className="modal__button">
-          <Button
-            onClick={closeModal}
-            typeBtn="icon"
-            className="modal-button"
-            icon={<CloseSvg />}
-          />
+    <>
+      <Modal
+        isOpen={props.isOpen}
+        style={modalStyles}
+        closeTimeoutMS={300}
+        className={{
+          base: 'modal',
+          afterOpen: 'modal--open',
+          beforeClose: 'modal--close',
+        }}
+        overlayClassName={{
+          base: 'modal-overlay',
+          afterOpen: 'modal-overlay--open',
+          beforeClose: 'modal-overlay--close',
+        }}
+        ariaHideApp={false}
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={closeModal}
+      >
+        <div className="modal__wrapper">
+          <div className="modal__content">
+            <ContactUsForm />
+          </div>
         </div>
-        <div className="modal__content">
-          <ContactUsForm />
-        </div>
-      </div>
-    </Modal>
+      </Modal>
+      {props.isOpen && (
+        <Button
+          onClick={closeModal}
+          typeBtn="icon"
+          className="modal-close-fixed"
+          icon={<CloseSvg />}
+        />
+      )}
+    </>
   )
 }
 

@@ -336,7 +336,7 @@ main {
   max-height: 100svh;
   max-width: toRem(600);
   padding: toRem(40) toRem(20);
-
+  position: relative;
   opacity: 0;
   transform: translateY(-30px);
   transition:
@@ -359,26 +359,20 @@ main {
   // .modal__wrapper
 
   &__wrapper {
-    position: relative;
-    inset: 0;
     display: flex;
     flex-direction: column;
     gap: toRem(30);
+    height: 100%;
   }
 
   // .modal__button
 
   &__button {
-    position: absolute;
-    top: toRem(-50);
-    right: toRem(-5);
-    align-self: flex-end;
   }
 
   // .modal-button
 
   .modal-button {
-    background-color: $colorWhite;
   }
 
   // .modal__content
@@ -401,6 +395,28 @@ main {
 
   &--close {
     opacity: 0;
+  }
+}
+
+.modal-close-fixed {
+  position: fixed;
+  top: 3.5%;
+  right: toRem(10);
+  z-index: 10000000;
+
+  @media (min-width: 47em) {
+    right: toRem(20);
+  }
+
+  &.button--icon {
+    background-color: transparent;
+    border-radius: 0px;
+    box-shadow: none;
+
+    @media (min-width: 47em) {
+      background-color: $colorWhite;
+      border-radius: 4px;
+    }
   }
 }
 

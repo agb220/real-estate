@@ -24,53 +24,55 @@ const ProductSearchModal = (props: ProductSearchModalProps) => {
   }
 
   return (
-    <Modal
-      isOpen={props.isOpen}
-      style={modalStyles}
-      closeTimeoutMS={300}
-      className={{
-        base: 'modal',
-        afterOpen: 'modal--open',
-        beforeClose: 'modal--close',
-      }}
-      overlayClassName={{
-        base: 'modal-overlay',
-        afterOpen: 'modal-overlay--open',
-        beforeClose: 'modal-overlay--close',
-      }}
-      ariaHideApp={false}
-      shouldCloseOnOverlayClick={true}
-      onRequestClose={closeModal}
-    >
-      <div className="modal__wrapper">
-        <div className="modal__button">
-          <Button
-            onClick={closeModal}
-            typeBtn="icon"
-            className="modal-button"
-            icon={<CloseSvg />}
-          />
-        </div>
-        <div className="modal__content product-modal">
-          <div className="product-modal__wrapper">
-            {props.findResult.length > 0 ? (
-              props.findResult.map((product, index) => (
-                <ProductCard product={product} key={index} />
-              ))
-            ) : (
-              <>Not found, please check your search parametrs</>
-            )}
+    <>
+      <Modal
+        isOpen={props.isOpen}
+        style={modalStyles}
+        closeTimeoutMS={300}
+        className={{
+          base: 'modal',
+          afterOpen: 'modal--open',
+          beforeClose: 'modal--close',
+        }}
+        overlayClassName={{
+          base: 'modal-overlay',
+          afterOpen: 'modal-overlay--open',
+          beforeClose: 'modal-overlay--close',
+        }}
+        ariaHideApp={false}
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={closeModal}
+      >
+        <div className="modal__wrapper">
+          <div className="modal__content product-modal">
+            <div className="product-modal__wrapper">
+              {props.findResult.length > 0 ? (
+                props.findResult.map((product, index) => (
+                  <ProductCard product={product} key={index} />
+                ))
+              ) : (
+                <>Not found, please check your search parametrs</>
+              )}
+            </div>
+            <Link
+              href={'/offers'}
+              className="button button--outline link--outline"
+              onClick={closeModal}
+            >
+              See all
+            </Link>
           </div>
-          <Link
-            href={'/offers'}
-            className="button button--outline link--outline"
-            onClick={closeModal}
-          >
-            See all
-          </Link>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+      {props.isOpen && (
+        <Button
+          onClick={closeModal}
+          typeBtn="icon"
+          className="modal-close-fixed"
+          icon={<CloseSvg />}
+        />
+      )}
+    </>
   )
 }
 
