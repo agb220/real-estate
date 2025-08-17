@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { getImageUrl } from '@/utilities/getUrl'
 import { Product } from '@/payload-types'
 
@@ -10,7 +11,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <article className="product-card">
       <div className="product-card__wrapper">
-        <a href={`offers/${product.slug}`} className="product-card__link">
+        <Link href={`/offers/${product.slug}`} className="product-card__link">
           <Image
             src={getImageUrl({
               media: product.main.mainImage,
@@ -22,10 +23,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="product-card__img"
             draggable={false}
           />
-        </a>
+        </Link>
         <div className="product-card__content">
           <h3 className="product-card__name">
-            <a href={`offers/${product.slug}`}>{product.title}</a>
+            <Link href={`/offers/${product.slug}`}>{product.title}</Link>
           </h3>
           <p className="product-card__price">{product.productDetails.prices.Payment}</p>
           <p className="product-card__location">
