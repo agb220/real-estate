@@ -1,5 +1,4 @@
 import { withPayload } from '@payloadcms/next/withPayload'
-
 import redirects from './redirects.js'
 
 const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
@@ -8,14 +7,23 @@ const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://loc
 const nextConfig = {
   images: {
     remotePatterns: [
-      ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
-        const url = new URL(item)
-
-        return {
-          hostname: url.hostname,
-          protocol: url.protocol.replace(':', ''),
-        }
-      }),
+      ...[NEXT_PUBLIC_SERVER_URL]
+        .filter((item) => {
+          try {
+            new URL(item) // Перевірка валідності URL
+            return true
+          } catch {
+            console.error(`Invalid URL in NEXT_PUBLIC_SERVER_URL: ${item}`)
+            return false
+          }
+        })
+        .map((item) => {
+          const url = new URL(item)
+          return {
+            hostname: url.hostname,
+            protocol: url.protocol.replace(':', ''),
+          }
+        }),
     ],
   },
   webpack(config) {
@@ -32,13 +40,12 @@ const nextConfig = {
         },
       ],
     })
-
     return config
   },
   env: {
-    DATABASE_URI: process.env.DATABASE_URI, // pulls from .env file
-    PAYLOAD_SECRET: process.env.PAYLOAD_SECRET, // pulls from .env file
-    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL, // pulls from .env file
+    DATABASE_URI: process.env.DATABASE_URI,
+    PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
+    NEXT_PUBLIC_SERVER_URL: process.env.NEXT_PUBLIC_SERVER_URL,
   },
   eslint: {
     ignoreDuringBuilds: true,

@@ -43,6 +43,7 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 }
 
 export default buildConfig({
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
   admin: {
     user: Users.slug,
     importMap: {
