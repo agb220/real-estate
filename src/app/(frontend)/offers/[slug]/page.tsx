@@ -5,8 +5,8 @@ import LayoutWrapper from '../../components/layout/LayoutWrapper'
 import SubscribeSection from '../../components/SubscribeSection'
 import { Product } from '@/payload-types'
 import ProductBlock from '../../components/ProductBlock/ProductBlock'
-import { BackSvg } from '../../components/icons'
 import RelatedProductsSection from '../../components/RelatedProductsSection'
+import { BackSvg } from '../../components/icons'
 
 export default async function OfferBySlugPage({ params }: any) {
   const { slug } = await params
