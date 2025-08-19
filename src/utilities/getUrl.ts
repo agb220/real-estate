@@ -12,71 +12,45 @@ export const getImageUrl = (params: {
     }
     return params.defaultImage?.src || ''
   }
-  if (
-    params.size === 'thumbnail' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.thumbnail &&
-    (params.media as Media).sizes?.thumbnail?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.thumbnail?.url}`
-  }
-  if (
-    params.size === 'card' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.card?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.card?.url}`
-  }
-  if (
-    params.size === 'slider' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.slider &&
-    (params.media as Media).sizes?.slider?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.slider?.url}`
-  }
-  if (
-    params.size === 'big' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.big?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.big?.url}`
-  }
-  if (
-    params.size === 'large' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.large?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.large?.url}`
+
+  const baseUrl = (url: string | null | undefined): string => {
+    if (!url) return ''
+    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url
+    }
+    try {
+      new URL(serverUrl)
+      return `${serverUrl}${url}`
+    } catch (e) {
+      console.error('Invalid NEXT_PUBLIC_SERVER_URL:', serverUrl, e)
+      return url
+    }
   }
 
-  if (
-    params.size === 'pngSlider' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.pngSlider?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.pngSlider?.url}`
+  const media = params.media as Media
+
+  if (params.size === 'thumbnail' && media.sizes?.thumbnail?.url) {
+    return baseUrl(media.sizes.thumbnail.url)
+  }
+  if (params.size === 'card' && media.sizes?.card?.url) {
+    return baseUrl(media.sizes.card.url)
+  }
+  if (params.size === 'slider' && media.sizes?.slider?.url) {
+    return baseUrl(media.sizes.slider.url)
+  }
+  if (params.size === 'big' && media.sizes?.big?.url) {
+    return baseUrl(media.sizes.big.url)
+  }
+  if (params.size === 'large' && media.sizes?.large?.url) {
+    return baseUrl(media.sizes.large.url)
+  }
+  if (params.size === 'pngSlider' && media.sizes?.pngSlider?.url) {
+    return baseUrl(media.sizes.pngSlider.url)
+  }
+  if (params.size === 'pngBig' && media.sizes?.pngBig?.url) {
+    return baseUrl(media.sizes.pngBig.url)
   }
 
-  if (
-    params.size === 'pngBig' &&
-    params.media &&
-    (params.media as Media).sizes &&
-    (params.media as Media).sizes?.card &&
-    (params.media as Media).sizes?.pngBig?.url
-  ) {
-    return `${process.env.NEXT_PUBLIC_SERVER_URL}${(params.media as Media).sizes?.pngBig?.url}`
-  }
-
-  return `${process.env.NEXT_PUBLIC_SERVER_URL}${params.media.url}`
+  return media.url ? baseUrl(media.url) : ''
 }

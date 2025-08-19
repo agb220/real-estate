@@ -64,7 +64,8 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: 'http://localhost:3000',
+            value:
+              process.env.NEXT_PUBLIC_SERVER_URL || 'https://real-estate-beta-flame.vercel.app',
           },
           {
             key: 'Access-Control-Allow-Methods',
