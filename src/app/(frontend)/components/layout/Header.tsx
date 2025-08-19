@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-
 import Sidebar from './Sidebar'
 import ContactUsModal from '../modals/ContactUsModal'
 import { useScrollToSection } from '@/utilities/scrollTo'

@@ -3,9 +3,9 @@ import Link from 'next/link'
 import type { Styles } from 'react-modal'
 import Modal from 'react-modal'
 import Button from '../shared/Button'
+import ProductCard from '../shared/ProductCard'
 import { Product } from '@/payload-types'
 import { CloseSvg } from '../icons'
-import ProductCard from '../shared/ProductCard'
 
 interface ProductSearchModalProps {
   isOpen: boolean

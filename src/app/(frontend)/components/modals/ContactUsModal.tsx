@@ -1,6 +1,7 @@
 'use client'
-import type { Styles } from 'react-modal'
+
 import Modal from 'react-modal'
+import type { Styles } from 'react-modal'
 import Button from '../shared/Button'
 import ContactUsForm from '../forms/ContactUsForm'
 import { CloseSvg } from '../icons'
