@@ -28,7 +28,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <h3 className="product-card__name">
             <Link href={`/offers/${product.slug}`}>{product.title}</Link>
           </h3>
-          <p className="product-card__price">{product.productDetails.prices.Payment}</p>
+          <p className="product-card__price">{product.productDetails.prices.fullPrice}</p>
           <p className="product-card__location">
             {typeof product.main.location === 'object' && product.main.location !== null
               ? product.main.location.name
