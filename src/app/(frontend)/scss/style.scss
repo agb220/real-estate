@@ -261,7 +261,7 @@ main {
     justify-content: center;
     width: toRem(56);
     padding: toRem(18) toRem(18) toRem(18) toRem(18);
-    transition: color 0.3s;
+    transition: background-color 0.3s;
 
     &:disabled {
       background-color: $bgLightGrey;

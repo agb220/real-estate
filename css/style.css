@@ -2276,8 +2276,8 @@ main {
           justify-content: center;
   width: 3.5rem;
   padding: 1.125rem 1.125rem 1.125rem 1.125rem;
-  -webkit-transition: color 0.3s;
-  transition: color 0.3s;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 .button--icon:disabled {
   background-color: #e1edec;
