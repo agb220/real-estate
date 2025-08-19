@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
-import type { Styles } from 'react-modal'
 import Modal from 'react-modal'
+import type { Styles } from 'react-modal'
 import Button from '../shared/Button'
 import ProductCard from '../shared/ProductCard'
 import { Product } from '@/payload-types'
