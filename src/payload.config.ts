@@ -44,6 +44,7 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  cors: ['http://localhost:3000', 'https://real-estate-beta-flame.vercel.app'],
   admin: {
     user: Users.slug,
     importMap: {
@@ -60,7 +61,7 @@ export default buildConfig({
   defaultDepth: 3,
   maxDepth: 10,
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: process.env.DATABASE_URI || 'mongodb://127.0.0.1/real-estate',
   }),
   secret: process.env.PAYLOAD_SECRET || '',
   sharp,
