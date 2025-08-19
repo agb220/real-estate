@@ -43,7 +43,7 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 }
 
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'https://real-estate-beta-flame.vercel.app',
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
   cors: ['http://localhost:3000', 'https://real-estate-beta-flame.vercel.app'],
   admin: {
     user: Users.slug,
