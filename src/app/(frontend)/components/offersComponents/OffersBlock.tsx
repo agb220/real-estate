@@ -36,6 +36,8 @@ const OffersBlock = () => {
     setSelectedBedroomsOption,
     sort,
     resetSearch,
+    fetchProducts,
+    setSelectedSearchParams,
   } = useSearch()
 
   const currentParams = useMemo(() => {
@@ -52,29 +54,26 @@ const OffersBlock = () => {
     { id: 'price_low', name: 'Cheaper at first' },
   ]
 
-  const handleSearch = () => {
-    const currentParams = qs.parse(window.location.search, {
-      ignoreQueryPrefix: true,
-    })
-
+  const handleSearch = async () => {
     const locationDoc = filterData?.locations?.docs.find(
       (doc) => doc.name.toLowerCase() === locationInput.toLowerCase(),
     )
     const locationId = locationDoc ? locationDoc.id : undefined
 
-    const updatedParams = {
-      ...currentParams,
+    const updatedParams: ProductCatalogSearchParams = {
       locations: locationId ? [locationId] : locationInput.trim() === '' ? [] : [locationInput],
       productType: selectedTypeOption,
       bedrooms: selectedBedroomsOption,
+      sort,
     }
 
+    setSelectedSearchParams && setSelectedSearchParams(updatedParams)
+    await fetchProducts(updatedParams, MOCK_LIMIT_PRODUCT)
     const queryString = qs.stringify(updatedParams, {
       skipEmptyString: true,
       skipNull: true,
       arrayFormat: 'comma',
-    } as QsStringifyOptions)
-
+    })
     router.push(`${window.location.pathname}${queryString ? `?${queryString}` : ''}`, {
       scroll: false,
     })
@@ -106,29 +105,35 @@ const OffersBlock = () => {
     }
   }, [currentParams, filterData])
 
-  const handleSortChange = (val: IOption) => {
-    const currentParams = qs.parse(window.location.search, {
-      ignoreQueryPrefix: true,
-    }) as unknown as ProductCatalogSearchParams
-
+  const handleSortChange = async (val: IOption) => {
     const updatedParams: ProductCatalogSearchParams = {
       ...currentParams,
       sort: val?.id as ProductCatalogSortByEnum,
     }
 
+    setSelectedSearchParams && setSelectedSearchParams(updatedParams)
+    await fetchProducts(updatedParams, MOCK_LIMIT_PRODUCT)
+
     const queryString = qs.stringify(updatedParams, {
       skipEmptyString: true,
       skipNull: true,
       arrayFormat: 'comma',
-    } as QsStringifyOptions)
-
+    })
     router.push(`${window.location.pathname}${queryString ? `?${queryString}` : ''}`, {
       scroll: false,
     })
   }
 
-  const handleResetFilters = () => {
+  const handleResetFilters = async () => {
     resetSearch()
+    const resetParams: ProductCatalogSearchParams = {
+      locations: [],
+      productType: [],
+      bedrooms: [],
+      sort: undefined,
+    }
+    setSelectedSearchParams && setSelectedSearchParams(resetParams)
+    await fetchProducts(resetParams, MOCK_LIMIT_PRODUCT)
     router.push('/offers')
   }
 
@@ -186,12 +191,14 @@ const OffersBlock = () => {
             icon={<SearchSvg />}
             onClick={handleSearch}
             className="btn-offers-search"
+            disabled={loading}
           />
           <Button
             typeBtn="outline"
             titlebtn="Reset"
             onClick={handleResetFilters}
-            className="btn-offers-reset "
+            className="btn-offers-reset"
+            disabled={loading}
           />
         </div>
       </div>
@@ -210,7 +217,9 @@ const OffersBlock = () => {
           />
         </div>
         {loading ? (
-          <div className="loading">Loading... </div>
+          <div className="loading">
+            <div className="loading__loader"></div>
+          </div>
         ) : (
           <>
             <div className="offers__products products">

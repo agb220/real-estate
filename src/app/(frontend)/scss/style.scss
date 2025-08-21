@@ -464,23 +464,29 @@ main {
 //*------loading-----*//
 
 .loading {
-  text-align: center;
-  padding: 20px;
-  color: #333;
-  font-size: 16px;
-}
-.loading::after {
-  content: 'Loading...';
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  0% {
-    content: 'Loading.';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+
+  &__loader {
+    width: toRem(48);
+    height: toRem(48);
+    border: toRem(5) solid $bgBlue;
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 toREm(15) rgba(23, 194, 177, 0.1);
   }
-  33% {
-    content: 'Loading..';
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 toREm(15) rgba(23, 194, 177, 0.5);
   }
-  66% {
-    content: 'Loading...';
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 toREm(15) rgba(23, 194, 177, 0.8);
   }
 }

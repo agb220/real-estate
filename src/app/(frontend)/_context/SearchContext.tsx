@@ -44,6 +44,7 @@ interface SearchContextType {
   loadProducts: (params: { limit?: number }) => Promise<void>
 
   resetSearch: () => void
+  fetchProducts: (params?: ProductCatalogSearchParams, limit?: number) => Promise<void>
 }
 
 interface SearchProviderProps extends PropsWithChildren {
@@ -142,6 +143,37 @@ export const SearchProvider = (props: SearchProviderProps) => {
     setSort(props.selectedSearchParams?.sort)
   }, [props.selectedSearchParams])
 
+  const fetchProducts = async (
+    params?: ProductCatalogSearchParams,
+    limit: number = MOCK_LIMIT_PRODUCT,
+  ) => {
+    setLoading(true)
+    try {
+      let searchRequestParams: any = { where: {}, sort: [] }
+
+      if (params) {
+        searchRequestParams = generateRequestQuery(params)
+      }
+
+      const requestQuery = qs.stringify({
+        pagination: true,
+        depth: 3,
+        limit,
+        sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
+        where: searchRequestParams.where,
+      })
+
+      const response = await fetch(`/api/products?${requestQuery}`)
+      const searchProducts = (await response.json()) as PaginatedDocs<Product>
+
+      setProducts(searchProducts)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <SearchContext.Provider
       value={{
@@ -167,6 +199,8 @@ export const SearchProvider = (props: SearchProviderProps) => {
 
         loadProducts,
         resetSearch,
+
+        fetchProducts,
       }}
     >
       {props.children}
@@ -183,45 +217,37 @@ export const useSearch = () => {
 export const generateRequestQuery = (searchObj: ProductCatalogSearchParams) => {
   const sortParams: string[] = []
 
-  if (searchObj.sort === 'price_high') {
-    sortParams.push('-price')
+  if (searchObj?.sort === 'price_high') {
+    sortParams.push('-productDetails.prices.fullPrice')
+  }
+  if (searchObj?.sort === 'price_low') {
+    sortParams.push('productDetails.prices.fullPrice')
   }
 
-  if (searchObj.sort === 'price_low') {
-    sortParams.push('price')
-  }
+  const bedrooms = Array.isArray(searchObj?.bedrooms) ? searchObj.bedrooms : []
+  const locations = Array.isArray(searchObj?.locations) ? searchObj.locations : []
+  const productType = Array.isArray(searchObj?.productType) ? searchObj.productType : []
 
-  let whereState = {}
+  let whereState: Record<string, any> = {}
 
-  if (searchObj.bedrooms.length) {
+  if (bedrooms.length) {
     whereState = {
       ...whereState,
-      'productDetails.roomNumbers': {
-        in: searchObj.bedrooms,
-      },
+      'productDetails.roomNumbers': { in: bedrooms },
+    }
+  }
+  if (locations.length) {
+    whereState = {
+      ...whereState,
+      'main.location': { in: locations },
+    }
+  }
+  if (productType.length) {
+    whereState = {
+      ...whereState,
+      'main.type': { in: productType },
     }
   }
 
-  if (searchObj.locations.length) {
-    whereState = {
-      ...whereState,
-      'main.location': {
-        in: searchObj.locations,
-      },
-    }
-  }
-
-  if (searchObj.productType.length) {
-    whereState = {
-      ...whereState,
-      'main.type': {
-        in: searchObj.productType,
-      },
-    }
-  }
-
-  return {
-    sort: sortParams,
-    where: whereState,
-  }
+  return { sort: sortParams, where: whereState }
 }
