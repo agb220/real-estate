@@ -460,3 +460,27 @@ main {
 .link--outline {
   align-self: center;
 }
+
+//*------loading-----*//
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #333;
+  font-size: 16px;
+}
+.loading::after {
+  content: 'Loading...';
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    content: 'Loading.';
+  }
+  33% {
+    content: 'Loading..';
+  }
+  66% {
+    content: 'Loading...';
+  }
+}

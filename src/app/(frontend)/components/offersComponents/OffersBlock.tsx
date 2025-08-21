@@ -138,6 +138,15 @@ const OffersBlock = () => {
     loadProducts({ limit: newLimit })
   }
 
+  const getUniqueBedrooms = () => {
+    const uniqueRoomNumbers = [
+      ...new Set(products?.docs.map((product) => product.productDetails.roomNumbers)),
+    ].sort()
+    return uniqueRoomNumbers.map((num) => ({ id: num, name: num }))
+  }
+
+  console.log('loading', loading)
+
   return (
     <section className="offers">
       <div className="offers__container">
@@ -165,13 +174,9 @@ const OffersBlock = () => {
             className="offers--select"
           />
           <Select
-            options={mapDocsToOptions(filterData?.bedrooms?.docs)}
+            options={getUniqueBedrooms()}
             label="Bedrooms"
-            value={
-              mapDocsToOptions(filterData?.bedrooms?.docs).find(
-                (opt) => opt.id === selectedBedroomsOption[0],
-              ) || null
-            }
+            value={getUniqueBedrooms().find((opt) => opt.id === selectedBedroomsOption[0]) || null}
             onChange={(val) => setSelectedBedroomsOption([val.id])}
             className="offers--select"
           />
@@ -204,15 +209,21 @@ const OffersBlock = () => {
             onChange={handleSortChange}
           />
         </div>
-        <div className="offers__products products">
-          <div className="products__wrapper">
-            {products?.docs.map((product, i) => (
-              <ProductCard key={i} product={product} />
-            ))}
-          </div>
-        </div>
-        {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
-          <Button typeBtn={'outline'} titlebtn="Show more" onClick={handleLoadMore} />
+        {loading ? (
+          <div className="loading">Loading... </div>
+        ) : (
+          <>
+            <div className="offers__products products">
+              <div className="products__wrapper">
+                {products?.docs.map((product, i) => (
+                  <ProductCard key={i} product={product} />
+                ))}
+              </div>
+            </div>
+            {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
+              <Button typeBtn={'outline'} titlebtn="Show more" onClick={handleLoadMore} />
+            )}
+          </>
         )}
       </div>
     </section>
