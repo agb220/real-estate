@@ -14,7 +14,7 @@ import {
   SearchProductsPageProps,
   ShopPageSearchParams,
 } from '@/utilities/types'
-import { MOCK_LIMIT_PRODUCT, SearchProvider } from './_context/SearchContext'
+import { SearchProvider } from './_context/SearchContext'
 
 export const dynamic = 'force-dynamic'
 
@@ -76,7 +76,7 @@ export default async function HomePage(props: SearchProductsPageProps) {
     collection: 'products',
     pagination: true,
     depth: 3,
-    limit: MOCK_LIMIT_PRODUCT,
+    limit: 6,
     page: 1,
     where: whereState,
   })

@@ -44,16 +44,16 @@ const ContactUsModal = (props: ModalFormProps) => {
           <div className="modal__content">
             <ContactUsForm />
           </div>
+          {props.isOpen && (
+            <Button
+              onClick={closeModal}
+              typeBtn="icon"
+              className="modal-close-fixed modal-close-fixed--position"
+              icon={<CloseSvg />}
+            />
+          )}
         </div>
       </Modal>
-      {props.isOpen && (
-        <Button
-          onClick={closeModal}
-          typeBtn="icon"
-          className="modal-close-fixed"
-          icon={<CloseSvg />}
-        />
-      )}
     </>
   )
 }
@@ -65,7 +65,7 @@ const modalStyles: Styles = {
     height: '100%',
     top: 0,
     left: 0,
-    zIndex: 9999999,
+    zIndex: 999,
     background: 'rgb(140 140 140 / 93%)',
   },
   content: {
@@ -76,7 +76,6 @@ const modalStyles: Styles = {
     maxWidth: '600px',
     maxHeight: '90svh',
     width: '90%',
-    padding: '40px 20px',
     border: '1px solid #colorBlue',
     backgroundColor: '#fff',
     overflowY: 'auto',

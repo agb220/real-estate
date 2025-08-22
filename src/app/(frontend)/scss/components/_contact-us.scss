@@ -3,7 +3,11 @@
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: toRem(25);
+  gap: toRem(14);
+
+  @media (min-width: 47em) {
+    gap: toRem(25);
+  }
 
   .button {
     width: 100%;

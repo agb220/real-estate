@@ -359,6 +359,7 @@ main {
   // .modal__wrapper
 
   &__wrapper {
+    position: relative;
   }
 
   // .modal__button
@@ -403,11 +404,12 @@ main {
 
 .modal-close-fixed {
   position: fixed;
-  top: 3.5%;
+  top: -1%;
   right: toRem(10);
   z-index: 10000000;
 
   @media (min-width: 47em) {
+    top: 3.5%;
     right: toRem(20);
   }
 
@@ -421,6 +423,14 @@ main {
       border-radius: 4px;
     }
   }
+}
+
+//*---modal-close-fixed--position---*//
+
+.modal-close-fixed--position {
+  top: 0;
+  right: 0;
+  z-index: 99999;
 }
 
 //*----- bread crumbs --------*//

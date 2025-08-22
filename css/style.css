@@ -469,7 +469,7 @@ option {
 }
 @media (min-width: 65em) {
   .hero {
-    padding: 3.5rem 0 6.5rem 0;
+    padding: 3.5rem 0 0 0;
   }
 }
 .hero__wrapper {
@@ -1368,7 +1368,12 @@ option {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1.5625rem;
+  gap: 0.875rem;
+}
+@media (min-width: 47em) {
+  .contact-form {
+    gap: 1.5625rem;
+  }
 }
 .contact-form .button {
   width: 100%;
@@ -2365,6 +2370,9 @@ main {
       -ms-transform: translateY(-30px);
           transform: translateY(-30px);
 }
+.modal__wrapper {
+  position: relative;
+}
 .modal__content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2401,12 +2409,13 @@ main {
 
 .modal-close-fixed {
   position: fixed;
-  top: 3.5%;
+  top: -1%;
   right: 0.625rem;
   z-index: 10000000;
 }
 @media (min-width: 47em) {
   .modal-close-fixed {
+    top: 3.5%;
     right: 1.25rem;
   }
 }
@@ -2421,6 +2430,12 @@ main {
     background-color: #fff;
     border-radius: 4px;
   }
+}
+
+.modal-close-fixed--position {
+  top: 0;
+  right: 0;
+  z-index: 99999;
 }
 
 .bread-crumbs {
