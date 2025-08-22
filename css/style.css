@@ -1163,7 +1163,7 @@ option {
      object-fit: cover !important;
   -o-object-position: 38% center !important;
      object-position: 38% center !important;
-  width: 100%;
+  min-width: 100%;
 }
 @media (min-width: 47em) {
   .about-us__image img {
