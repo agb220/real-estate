@@ -1,16 +1,15 @@
 'use client'
-
+import { useEffect, useMemo } from 'react'
+import qs from 'qs'
+import { useRouter, useSearchParams } from 'next/navigation'
 import ProductCard from '../shared/ProductCard'
 import Input from '../shared/Input'
 import Select, { IOption } from '../shared/Select'
 import Button from '../shared/Button'
-import { SearchSvg } from '../icons'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { MOCK_LIMIT_PRODUCT, useSearch } from '../../_context/SearchContext'
+import { useSearch } from '../../_context/SearchContext'
 import { ProductCatalogSearchParams, ProductCatalogSortByEnum } from '@/utilities/types'
-import { useEffect, useMemo, useState } from 'react'
-import qs from 'qs'
 import { updateStateIfChanged } from '@/utilities/updateStateIfChanged'
+import { SearchSvg } from '../icons'
 
 export interface QsStringifyOptions {
   skipEmptyString?: boolean
@@ -219,7 +218,7 @@ const OffersBlock = () => {
             ))}
           </div>
         </div>
-        {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
+        {products?.hasNextPage && (
           <Button
             typeBtn="outline"
             titlebtn={loading ? 'Loading...' : 'Show more'}

@@ -1,6 +1,5 @@
 import { CollectionConfig, CollectionSlug, PaginatedDocs } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { MOCK_LIMIT_PRODUCT } from '@/app/(frontend)/_context/SearchContext'
 
 const Product: CollectionConfig = {
   slug: 'products',
@@ -241,7 +240,7 @@ const Product: CollectionConfig = {
 
         const allProducts = await req.payload.find({
           collection: 'products',
-          limit: MOCK_LIMIT_PRODUCT,
+          limit: 6,
           page: 1,
         })
 

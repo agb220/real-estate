@@ -7,7 +7,6 @@ import { Product } from '@/payload-types'
 import ProductBlock from '../../components/ProductBlock/ProductBlock'
 import RelatedProductsSection from '../../components/RelatedProductsSection'
 import { BackSvg } from '../../components/icons'
-import { MOCK_LIMIT_PRODUCT } from '../../_context/SearchContext'
 
 export default async function OfferBySlugPage({ params }: any) {
   const { slug } = await params
@@ -20,7 +19,7 @@ export default async function OfferBySlugPage({ params }: any) {
     collection: 'products',
     pagination: false,
     depth: 3,
-    limit: MOCK_LIMIT_PRODUCT,
+    limit: 6,
     where: {
       slug: {
         equals: slug,

@@ -14,8 +14,6 @@ import { Product } from '@/payload-types'
 import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
 import { ProductCatalogSearchParams, ProductCatalogSortByKeys } from '@/utilities/types'
 
-export const MOCK_LIMIT_PRODUCT = 6
-
 interface SearchContextType {
   products?: PaginatedDocs<Product>
   setProducts: (products: PaginatedDocs<Product>) => void
@@ -87,7 +85,7 @@ export const SearchProvider = (props: SearchProviderProps) => {
       const requestQuery = qs.stringify({
         pagination: true,
         depth: 3,
-        limit: MOCK_LIMIT_PRODUCT,
+        limit: 6,
         page: params.page,
         sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
         where: searchRequestParams.where,

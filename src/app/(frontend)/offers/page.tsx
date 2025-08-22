@@ -9,7 +9,7 @@ import {
   ShopPageSearchParams,
 } from '@/utilities/types'
 import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
-import { MOCK_LIMIT_PRODUCT, SearchProvider } from '../_context/SearchContext'
+import { SearchProvider } from '../_context/SearchContext'
 
 export const dynamic = 'force-dynamic'
 
@@ -72,7 +72,7 @@ export default async function OffersPage(props: SearchProductsPageProps) {
   const findResult = await payload.find({
     collection: 'products',
     depth: 3,
-    limit: MOCK_LIMIT_PRODUCT,
+    limit: 6,
     page: 1,
     sort: sortParams.length > 1 ? sortParams : sortParams[0] || undefined,
     where: whereState,
