@@ -21,7 +21,6 @@ export interface QsStringifyOptions {
 const OffersBlock = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [loadMoreLimit, setLoadMoreLimit] = useState(MOCK_LIMIT_PRODUCT)
 
   const {
     products,
@@ -36,6 +35,7 @@ const OffersBlock = () => {
     setSelectedBedroomsOption,
     sort,
     resetSearch,
+    setSelectedSearchParams,
   } = useSearch()
 
   const currentParams = useMemo(() => {
@@ -52,29 +52,26 @@ const OffersBlock = () => {
     { id: 'price_low', name: 'Cheaper at first' },
   ]
 
-  const handleSearch = () => {
-    const currentParams = qs.parse(window.location.search, {
-      ignoreQueryPrefix: true,
-    })
-
+  const handleSearch = async () => {
     const locationDoc = filterData?.locations?.docs.find(
       (doc) => doc.name.toLowerCase() === locationInput.toLowerCase(),
     )
     const locationId = locationDoc ? locationDoc.id : undefined
 
-    const updatedParams = {
-      ...currentParams,
+    const updatedParams: ProductCatalogSearchParams = {
       locations: locationId ? [locationId] : locationInput.trim() === '' ? [] : [locationInput],
       productType: selectedTypeOption,
       bedrooms: selectedBedroomsOption,
+      sort,
     }
+
+    setSelectedSearchParams && setSelectedSearchParams(updatedParams)
 
     const queryString = qs.stringify(updatedParams, {
       skipEmptyString: true,
       skipNull: true,
       arrayFormat: 'comma',
-    } as QsStringifyOptions)
-
+    })
     router.push(`${window.location.pathname}${queryString ? `?${queryString}` : ''}`, {
       scroll: false,
     })
@@ -106,36 +103,41 @@ const OffersBlock = () => {
     }
   }, [currentParams, filterData])
 
-  const handleSortChange = (val: IOption) => {
-    const currentParams = qs.parse(window.location.search, {
-      ignoreQueryPrefix: true,
-    }) as unknown as ProductCatalogSearchParams
-
+  const handleSortChange = async (val: IOption) => {
     const updatedParams: ProductCatalogSearchParams = {
       ...currentParams,
       sort: val?.id as ProductCatalogSortByEnum,
     }
 
+    setSelectedSearchParams && setSelectedSearchParams(updatedParams)
+
     const queryString = qs.stringify(updatedParams, {
       skipEmptyString: true,
       skipNull: true,
       arrayFormat: 'comma',
-    } as QsStringifyOptions)
-
+    })
     router.push(`${window.location.pathname}${queryString ? `?${queryString}` : ''}`, {
       scroll: false,
     })
   }
 
-  const handleResetFilters = () => {
+  const handleResetFilters = async () => {
     resetSearch()
+    const resetParams: ProductCatalogSearchParams = {
+      locations: [],
+      productType: [],
+      bedrooms: [],
+      sort: undefined,
+    }
+    setSelectedSearchParams && setSelectedSearchParams(resetParams)
+
     router.push('/offers')
   }
 
   const handleLoadMore = () => {
-    const newLimit = loadMoreLimit + MOCK_LIMIT_PRODUCT
-    setLoadMoreLimit(newLimit)
-    loadProducts({ limit: newLimit })
+    loadProducts({
+      page: (products?.page || 1) + 1,
+    }).then(() => {})
   }
 
   const getUniqueBedrooms = () => {
@@ -144,8 +146,6 @@ const OffersBlock = () => {
     ].sort()
     return uniqueRoomNumbers.map((num) => ({ id: num, name: num }))
   }
-
-  console.log('loading', loading)
 
   return (
     <section className="offers">
@@ -186,12 +186,14 @@ const OffersBlock = () => {
             icon={<SearchSvg />}
             onClick={handleSearch}
             className="btn-offers-search"
+            disabled={loading}
           />
           <Button
             typeBtn="outline"
             titlebtn="Reset"
             onClick={handleResetFilters}
-            className="btn-offers-reset "
+            className="btn-offers-reset"
+            disabled={loading}
           />
         </div>
       </div>
@@ -209,21 +211,21 @@ const OffersBlock = () => {
             onChange={handleSortChange}
           />
         </div>
-        {loading ? (
-          <div className="loading">Loading... </div>
-        ) : (
-          <>
-            <div className="offers__products products">
-              <div className="products__wrapper">
-                {products?.docs.map((product, i) => (
-                  <ProductCard key={i} product={product} />
-                ))}
-              </div>
-            </div>
-            {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
-              <Button typeBtn={'outline'} titlebtn="Show more" onClick={handleLoadMore} />
-            )}
-          </>
+
+        <div className="offers__products products">
+          <div className="products__wrapper">
+            {products?.docs.map((product, i) => (
+              <ProductCard key={i} product={product} />
+            ))}
+          </div>
+        </div>
+        {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
+          <Button
+            typeBtn="outline"
+            titlebtn={loading ? 'Loading...' : 'Show more'}
+            onClick={handleLoadMore}
+            disabled={loading}
+          />
         )}
       </div>
     </section>

@@ -41,7 +41,7 @@ interface SearchContextType {
   sort?: ProductCatalogSortByKeys
   setSort: (val?: ProductCatalogSortByKeys) => void
 
-  loadProducts: (params: { limit?: number }) => Promise<void>
+  loadProducts: (params: { page?: number }) => Promise<void>
 
   resetSearch: () => void
 }
@@ -73,7 +73,7 @@ export const SearchProvider = (props: SearchProviderProps) => {
   const [sort, setSort] = useState<ProductCatalogSortByKeys | undefined>(selectedSearchParams?.sort)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const loadProducts = async (params: { limit?: number }) => {
+  const loadProducts = async (params: { page?: number }) => {
     setLoading(true)
     try {
       let searchRequestParams: any = {
@@ -87,7 +87,8 @@ export const SearchProvider = (props: SearchProviderProps) => {
       const requestQuery = qs.stringify({
         pagination: true,
         depth: 3,
-        limit: params.limit,
+        limit: MOCK_LIMIT_PRODUCT,
+        page: params.page,
         sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
         where: searchRequestParams.where,
       })
@@ -183,45 +184,37 @@ export const useSearch = () => {
 export const generateRequestQuery = (searchObj: ProductCatalogSearchParams) => {
   const sortParams: string[] = []
 
-  if (searchObj.sort === 'price_high') {
-    sortParams.push('-price')
+  if (searchObj?.sort === 'price_high') {
+    sortParams.push('-productDetails.prices.fullPrice')
+  }
+  if (searchObj?.sort === 'price_low') {
+    sortParams.push('productDetails.prices.fullPrice')
   }
 
-  if (searchObj.sort === 'price_low') {
-    sortParams.push('price')
-  }
+  const bedrooms = Array.isArray(searchObj?.bedrooms) ? searchObj.bedrooms : []
+  const locations = Array.isArray(searchObj?.locations) ? searchObj.locations : []
+  const productType = Array.isArray(searchObj?.productType) ? searchObj.productType : []
 
-  let whereState = {}
+  let whereState: Record<string, any> = {}
 
-  if (searchObj.bedrooms.length) {
+  if (bedrooms.length) {
     whereState = {
       ...whereState,
-      'productDetails.roomNumbers': {
-        in: searchObj.bedrooms,
-      },
+      'productDetails.roomNumbers': { in: bedrooms },
+    }
+  }
+  if (locations.length) {
+    whereState = {
+      ...whereState,
+      'main.location': { in: locations },
+    }
+  }
+  if (productType.length) {
+    whereState = {
+      ...whereState,
+      'main.type': { in: productType },
     }
   }
 
-  if (searchObj.locations.length) {
-    whereState = {
-      ...whereState,
-      'main.location': {
-        in: searchObj.locations,
-      },
-    }
-  }
-
-  if (searchObj.productType.length) {
-    whereState = {
-      ...whereState,
-      'main.type': {
-        in: searchObj.productType,
-      },
-    }
-  }
-
-  return {
-    sort: sortParams,
-    where: whereState,
-  }
+  return { sort: sortParams, where: whereState }
 }
