@@ -41,10 +41,9 @@ interface SearchContextType {
   sort?: ProductCatalogSortByKeys
   setSort: (val?: ProductCatalogSortByKeys) => void
 
-  loadProducts: (params: { limit?: number }) => Promise<void>
+  loadProducts: (params: { page?: number }) => Promise<void>
 
   resetSearch: () => void
-  fetchProducts: (params?: ProductCatalogSearchParams, limit?: number) => Promise<void>
 }
 
 interface SearchProviderProps extends PropsWithChildren {
@@ -74,7 +73,7 @@ export const SearchProvider = (props: SearchProviderProps) => {
   const [sort, setSort] = useState<ProductCatalogSortByKeys | undefined>(selectedSearchParams?.sort)
   const [loading, setLoading] = useState<boolean>(false)
 
-  const loadProducts = async (params: { limit?: number }) => {
+  const loadProducts = async (params: { page?: number }) => {
     setLoading(true)
     try {
       let searchRequestParams: any = {
@@ -88,7 +87,8 @@ export const SearchProvider = (props: SearchProviderProps) => {
       const requestQuery = qs.stringify({
         pagination: true,
         depth: 3,
-        limit: params.limit,
+        limit: MOCK_LIMIT_PRODUCT,
+        page: params.page,
         sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
         where: searchRequestParams.where,
       })
@@ -143,37 +143,6 @@ export const SearchProvider = (props: SearchProviderProps) => {
     setSort(props.selectedSearchParams?.sort)
   }, [props.selectedSearchParams])
 
-  const fetchProducts = async (
-    params?: ProductCatalogSearchParams,
-    limit: number = MOCK_LIMIT_PRODUCT,
-  ) => {
-    setLoading(true)
-    try {
-      let searchRequestParams: any = { where: {}, sort: [] }
-
-      if (params) {
-        searchRequestParams = generateRequestQuery(params)
-      }
-
-      const requestQuery = qs.stringify({
-        pagination: true,
-        depth: 3,
-        limit,
-        sort: searchRequestParams.sort.length ? searchRequestParams.sort[0] : undefined,
-        where: searchRequestParams.where,
-      })
-
-      const response = await fetch(`/api/products?${requestQuery}`)
-      const searchProducts = (await response.json()) as PaginatedDocs<Product>
-
-      setProducts(searchProducts)
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
     <SearchContext.Provider
       value={{
@@ -199,8 +168,6 @@ export const SearchProvider = (props: SearchProviderProps) => {
 
         loadProducts,
         resetSearch,
-
-        fetchProducts,
       }}
     >
       {props.children}

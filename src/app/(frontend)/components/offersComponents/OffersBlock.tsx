@@ -21,7 +21,6 @@ export interface QsStringifyOptions {
 const OffersBlock = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [loadMoreLimit, setLoadMoreLimit] = useState(MOCK_LIMIT_PRODUCT)
 
   const {
     products,
@@ -36,7 +35,6 @@ const OffersBlock = () => {
     setSelectedBedroomsOption,
     sort,
     resetSearch,
-    fetchProducts,
     setSelectedSearchParams,
   } = useSearch()
 
@@ -68,7 +66,7 @@ const OffersBlock = () => {
     }
 
     setSelectedSearchParams && setSelectedSearchParams(updatedParams)
-    await fetchProducts(updatedParams, MOCK_LIMIT_PRODUCT)
+
     const queryString = qs.stringify(updatedParams, {
       skipEmptyString: true,
       skipNull: true,
@@ -112,7 +110,6 @@ const OffersBlock = () => {
     }
 
     setSelectedSearchParams && setSelectedSearchParams(updatedParams)
-    await fetchProducts(updatedParams, MOCK_LIMIT_PRODUCT)
 
     const queryString = qs.stringify(updatedParams, {
       skipEmptyString: true,
@@ -133,14 +130,14 @@ const OffersBlock = () => {
       sort: undefined,
     }
     setSelectedSearchParams && setSelectedSearchParams(resetParams)
-    await fetchProducts(resetParams, MOCK_LIMIT_PRODUCT)
+
     router.push('/offers')
   }
 
   const handleLoadMore = () => {
-    const newLimit = loadMoreLimit + MOCK_LIMIT_PRODUCT
-    setLoadMoreLimit(newLimit)
-    loadProducts({ limit: newLimit })
+    loadProducts({
+      page: (products?.page || 1) + 1,
+    }).then(() => {})
   }
 
   const getUniqueBedrooms = () => {
@@ -149,8 +146,6 @@ const OffersBlock = () => {
     ].sort()
     return uniqueRoomNumbers.map((num) => ({ id: num, name: num }))
   }
-
-  console.log('loading', loading)
 
   return (
     <section className="offers">
@@ -216,23 +211,21 @@ const OffersBlock = () => {
             onChange={handleSortChange}
           />
         </div>
-        {loading ? (
-          <div className="loading">
-            <div className="loading__loader"></div>
+
+        <div className="offers__products products">
+          <div className="products__wrapper">
+            {products?.docs.map((product, i) => (
+              <ProductCard key={i} product={product} />
+            ))}
           </div>
-        ) : (
-          <>
-            <div className="offers__products products">
-              <div className="products__wrapper">
-                {products?.docs.map((product, i) => (
-                  <ProductCard key={i} product={product} />
-                ))}
-              </div>
-            </div>
-            {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
-              <Button typeBtn={'outline'} titlebtn="Show more" onClick={handleLoadMore} />
-            )}
-          </>
+        </div>
+        {products?.docs && products?.docs.length >= MOCK_LIMIT_PRODUCT && (
+          <Button
+            typeBtn="outline"
+            titlebtn={loading ? 'Loading...' : 'Show more'}
+            onClick={handleLoadMore}
+            disabled={loading}
+          />
         )}
       </div>
     </section>
