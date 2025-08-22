@@ -58,7 +58,7 @@ const ProductBlock = (props: Product) => {
                   <div className="mortgage-form__deteils">
                     <span className="mortgage-form__title">Mortgage since:</span>
                     <span className="mortgage-form__price">
-                      {props.productDetails.prices.Payment}/ month
+                      {props.productDetails.prices.Payment} / month
                     </span>
                   </div>
                   <Button
