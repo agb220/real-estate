@@ -194,6 +194,8 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                   media: props.data.mainImage,
                   size: 'large',
                 })}
+                fill
+                priority
                 height={580}
                 width={580}
                 alt={props.data.title}
@@ -203,6 +205,8 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                 src="/images/hero/hero-bg.svg"
                 height={500}
                 width={479}
+                fill
+                priority
                 alt=""
                 className="img-block__bg"
               />

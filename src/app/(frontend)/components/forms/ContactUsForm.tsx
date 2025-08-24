@@ -3,7 +3,11 @@ import { useState } from 'react'
 import Button from '../shared/Button'
 import Input from '../shared/Input'
 
-const ContactUsForm = () => {
+interface ContactUsFormProps {
+  closeModal?: (arg: boolean) => void
+}
+
+const ContactUsForm = ({ closeModal }: ContactUsFormProps) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
@@ -32,6 +36,7 @@ const ContactUsForm = () => {
     setName('')
     setEmail('')
     setMessage('')
+    closeModal && closeModal(false)
   }
 
   return (

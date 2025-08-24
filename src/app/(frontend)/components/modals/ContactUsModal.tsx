@@ -42,7 +42,7 @@ const ContactUsModal = (props: ModalFormProps) => {
       >
         <div className="modal__wrapper">
           <div className="modal__content">
-            <ContactUsForm />
+            <ContactUsForm closeModal={props.setIsOpenModal} />
           </div>
           {props.isOpen && (
             <Button

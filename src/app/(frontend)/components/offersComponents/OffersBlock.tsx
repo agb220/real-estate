@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import qs from 'qs'
 import { useRouter, useSearchParams } from 'next/navigation'
 import ProductCard from '../shared/ProductCard'
@@ -20,6 +20,7 @@ export interface QsStringifyOptions {
 const OffersBlock = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [isSearching, setIsSearching] = useState(false)
 
   const {
     products,
@@ -52,6 +53,8 @@ const OffersBlock = () => {
   ]
 
   const handleSearch = async () => {
+    setIsSearching(true)
+
     const locationDoc = filterData?.locations?.docs.find(
       (doc) => doc.name.toLowerCase() === locationInput.toLowerCase(),
     )
@@ -129,9 +132,20 @@ const OffersBlock = () => {
       sort: undefined,
     }
     setSelectedSearchParams && setSelectedSearchParams(resetParams)
+    setIsSearching(false)
 
     router.push('/offers')
   }
+
+  const isButtonDisabled =
+    isSearching ||
+    (!locationInput.trim() && !selectedTypeOption?.[0] && !selectedBedroomsOption?.[0])
+
+  useEffect(() => {
+    if (isSearching) {
+      setIsSearching(false)
+    }
+  }, [products])
 
   const handleLoadMore = () => {
     loadProducts({
@@ -181,11 +195,11 @@ const OffersBlock = () => {
           />
           <Button
             typeBtn="btn"
-            titlebtn="Search"
-            icon={<SearchSvg />}
+            titlebtn={isSearching ? 'Searching...' : 'Search'}
+            icon={!isSearching ? <SearchSvg /> : <></>}
             onClick={handleSearch}
             className="btn-offers-search"
-            disabled={loading}
+            disabled={isButtonDisabled}
           />
           <Button
             typeBtn="outline"

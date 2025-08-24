@@ -31,16 +31,35 @@ body {
   height: 100%;
 }
 
-// .wrapper {
-//   min-height: 100%;
-//   overflow: visible;
-//   display: flex;
-//   flex-direction: column;
-// }
+/*Input styles for background and text color together*/
 
-// .wrapper > main {
-//   flex-grow: 1;
-// }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition:
+    background-color 5000s ease-in-out 0s,
+    color 5000s ease-in-out 0s;
+  background-color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+/*Hiding the autofill input for safari*/
+
+input[type='text']::-webkit-contacts-auto-fill-button,
+input[type='text']::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+input[type='text'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
 [class*='__container'] {
   margin: 0 auto;
