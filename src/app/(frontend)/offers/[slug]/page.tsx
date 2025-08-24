@@ -3,9 +3,9 @@ import config from '@payload-config'
 import { notFound } from 'next/navigation'
 import LayoutWrapper from '../../components/layout/LayoutWrapper'
 import SubscribeSection from '../../components/SubscribeSection'
-import { Product } from '@/payload-types'
 import ProductBlock from '../../components/ProductBlock/ProductBlock'
 import RelatedProductsSection from '../../components/RelatedProductsSection'
+import { Product } from '@/payload-types'
 import { BackSvg } from '../../components/icons'
 
 export default async function OfferBySlugPage({ params }: any) {

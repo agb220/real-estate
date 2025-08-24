@@ -48,7 +48,7 @@ const ProductBlock = (props: Product) => {
                     <span className="short-info__title">
                       {props.main.location &&
                         typeof props.main.location !== 'string' &&
-                        props.main.location.name}
+                        props.main.location}
                     </span>
                   </li>
                 </ul>
