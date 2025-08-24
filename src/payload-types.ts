@@ -69,7 +69,6 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    locations: Location;
     'property-types': PropertyType;
     products: Product;
     reviews: Review;
@@ -81,7 +80,6 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    locations: LocationsSelect<false> | LocationsSelect<true>;
     'property-types': PropertyTypesSelect<false> | PropertyTypesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
@@ -228,16 +226,6 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "locations".
- */
-export interface Location {
-  id: string;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "property-types".
  */
 export interface PropertyType {
@@ -265,7 +253,7 @@ export interface Product {
  */
 export interface ProductMain {
   title: string;
-  location: string | Location;
+  location: string;
   type: string | PropertyType;
   mainImage: string | Media;
   images: (string | Media)[];
@@ -333,10 +321,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
-      } | null)
-    | ({
-        relationTo: 'locations';
-        value: string | Location;
       } | null)
     | ({
         relationTo: 'property-types';
@@ -505,15 +489,6 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "locations_select".
- */
-export interface LocationsSelect<T extends boolean = true> {
-  name?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

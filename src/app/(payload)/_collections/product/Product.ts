@@ -53,10 +53,9 @@ const Product: CollectionConfig = {
               },
             },
             {
-              type: 'relationship',
+              type: 'text',
               name: 'location',
               required: true,
-              relationTo: 'locations',
               label: {
                 en: 'Location',
               },
@@ -255,16 +254,33 @@ const Product: CollectionConfig = {
           name: bedrooms,
         }))
 
-        const locations = req.payload.find({
-          collection: 'locations',
-          limit: 1000,
-          page: 1,
-        })
+        const uniqueLocations = Array.from(
+          new Set(
+            allProducts.docs
+              .map((product) => product.main.location)
+              .filter((r): r is string => typeof r === 'string'),
+          ),
+        ).map((location) => ({
+          id: location,
+          name: location,
+        }))
 
-        const result = await Promise.all([productType, locations])
+        const result = await Promise.all([productType])
 
         return Response.json({
           productType: result[0],
+          locations: {
+            docs: uniqueLocations,
+            totalDocs: uniqueLocations.length,
+            page: 1,
+            totalPages: 1,
+            hasNextPage: false,
+            hasPrevPage: false,
+            pagingCounter: 1,
+            limit: 1000,
+            nextPage: null,
+            prevPage: null,
+          },
           bedrooms: {
             docs: uniqueBedrooms,
             totalDocs: uniqueBedrooms.length,
@@ -277,7 +293,6 @@ const Product: CollectionConfig = {
             nextPage: null,
             prevPage: null,
           },
-          locations: result[1],
         })
       },
     },

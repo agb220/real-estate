@@ -9,7 +9,6 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { Users } from './collections/Users'
 import MainPage from './app/(payload)/_globals/MainPage'
 import Media from './collections/Media'
-import ProductLocation from './app/(payload)/_collections/product/ProductLocation'
 import PropertyTypes from './app/(payload)/_collections/product/PropertyTypes'
 import Product from './app/(payload)/_collections/product/Product'
 import { ReviewsCollection } from './app/(payload)/_collections/Reviews'
@@ -53,7 +52,7 @@ export default buildConfig({
   },
   collections: [
     ...groupCollections('Other', [Users, Media]),
-    ...groupCollections('Producs', [ProductLocation, PropertyTypes, Product]),
+    ...groupCollections('Producs', [PropertyTypes, Product]),
     ...groupCollections('Reviews', [ReviewsCollection]),
   ],
   globals: [...groupGlobals('Pages', [MainPage])],
