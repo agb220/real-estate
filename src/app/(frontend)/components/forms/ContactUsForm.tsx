@@ -7,7 +7,7 @@ const ContactUsForm = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-  const [error, setError] = useState('')
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({})
 
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -17,12 +17,15 @@ const ContactUsForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!validateEmail(email)) {
-      setError('Invalid email')
-      return
-    }
+    const newErrors: typeof errors = {}
 
-    setError('')
+    if (!name.length) newErrors.name = 'Enter your name'
+    if (!validateEmail(email)) newErrors.email = 'Invalid email'
+    if (!message.length) newErrors.message = 'Enter your message'
+
+    setErrors(newErrors)
+
+    if (Object.keys(newErrors).length > 0) return
 
     console.log({ name, email, message })
 
@@ -38,12 +41,13 @@ const ContactUsForm = () => {
         value={name}
         onChange={(e: any) => setName(e.target.value)}
         label="Full name"
+        error={errors.name}
       />
       <Input
         placeholder="Your e-mail address"
         value={email}
         onChange={(e: any) => setEmail(e.target.value)}
-        error={error}
+        error={errors.email}
         label="Email"
       />
       <Input
@@ -52,6 +56,7 @@ const ContactUsForm = () => {
         value={message}
         onChange={(e: any) => setMessage(e.target.value)}
         label="Your Message"
+        error={errors.message}
       />
       <Button typeBtn="outline" titlebtn="Send Message" type="submit" />
     </form>
