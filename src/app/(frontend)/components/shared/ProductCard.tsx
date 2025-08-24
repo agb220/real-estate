@@ -34,7 +34,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <p className="product-card__price">{formattedPrice} $</p>
           <p className="product-card__location">
             {typeof product.main.location === 'object' && product.main.location !== null
-              ? product.main.location.name
+              ? product.main.location
               : product.main.location}
           </p>
         </div>

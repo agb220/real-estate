@@ -46,9 +46,9 @@ const ProductBlock = (props: Product) => {
                       <LocationGreenSvg />
                     </span>
                     <span className="short-info__title">
-                      {props.main.location &&
-                        typeof props.main.location !== 'string' &&
-                        props.main.location}
+                      {typeof props.main.location === 'object' && props.main.location !== null
+                        ? props.main.location
+                        : props.main.location}
                     </span>
                   </li>
                 </ul>
