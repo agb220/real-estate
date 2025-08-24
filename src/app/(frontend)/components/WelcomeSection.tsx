@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import qs from 'qs'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -26,8 +26,11 @@ interface WelcomeSectionProps {
 
 const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
   const [modalOpen, setModalOpen] = useState(false)
+  const [searchTriggered, setSearchTriggered] = useState(false)
+  const [isSearching, setIsSearching] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
+  const prevSigRef = useRef<string>('')
 
   const currentParams = useMemo(() => {
     return qs.parse(searchParams.toString(), {
@@ -44,7 +47,21 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
     setSelectedTypeOption,
   } = useSearch()
 
+  const getDocsSignature = (docs?: any[]) => {
+    if (!docs || !docs.length) return 'empty'
+    const ids = docs.map((d: any) => d?.id ?? d?._id ?? '').join('|')
+    return `${docs.length}:${ids.slice(0, 200)}`
+  }
+
+  useEffect(() => {
+    prevSigRef.current = getDocsSignature(products?.docs)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleSearch = async () => {
+    setIsSearching(true)
+
     const currentParams = qs.parse(window.location.search, {
       ignoreQueryPrefix: true,
     })
@@ -71,7 +88,7 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
       scroll: false,
     })
 
-    setModalOpen(true)
+    setSearchTriggered(true)
   }
 
   useEffect(() => {
@@ -99,13 +116,30 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
     }
   }, [currentParams, filterData])
 
+  useEffect(() => {
+    const currentSig = getDocsSignature(products?.docs)
+
+    if (searchTriggered && currentSig && currentSig !== prevSigRef.current) {
+      setModalOpen(true)
+      setSearchTriggered(false)
+      setIsSearching(false)
+    }
+
+    prevSigRef.current = currentSig
+  }, [products, searchTriggered])
+
   const mapDocsToOptions = (arr?: { id: string; name: string }[]): IOption[] =>
     arr?.map((val) => ({ id: val.id, name: val.name })) || []
 
+  const isButtonDisabled = isSearching || (!locationInput.trim() && !selectedTypeOption?.[0])
+
   const closeModal = () => {
     setModalOpen(false)
-    router.push(window.location.pathname, { scroll: false })
+    setSearchTriggered(false)
+
+    router.push('/', { scroll: false })
   }
+
   return (
     <section className="hero">
       <div className="hero__container">
@@ -127,7 +161,9 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                   icon
                   className="input-form-search"
                   value={locationInput}
-                  onChange={(e: any) => setLocationInput(e.target.value)}
+                  onChange={(e: any) => {
+                    setLocationInput(e.target.value)
+                  }}
                 />
                 <Select
                   options={props.productTypes}
@@ -142,11 +178,12 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                 />
               </div>
               <Button
-                titlebtn={'Search'}
+                titlebtn={isSearching ? 'Searching...' : 'Search'}
                 typeBtn={'btn'}
-                icon={<SearchSvg />}
+                icon={!isSearching ? <SearchSvg /> : <></>}
                 className="btn--hero"
                 type="submit"
+                disabled={isButtonDisabled}
               />
             </form>
           </div>
