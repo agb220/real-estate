@@ -195,8 +195,8 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                   size: 'pngSlider',
                 })}
                 priority
-                height={580}
-                width={580}
+                height={495}
+                width={490}
                 alt={props.data.title}
                 className="img-block__main"
               />
