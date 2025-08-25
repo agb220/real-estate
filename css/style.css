@@ -645,10 +645,10 @@ option {
     top: -4.6875rem;
   }
 }
-@media (min-width: 67em) {
+@media (min-width: 62em) {
   .img-block__bg {
     top: -2.5rem;
-    right: -5.625rem;
+    right: -4.375rem;
   }
 }
 
