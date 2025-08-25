@@ -192,7 +192,7 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
               <Image
                 src={getImageUrl({
                   media: props.data.mainImage,
-                  size: 'big',
+                  size: 'card',
                 })}
                 priority
                 height={580}
@@ -200,14 +200,14 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                 alt={props.data.title}
                 className="img-block__main"
               />
-              {/* <Image
+              <Image
                 src="/images/hero/hero-bg.svg"
                 height={500}
                 width={479}
                 priority
                 alt=""
                 className="img-block__bg"
-              /> */}
+              />
             </div>
           </div>
         </div>
