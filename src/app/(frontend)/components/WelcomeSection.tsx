@@ -192,7 +192,7 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
               <Image
                 src={getImageUrl({
                   media: props.data.mainImage,
-                  size: 'pngSlider',
+                  size: 'pngCard',
                 })}
                 priority
                 height={495}

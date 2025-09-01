@@ -4,7 +4,7 @@ import { StaticImageData } from 'next/image'
 export const getImageUrl = (params: {
   media: string | Media | { url: string } | null | undefined
   defaultImage?: StaticImageData
-  size?: 'thumbnail' | 'card' | 'slider' | 'big' | 'large' | 'pngSlider' | 'pngBig'
+  size?: 'thumbnail' | 'card' | 'slider' | 'big' | 'large' | 'pngSlider' | 'pngBig' | 'pngCard'
 }) => {
   if (!params.media || typeof params.media === 'string') {
     if (typeof params.media === 'string' && params.media.startsWith('/media')) {
@@ -50,6 +50,9 @@ export const getImageUrl = (params: {
   }
   if (params.size === 'pngBig' && media.sizes?.pngBig?.url) {
     return baseUrl(media.sizes.pngBig.url)
+  }
+  if (params.size === 'pngCard' && media.sizes?.pngCard?.url) {
+    return baseUrl(media.sizes.pngCard.url)
   }
 
   return media.url ? baseUrl(media.url) : ''

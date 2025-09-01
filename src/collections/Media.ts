@@ -96,6 +96,18 @@ const Media: CollectionConfig = {
           },
         },
       },
+      {
+        name: 'pngCard',
+        width: 600,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'png',
+          options: {
+            quality: 80,
+          },
+        },
+      },
     ],
   },
   access: {
