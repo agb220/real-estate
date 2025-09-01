@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import ContactUsModal from '../modals/ContactUsModal'
 import { useScrollToSection } from '@/utilities/scrollTo'
+import Link from 'next/link'
 
 const Footer = () => {
   const [contactUsModalOpen, setContactUsModalOpen] = useState(false)
@@ -13,9 +14,9 @@ const Footer = () => {
       <div className="footer__container">
         <div className="footer__wrapper">
           <div className="footer__logo">
-            <a href="/">
+            <Link href="/">
               <Image src="/images/logo-white.svg" alt="Real estate" width="201" height="40" />
-            </a>
+            </Link>
           </div>
           <div className="footer__menu footer-menu">
             <ul className="footer-menu__list">
@@ -25,9 +26,9 @@ const Footer = () => {
                 </button>
               </li>
               <li className="footer-menu__item">
-                <a href="/offers" className="footer-menu__link">
+                <Link href="/offers" className="footer-menu__link">
                   Search in offers
-                </a>
+                </Link>
               </li>
               <li className="footer-menu__item">
                 <button

@@ -7,6 +7,7 @@ import ProductBlock from '../../components/ProductBlock/ProductBlock'
 import RelatedProductsSection from '../../components/RelatedProductsSection'
 import { Product } from '@/payload-types'
 import { BackSvg } from '../../components/icons'
+import Link from 'next/link'
 
 export default async function OfferBySlugPage({ params }: any) {
   const { slug } = await params
@@ -40,9 +41,9 @@ export default async function OfferBySlugPage({ params }: any) {
         <div className="bread-crumbs">
           <div className="bread-crumbs__container">
             <div className="bread-crumbs__wrapper">
-              <a href="/offers" className="bread-crumbs__link">
+              <Link href="/offers" className="bread-crumbs__link">
                 <BackSvg /> Back
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import { useScrollToSection } from '@/utilities/scrollTo'
+import Link from 'next/link'
 
 interface SidebarProps {
   isClosing: boolean
@@ -43,9 +44,9 @@ const Sidebar = ({ isClosing, onClose, openContactUsModal, isOpen }: SidebarProp
               </button>
             </li>
             <li className="sidebar__item">
-              <a href="/offers" className="sidebar__link" onClick={onClose}>
+              <Link href="/offers" className="sidebar__link" onClick={onClose}>
                 Search in offers
-              </a>
+              </Link>
             </li>
             <li className="sidebar__item">
               <button className="sidebar__link" onClick={() => handleClick('testimonials')}>

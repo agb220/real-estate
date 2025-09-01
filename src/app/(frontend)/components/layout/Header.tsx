@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Sidebar from './Sidebar'
 import ContactUsModal from '../modals/ContactUsModal'
 import { useScrollToSection } from '@/utilities/scrollTo'
+import Link from 'next/link'
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -38,14 +39,14 @@ const Header = () => {
     <header className="header">
       <div className="header__container">
         <div className="header__wrapper">
-          <a className="header__logo logo" href="/">
+          <Link className="header__logo logo" href="/">
             <div className="logo__image">
               <Image src="/images/logo.svg" alt={'Logo'} width={64} height={40} />
             </div>
             <div className="logo__text">
               <Image src="/images/logo-text.svg" alt=" Real estate" width={120} height={40} />
             </div>
-          </a>
+          </Link>
           <div className="header__menu">
             <nav className="header__navigation menu">
               <ul className="menu__list">
@@ -55,9 +56,9 @@ const Header = () => {
                   </button>
                 </li>
                 <li className="menu__item">
-                  <a href="/offers" className="menu__link">
+                  <Link href="/offers" className="menu__link">
                     Search in offers
-                  </a>
+                  </Link>
                 </li>
                 <li className="menu__item">
                   <button className="menu__link" onClick={() => scrollToSection('testimonials')}>
