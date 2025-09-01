@@ -190,7 +190,7 @@ const OffersBlock = () => {
             options={getUniqueBedrooms()}
             label="Bedrooms"
             value={getUniqueBedrooms().find((opt) => opt.id === selectedBedroomsOption[0]) || null}
-            onChange={(val) => setSelectedBedroomsOption([val.id])}
+            onChange={(val) => val && setSelectedBedroomsOption([val.id])}
             className="offers--select"
           />
           <Button
@@ -214,7 +214,7 @@ const OffersBlock = () => {
       <div className="offers__container">
         <div className="offers__sorting">
           <div className="offers__counter">
-            {products?.docs.length} <span>results found</span>
+            {products && products?.docs.length} <span>results found</span>
           </div>
           <Select
             options={mapSortEnumToOptions()}
@@ -227,9 +227,8 @@ const OffersBlock = () => {
 
         <div className="offers__products products">
           <div className="products__wrapper">
-            {products?.docs.map((product, i) => (
-              <ProductCard key={i} product={product} />
-            ))}
+            {products &&
+              products?.docs?.map((product, i) => <ProductCard key={i} product={product} />)}
           </div>
         </div>
         {products?.hasNextPage && (

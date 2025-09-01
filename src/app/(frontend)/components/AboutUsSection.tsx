@@ -26,7 +26,7 @@ const AboutUsSection = ({ ...data }: AboutUsSectionProps) => {
               <Image
                 src={getImageUrl({
                   media: data.data.mainImage,
-                  size: 'large',
+                  size: 'big',
                 })}
                 width={628}
                 height={471}
