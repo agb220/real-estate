@@ -69,7 +69,7 @@ const ReviewCard = ({ ...props }: Review) => {
             <Image
               src={getImageUrl({
                 media: props.mainImage,
-                size: 'card',
+                size: 'thumbnail',
               })}
               alt={props.reviewerName}
               width={64}
