@@ -54,7 +54,7 @@ const ImagesSlider = (props: { images: (string | Media)[]; productName?: string 
                     height={1200}
                     src={getImageUrl({
                       media: image,
-                      size: 'large',
+                      size: 'card',
                     })}
                     className="main-image__image"
                     alt={`${props.productName || ''} ${index}`}
@@ -89,7 +89,7 @@ const ImagesSlider = (props: { images: (string | Media)[]; productName?: string 
                       height={600}
                       src={getImageUrl({
                         media: image,
-                        size: 'card',
+                        size: 'thumbnail',
                       })}
                       alt={`${props.productName || ''}  ${index}`}
                       className="slider-block__image"

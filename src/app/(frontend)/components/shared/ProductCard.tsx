@@ -18,7 +18,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <Image
             src={getImageUrl({
               media: product.main.mainImage,
-              size: 'large',
+              size: 'card',
             })}
             alt={product.title}
             width={384}
