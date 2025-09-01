@@ -17,8 +17,6 @@ const nextConfig = {
         }
       }),
     ],
-    loader: 'custom',
-    loaderFile: './imageLoader.js', // Custom loader file
   },
   webpack(config) {
     config.module.rules.push({

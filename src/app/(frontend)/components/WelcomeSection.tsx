@@ -200,14 +200,6 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                 alt={props.data.title}
                 className="img-block__main"
               />
-              {/* <Image
-                src="/images/hero/hero-bg.svg"
-                height={500}
-                width={479}
-                priority
-                alt=""
-                className="img-block__bg"
-              /> */}
             </div>
           </div>
         </div>
