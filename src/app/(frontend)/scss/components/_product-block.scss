@@ -35,11 +35,11 @@
     margin-bottom: toRem(24);
 
     @media (min-width: 47em) {
-      font-size: toRem(33.2);
+      font-size: toRem(33);
     }
 
     @media (min-width: 75em) {
-      font-size: toRem(41.504);
+      font-size: toRem(41);
     }
   }
 
@@ -72,7 +72,7 @@
     }
 
     h2 {
-      font-size: toRem(21.248);
+      font-size: toRem(21);
       font-weight: 700;
       line-height: 1.2;
       margin-top: toRem(40);
@@ -93,7 +93,7 @@
     }
 
     h3 {
-      font-size: toRem(21.248);
+      font-size: toRem(21);
       font-weight: 700;
       line-height: 1.2;
       margin-top: toRem(40);
@@ -149,7 +149,7 @@
     line-height: 1.2;
 
     @media (min-width: 47em) {
-      font-size: toRem(21.248);
+      font-size: toRem(21);
     }
   }
 }
@@ -187,7 +187,7 @@
 
   &__price {
     color: $colorBlue;
-    font-size: toRem(21.248);
+    font-size: toRem(21);
     font-weight: 700;
     line-height: 1.2;
   }
@@ -211,7 +211,7 @@
   // .form__title
 
   &__title {
-    font-size: toRem(21.248);
+    font-size: toRem(21);
     line-height: 1.2;
     font-weight: 700;
     margin-bottom: toRem(8);
@@ -283,7 +283,7 @@
     line-height: 1.2;
 
     @media (min-width: 47em) {
-      font-size: toRem(21.248);
+      font-size: toRem(21);
     }
   }
 

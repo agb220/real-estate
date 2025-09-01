@@ -531,7 +531,7 @@ option {
 }
 @media (min-width: 65em) {
   .content-block__title {
-    font-size: 4.053125rem;
+    font-size: 4rem;
     max-width: 33.625rem;
   }
 }
@@ -548,7 +548,7 @@ option {
 @media (min-width: 65em) {
   .content-block__description {
     max-width: 33.625rem;
-    font-size: 1.328125rem;
+    font-size: 1.3125rem;
   }
 }
 
@@ -741,7 +741,7 @@ option {
 }
 @media (min-width: 65em) {
   .product-card__name {
-    font-size: 1.328rem;
+    font-size: 1.3125rem;
   }
 }
 @media (any-hover: hover), (pointer: fine) {
@@ -1038,7 +1038,7 @@ option {
 }
 @media (min-width: 65em) {
   .review-card__name {
-    font-size: 1.328rem;
+    font-size: 1.3125rem;
   }
 }
 .review-card__product-name {
@@ -1195,7 +1195,7 @@ option {
 }
 @media (min-width: 65em) {
   .about-us__title {
-    font-size: 2.594rem;
+    font-size: 2.5625rem;
   }
 }
 
@@ -1266,19 +1266,19 @@ option {
   gap: 0.25rem;
 }
 .subcribe__title {
-  font-size: 2.0751875rem;
+  font-size: 2.0625rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.2;
 }
 @media (min-width: 47em) {
   .subcribe__title {
-    font-size: 1.66rem;
+    font-size: 1.625rem;
   }
 }
 @media (min-width: 65em) {
   .subcribe__title {
-    font-size: 2.0751875rem;
+    font-size: 2.0625rem;
   }
 }
 .subcribe__description {
@@ -1289,7 +1289,7 @@ option {
 }
 @media (min-width: 47em) {
   .subcribe__description {
-    font-size: 1.328125rem;
+    font-size: 1.3125rem;
   }
 }
 
@@ -1390,12 +1390,12 @@ option {
 }
 @media (min-width: 47em) {
   .offers__title {
-    font-size: 1.66rem;
+    font-size: 1.625rem;
   }
 }
 @media (min-width: 65em) {
   .offers__title {
-    font-size: 2.0751875rem;
+    font-size: 2.0625rem;
   }
 }
 .offers__filters {
@@ -1457,7 +1457,7 @@ option {
   }
 }
 .offers__counter {
-  font-size: 1.328125rem;
+  font-size: 1.3125rem;
   line-height: 1.6;
 }
 .products {
@@ -1679,12 +1679,12 @@ option {
 }
 @media (min-width: 47em) {
   .product__title {
-    font-size: 2.075rem;
+    font-size: 2.0625rem;
   }
 }
 @media (min-width: 75em) {
   .product__title {
-    font-size: 2.594rem;
+    font-size: 2.5625rem;
   }
 }
 .product__info {
@@ -1709,7 +1709,7 @@ option {
   margin-bottom: 1rem;
 }
 .product__content h2 {
-  font-size: 1.328rem;
+  font-size: 1.3125rem;
   font-weight: 700;
   line-height: 1.2;
   margin-top: 2.5rem;
@@ -1734,7 +1734,7 @@ option {
           user-select: none;
 }
 .product__content h3 {
-  font-size: 1.328rem;
+  font-size: 1.3125rem;
   font-weight: 700;
   line-height: 1.2;
   margin-top: 2.5rem;
@@ -1783,7 +1783,7 @@ option {
 }
 @media (min-width: 47em) {
   .short-info__title {
-    font-size: 1.328rem;
+    font-size: 1.3125rem;
   }
 }
 
@@ -1827,7 +1827,7 @@ option {
 }
 .mortgage-form__price {
   color: #17c2b1;
-  font-size: 1.328rem;
+  font-size: 1.3125rem;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -1856,7 +1856,7 @@ option {
   padding: 2.5rem 2.5rem 2.5rem 2.5rem;
 }
 .form__title {
-  font-size: 1.328rem;
+  font-size: 1.3125rem;
   line-height: 1.2;
   font-weight: 700;
   margin-bottom: 0.5rem;
@@ -1919,7 +1919,7 @@ option {
 }
 @media (min-width: 47em) {
   .brief__title {
-    font-size: 1.328rem;
+    font-size: 1.3125rem;
   }
 }
 .brief__items {
@@ -1979,7 +1979,7 @@ option {
   -webkit-overflow-scrolling: touch;
 }
 .related-products__title {
-  font-size: 1.328rem;
+  font-size: 1.3125rem;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -2342,7 +2342,7 @@ main {
 }
 @media (min-width: 65em) {
   .title-block__title {
-    font-size: 2.594rem;
+    font-size: 2.5625rem;
   }
 }
 .title-block__description {

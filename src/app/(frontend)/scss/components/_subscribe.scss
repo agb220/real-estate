@@ -58,17 +58,17 @@
   // .subcribe__title
 
   &__title {
-    font-size: toRem(33.203);
+    font-size: toRem(33);
     font-style: normal;
     font-weight: 700;
     line-height: 1.2;
 
     @media (min-width: 47em) {
-      font-size: toRem(26.56);
+      font-size: toRem(26);
     }
 
     @media (min-width: 65em) {
-      font-size: toRem(33.203);
+      font-size: toRem(33);
     }
   }
 
@@ -81,7 +81,7 @@
     margin-bottom: toRem(16);
 
     @media (min-width: 47em) {
-      font-size: toRem(21.25);
+      font-size: toRem(21);
     }
   }
 }

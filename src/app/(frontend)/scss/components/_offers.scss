@@ -24,11 +24,11 @@
     margin-bottom: toRem(24);
 
     @media (min-width: 47em) {
-      font-size: toRem(26.56);
+      font-size: toRem(26);
     }
 
     @media (min-width: 65em) {
-      font-size: toRem(33.203);
+      font-size: toRem(33);
     }
   }
 
@@ -81,7 +81,7 @@
   // .offers__counter
 
   &__counter {
-    font-size: toRem(21.25);
+    font-size: toRem(21);
     line-height: 1.6;
   }
 
