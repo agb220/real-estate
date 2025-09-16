@@ -615,6 +615,23 @@ option {
   position: relative;
 }
 
+.img-block {
+  max-width: 19.9375rem;
+  max-height: 19.375rem;
+}
+@media (min-width: 47em) {
+  .img-block {
+    padding: 6.25rem 0 0 0;
+    max-width: 36.25rem;
+    max-height: 34.8125rem;
+  }
+}
+@media (min-width: 65em) {
+  .img-block {
+    max-width: 30.625rem;
+    max-height: 30.9375rem;
+  }
+}
 .img-block__main {
   position: relative;
   z-index: 1;

@@ -25,6 +25,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             height={269}
             className="product-card__img"
             draggable={false}
+            loading="lazy"
           />
         </Link>
         <div className="product-card__content">

@@ -20,6 +20,7 @@ const AboutUsSection = ({ ...data }: AboutUsSectionProps) => {
                 width={477}
                 height={321}
                 style={{ objectFit: 'contain' }}
+                loading="lazy"
               />
             </div>
             <div className="about-us__image">
@@ -31,6 +32,7 @@ const AboutUsSection = ({ ...data }: AboutUsSectionProps) => {
                 width={628}
                 height={471}
                 alt={data.data.title}
+                loading="lazy"
               />
             </div>
           </div>

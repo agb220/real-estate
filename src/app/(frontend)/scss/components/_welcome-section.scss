@@ -133,6 +133,7 @@
   @media (min-width: 47em) {
     padding: toRem(100) 0 0 0;
   }
+
   // .imgs-block__wrapper
 
   &__wrapper {
@@ -140,6 +141,20 @@
   }
 }
 .img-block {
+  max-width: toRem(319);
+  max-height: toRem(310);
+
+  @media (min-width: 47em) {
+    padding: toRem(100) 0 0 0;
+    max-width: toRem(580);
+    max-height: toRem(557);
+  }
+
+  @media (min-width: 65em) {
+    max-width: toRem(490);
+    max-height: toRem(495);
+  }
+
   // .img-block__main
 
   &__main {

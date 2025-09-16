@@ -58,6 +58,7 @@ const ImagesSlider = (props: { images: (string | Media)[]; productName?: string 
                     })}
                     className="main-image__image"
                     alt={`${props.productName || ''} ${index}`}
+                    fetchPriority="high"
                   />
                 </div>
               ))}
@@ -92,6 +93,7 @@ const ImagesSlider = (props: { images: (string | Media)[]; productName?: string 
                       })}
                       alt={`${props.productName || ''}  ${index}`}
                       className="slider-block__image"
+                      loading="lazy"
                     />
                   </div>
                 ))}
