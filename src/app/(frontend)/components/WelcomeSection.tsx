@@ -198,6 +198,8 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                 width={490}
                 alt={props.data.title}
                 className="img-block__main"
+                placeholder="blur"
+                blurDataURL="/images/hero/hero.png"
               />
             </div>
           </div>
