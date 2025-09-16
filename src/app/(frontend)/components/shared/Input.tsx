@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, TextareaHTMLAttributes, ChangeEvent } from 'react'
+import { InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
 import { LocationSvg } from '../icons'
 
 interface CommonProps {

@@ -49,13 +49,14 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
 
   const getDocsSignature = (docs?: any[]) => {
     if (!docs || !docs.length) return 'empty'
+
     const ids = docs.map((d: any) => d?.id ?? d?._id ?? '').join('|')
+
     return `${docs.length}:${ids.slice(0, 200)}`
   }
 
   useEffect(() => {
     prevSigRef.current = getDocsSignature(products?.docs)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

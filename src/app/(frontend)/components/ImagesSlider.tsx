@@ -62,7 +62,6 @@ const ImagesSlider = (props: { images: (string | Media)[]; productName?: string 
                 </div>
               ))}
         </div>
-        {/* <div className="absolute bottom-1 right-1 z-[1]"><ImageZoomModal {...props} /> </div> */}
       </div>
       <div className="images-slider__slider slider-block">
         <PrevButton
