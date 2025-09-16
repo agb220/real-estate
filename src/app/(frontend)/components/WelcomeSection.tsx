@@ -194,7 +194,6 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                   media: props.data.mainImage,
                   size: 'pngCard',
                 })}
-                priority
                 height={495}
                 width={490}
                 alt={props.data.title}
