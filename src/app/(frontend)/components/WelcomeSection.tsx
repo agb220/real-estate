@@ -206,13 +206,13 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
           </div>
         </div>
       </div>
-      {modalOpen && (
+      {/* {modalOpen && (
         <ProductSearchModal
           isOpen={modalOpen}
           setIsOpenModal={closeModal}
           findResult={products?.docs ?? []}
         />
-      )}
+      )} */}
     </section>
   )
 }
