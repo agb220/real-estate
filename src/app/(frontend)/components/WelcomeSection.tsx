@@ -1,20 +1,20 @@
 'use client'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import qs from 'qs'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Input from './shared/Input'
 import Select, { IOption } from './shared/Select'
 import Button from './shared/Button'
-import ProductSearchModal from './modals/ProductSearchModal'
 import { useSearch } from '../_context/SearchContext'
 import { getImageUrl } from '@/utilities/getUrl'
 import { IHeroSection } from '@/payload-types'
 import { SearchSvg } from './icons'
-
 import { ProductCatalogSearchParams } from '@/utilities/types'
 import { QsStringifyOptions } from './offersComponents/OffersBlock'
 import { updateStateIfChanged } from '@/utilities/updateStateIfChanged'
+
+const ProductSearchModal = lazy(() => import('./modals/ProductSearchModal'))
 
 interface WelcomeSectionProps {
   data: IHeroSection
@@ -188,31 +188,30 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
               />
             </form>
           </div>
-          <div className="hero__imgs imgs-block">
-            <div className="imgs-block__wrapper img-block">
-              <Image
-                src={getImageUrl({
-                  media: props.data.mainImage,
-                  size: 'pngCard',
-                })}
-                height={495}
-                width={490}
-                alt={props.data.title}
-                className="img-block__main"
-                placeholder="blur"
-                blurDataURL="/images/hero/hero.png"
-              />
-            </div>
+
+          <div className="imgs-block__wrapper img-block">
+            <Image
+              src={getImageUrl({
+                media: props.data.mainImage,
+                size: 'pngCard',
+              })}
+              height={495}
+              width={490}
+              alt={props.data.title}
+              className="img-block__main"
+              placeholder="blur"
+              blurDataURL="/images/hero/hero.png"
+            />
           </div>
         </div>
       </div>
-      {/* {modalOpen && (
+      {modalOpen && (
         <ProductSearchModal
           isOpen={modalOpen}
           setIsOpenModal={closeModal}
           findResult={products?.docs ?? []}
         />
-      )} */}
+      )}
     </section>
   )
 }
