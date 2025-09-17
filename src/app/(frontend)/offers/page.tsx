@@ -10,6 +10,7 @@ import {
 } from '@/utilities/types'
 import { FilterDataResponse } from '@/app/(payload)/_collections/product/Product'
 import { SearchProvider } from '../_context/SearchContext'
+import { Suspense } from 'react'
 
 export const dynamic = 'force-dynamic'
 
@@ -25,7 +26,12 @@ const convertSearchParams = (params?: ShopPageSearchParams): ProductCatalogSearc
 export default async function OffersPage(props: SearchProductsPageProps) {
   const payload = await getPayload({ config })
 
-  const filterFetch = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/products/filter-data`)
+  const filterFetch = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/products/filter-data`,
+    {
+      cache: 'force-cache',
+    },
+  )
   const filterData: FilterDataResponse = await filterFetch.json()
 
   const searchObj = convertSearchParams(await props.searchParams)
@@ -71,7 +77,7 @@ export default async function OffersPage(props: SearchProductsPageProps) {
 
   const findResult = await payload.find({
     collection: 'products',
-    depth: 3,
+    depth: 1,
     limit: 6,
     page: 1,
     sort: sortParams.length > 1 ? sortParams : sortParams[0] || undefined,
@@ -81,14 +87,16 @@ export default async function OffersPage(props: SearchProductsPageProps) {
   return (
     <LayoutWrapper>
       <main>
-        <SearchProvider
-          products={findResult}
-          filterData={filterData}
-          selectedSearchParams={searchObj}
-        >
-          <OffersBlock />
-          <SubscribeSection />
-        </SearchProvider>
+        <Suspense fallback={null}>
+          <SearchProvider
+            products={findResult}
+            filterData={filterData}
+            selectedSearchParams={searchObj}
+          >
+            <OffersBlock />
+          </SearchProvider>
+        </Suspense>
+        <SubscribeSection />
       </main>
     </LayoutWrapper>
   )

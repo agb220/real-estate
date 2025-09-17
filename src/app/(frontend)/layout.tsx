@@ -14,6 +14,7 @@ const open_sans = Open_Sans({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--open_sans-font',
+  preload: false,
 })
 
 export const metadata = {

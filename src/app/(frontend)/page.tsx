@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
 import config from '@/payload.config'
@@ -47,7 +47,13 @@ export default async function HomePage(props: SearchProductsPageProps) {
     select: { name: true },
   })
 
-  const filterFetch = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/products/filter-data`)
+  const filterFetch = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/products/filter-data`,
+    {
+      cache: 'force-cache',
+    },
+  )
+
   const filterData: FilterDataResponse = await filterFetch.json()
 
   const searchObj = convertSearchParams(await props.searchParams)
@@ -75,7 +81,7 @@ export default async function HomePage(props: SearchProductsPageProps) {
   const findProducts = await payload.find({
     collection: 'products',
     pagination: true,
-    depth: 3,
+    depth: 1,
     limit: 6,
     page: 1,
     where: whereState,
@@ -83,35 +89,37 @@ export default async function HomePage(props: SearchProductsPageProps) {
 
   return (
     <LayoutWrapper>
-      <SearchProvider
-        products={findProducts}
-        filterData={filterData}
-        selectedSearchParams={searchObj}
-      >
-        <main>
-          {(findResult.section || []).map((section, idx) => {
-            if (section.blockType === 'hero-section') {
-              return <WelcomeSection key={idx} data={section} productTypes={productTypes.docs} />
-            }
-          })}
-          {(findResult.section || []).map((section, idx) => {
-            if (section.blockType === 'top-offers') {
-              return <TopOffersSection key={idx} data={section} />
-            }
-          })}
-          {(findResult.section || []).map((section, idx) => {
-            if (section.blockType === 'reviews') {
-              return <ReviewsSection key={idx} data={section} />
-            }
-          })}
-          {(findResult.section || []).map((section, idx) => {
-            if (section.blockType === 'about-us') {
-              return <AboutUsSection key={idx} data={section} />
-            }
-          })}
-          <SubscribeSection />
-        </main>
-      </SearchProvider>
+      <main>
+        <Suspense fallback={null}>
+          <SearchProvider
+            products={findProducts}
+            filterData={filterData}
+            selectedSearchParams={searchObj}
+          >
+            {(findResult.section || []).map((section, idx) => {
+              if (section.blockType === 'hero-section') {
+                return <WelcomeSection key={idx} data={section} productTypes={productTypes.docs} />
+              }
+            })}
+          </SearchProvider>
+        </Suspense>
+        <SubscribeSection />
+        {(findResult.section || []).map((section, idx) => {
+          if (section.blockType === 'top-offers') {
+            return <TopOffersSection key={idx} data={section} />
+          }
+        })}
+        {(findResult.section || []).map((section, idx) => {
+          if (section.blockType === 'reviews') {
+            return <ReviewsSection key={idx} data={section} />
+          }
+        })}
+        {(findResult.section || []).map((section, idx) => {
+          if (section.blockType === 'about-us') {
+            return <AboutUsSection key={idx} data={section} />
+          }
+        })}
+      </main>
     </LayoutWrapper>
   )
 }
