@@ -604,12 +604,6 @@ option {
 }
 .imgs-block {
   width: 100%;
-  padding: 2.5rem 0 0 0;
-}
-@media (min-width: 47em) {
-  .imgs-block {
-    padding: 6.25rem 0 0 0;
-  }
 }
 .imgs-block__wrapper {
   position: relative;
@@ -617,19 +611,18 @@ option {
 
 .img-block {
   max-width: 19.9375rem;
-  max-height: 19.375rem;
+  aspect-ratio: 319/310;
 }
 @media (min-width: 47em) {
   .img-block {
-    padding: 6.25rem 0 0 0;
     max-width: 36.25rem;
-    max-height: 34.8125rem;
+    aspect-ratio: 580/557;
   }
 }
 @media (min-width: 65em) {
   .img-block {
     max-width: 30.625rem;
-    max-height: 30.9375rem;
+    aspect-ratio: 490/495;
   }
 }
 .img-block__main {
@@ -640,7 +633,6 @@ option {
   width: 100%;
   height: 100%;
   margin-right: -0.625rem;
-  aspect-ratio: 580/587;
 }
 
 .select--hero {

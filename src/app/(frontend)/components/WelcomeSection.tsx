@@ -193,7 +193,7 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
             <Image
               src={getImageUrl({
                 media: props.data.mainImage,
-                size: 'pngCard',
+                size: 'pngBig',
               })}
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
