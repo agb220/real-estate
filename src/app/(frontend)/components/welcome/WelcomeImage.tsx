@@ -19,7 +19,7 @@ export default async function WelcomeImage({ mainImage, title }: WelcomeImagePro
         width={490}
         alt={title}
         className="img-block__main"
-        fetchPriority="high"
+        loading="lazy"
       />
     </div>
   )
