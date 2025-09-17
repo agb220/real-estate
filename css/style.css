@@ -611,17 +611,21 @@ option {
 
 .img-block {
   max-width: 19.9375rem;
+  min-height: 19.375rem;
+  height: 100%;
   aspect-ratio: 319/310;
 }
 @media (min-width: 47em) {
   .img-block {
     max-width: 36.25rem;
+    min-height: 34.8125rem;
     aspect-ratio: 580/557;
   }
 }
 @media (min-width: 65em) {
   .img-block {
     max-width: 30.625rem;
+    min-height: 30.9375rem;
     aspect-ratio: 490/495;
   }
 }
@@ -638,6 +642,7 @@ option {
 .select--hero {
   -ms-flex-preferred-size: 12.625rem;
       flex-basis: 12.625rem;
+  min-width: 12.625rem;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
