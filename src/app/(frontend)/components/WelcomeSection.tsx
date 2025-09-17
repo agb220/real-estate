@@ -195,14 +195,12 @@ const WelcomeSection = ({ ...props }: WelcomeSectionProps) => {
                 media: props.data.mainImage,
                 size: 'pngBig',
               })}
-              priority
               sizes="(max-width: 768px) 100vw, 50vw"
               height={495}
               width={490}
               alt={props.data.title}
               className="img-block__main"
-              placeholder="blur"
-              blurDataURL="/images/hero/hero.png"
+              loading="lazy"
             />
           </div>
         </div>
