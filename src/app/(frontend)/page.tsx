@@ -16,8 +16,6 @@ import {
 } from '@/utilities/types'
 import { SearchProvider } from './_context/SearchContext'
 
-export const dynamic = 'force-dynamic'
-
 const convertSearchParams = (params?: ShopPageSearchParams): ProductCatalogSearchParams => {
   return {
     sort: params?.sort || undefined,
@@ -32,7 +30,7 @@ export default async function HomePage(props: SearchProductsPageProps) {
   const payload = await getPayload({ config: payloadConfig })
   const findResult = await payload.findGlobal({
     slug: 'main-page',
-    depth: 3,
+    depth: 2,
   })
 
   if (!findResult) {
@@ -42,7 +40,7 @@ export default async function HomePage(props: SearchProductsPageProps) {
   const productTypes = await payload.find({
     collection: 'property-types',
     pagination: true,
-    depth: 3,
+    depth: 1,
     limit: 100,
     select: { name: true },
   })
