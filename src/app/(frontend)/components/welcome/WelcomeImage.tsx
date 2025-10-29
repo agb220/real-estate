@@ -14,12 +14,12 @@ export default async function WelcomeImage({ mainImage, title }: WelcomeImagePro
           media: mainImage,
           size: 'pngBig',
         })}
-        sizes="(max-width: 768px) 100vw, 50vw"
-        height={495}
-        width={490}
         alt={title}
         className="img-block__main"
-        loading="lazy"
+        priority
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        style={{ objectFit: 'cover' }}
       />
     </div>
   )
