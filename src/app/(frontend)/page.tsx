@@ -101,7 +101,6 @@ export default async function HomePage(props: SearchProductsPageProps) {
             })}
           </SearchProvider>
         </Suspense>
-        <SubscribeSection />
         {(findResult.section || []).map((section, idx) => {
           if (section.blockType === 'top-offers') {
             return <TopOffersSection key={idx} data={section} />
@@ -117,6 +116,8 @@ export default async function HomePage(props: SearchProductsPageProps) {
             return <AboutUsSection key={idx} data={section} />
           }
         })}
+
+        <SubscribeSection />
       </main>
     </LayoutWrapper>
   )
