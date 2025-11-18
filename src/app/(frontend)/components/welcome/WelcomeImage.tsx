@@ -12,14 +12,15 @@ export default async function WelcomeImage({ mainImage, title }: WelcomeImagePro
       <Image
         src={getImageUrl({
           media: mainImage,
-          size: 'pngBig',
+          size: 'pngCard',
         })}
         alt={title}
         className="img-block__main"
-        priority
-        fill
-        sizes="(max-width: 768px) 100vw, 50vw"
+        loading="lazy"
+        width={490}
+        height={490}
         style={{ objectFit: 'cover' }}
+        placeholder="empty"
       />
     </div>
   )
