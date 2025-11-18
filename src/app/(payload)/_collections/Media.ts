@@ -108,6 +108,18 @@ const Media: CollectionConfig = {
           },
         },
       },
+      {
+        name: 'pngThumbnail',
+        width: 400,
+        height: undefined,
+        position: 'centre',
+        formatOptions: {
+          format: 'png',
+          options: {
+            quality: 80,
+          },
+        },
+      },
     ],
   },
   access: {

@@ -4,7 +4,16 @@ import { StaticImageData } from 'next/image'
 export const getImageUrl = (params: {
   media: string | Media | { url: string } | null | undefined
   defaultImage?: StaticImageData
-  size?: 'thumbnail' | 'card' | 'slider' | 'big' | 'large' | 'pngCard' | 'pngSlider' | 'pngBig'
+  size?:
+    | 'thumbnail'
+    | 'card'
+    | 'slider'
+    | 'big'
+    | 'large'
+    | 'pngCard'
+    | 'pngSlider'
+    | 'pngBig'
+    | 'pngThumbnail'
 }) => {
   if (!params.media) {
     return params.defaultImage?.src || ''
