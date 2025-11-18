@@ -3,7 +3,7 @@ import WelcomeImage from './welcome/WelcomeImage'
 import WelcomeContent from './welcome/WelcomeContent'
 
 interface WelcomeSectionProps {
-  data: IHeroSection
+  data?: IHeroSection
   productTypes: {
     id: string
     name: string
@@ -15,9 +15,11 @@ const WelcomeSection = async ({ ...props }: WelcomeSectionProps) => {
     <section className="hero">
       <div className="hero__container">
         <div className="hero__wrapper">
-          <WelcomeContent data={props.data} productTypes={props.productTypes} />
-          {props.data.mainImage && (
-            <WelcomeImage mainImage={props.data.mainImage} title={props.data.title} />
+          {props.data && (
+            <>
+              <WelcomeContent data={props.data} productTypes={props.productTypes} />
+              <WelcomeImage mainImage={props.data.mainImage} title={props.data.title} />
+            </>
           )}
         </div>
       </div>
