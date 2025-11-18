@@ -1,4 +1,4 @@
-import Image from 'next/image'
+'use client'
 import { SubscribeSvg } from './icons'
 import SubscribeForm from './forms/SubscribeForm'
 

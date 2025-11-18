@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import { IAboutUs } from '@/payload-types'
 import { getImageUrl } from '@/utilities/getUrl'

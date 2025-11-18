@@ -16,10 +16,13 @@ const WelcomeSection = async ({ ...props }: WelcomeSectionProps) => {
       <div className="hero__container">
         <div className="hero__wrapper">
           {props.data && (
-            <>
-              <WelcomeContent data={props.data} productTypes={props.productTypes} />
-              <WelcomeImage mainImage={props.data.mainImage} title={props.data.title} />
-            </>
+            <WelcomeContent
+              data={props.data}
+              productTypes={props.productTypes ? props.productTypes : []}
+            />
+          )}
+          {props.data && props.data.mainImage && (
+            <WelcomeImage mainImage={props.data.mainImage} title={props.data.title} />
           )}
         </div>
       </div>

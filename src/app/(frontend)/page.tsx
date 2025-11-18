@@ -85,6 +85,10 @@ export default async function HomePage(props: SearchProductsPageProps) {
     where: whereState,
   })
 
+  if (!findResult || !findProducts) {
+    return notFound()
+  }
+
   return (
     <LayoutWrapper>
       <main>
