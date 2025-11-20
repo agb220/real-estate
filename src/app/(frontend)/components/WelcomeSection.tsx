@@ -4,7 +4,7 @@ import WelcomeContent from './welcome/WelcomeContent'
 
 interface WelcomeSectionProps {
   data?: IHeroSection
-  productTypes: {
+  productTypes?: {
     id: string
     name: string
   }[]
