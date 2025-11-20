@@ -4,10 +4,10 @@ import WelcomeContent from './welcome/WelcomeContent'
 
 interface WelcomeSectionProps {
   data?: IHeroSection
-  productTypes?: {
-    id: string
-    name: string
-  }[]
+  // productTypes?: {
+  //   id: string
+  //   name: string
+  // }[]
 }
 
 const WelcomeSection = async ({ ...props }: WelcomeSectionProps) => {
@@ -18,7 +18,7 @@ const WelcomeSection = async ({ ...props }: WelcomeSectionProps) => {
           {props.data && (
             <WelcomeContent
               data={props.data}
-              productTypes={props.productTypes ? props.productTypes : []}
+              // productTypes={props.productTypes ? props.productTypes : []}
             />
           )}
           {props.data && props.data.mainImage && (
