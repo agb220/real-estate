@@ -13,7 +13,7 @@ const ProductSearchModal = lazy(() => import('../modals/ProductSearchModal'))
 
 interface WelcomeContentProps {
   data: any
-  productTypes: { id: string; name: string }[]
+  productTypes?: { id: string; name: string }[]
 }
 
 export default function WelcomeContent({ data, productTypes }: WelcomeContentProps) {
@@ -130,7 +130,7 @@ export default function WelcomeContent({ data, productTypes }: WelcomeContentPro
               onChange={(e: { target: { value: string } }) => setLocationInput(e.target.value)}
             />
             <Select
-              options={productTypes}
+              options={productTypes ? productTypes : []}
               className="select--hero"
               label="Property type"
               value={
