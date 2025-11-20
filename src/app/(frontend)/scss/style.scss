@@ -301,6 +301,18 @@ main {
   }
 }
 
+// button--link
+
+.button--link {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 60em) {
+    width: fit-content;
+  }
+}
+
 // *---- embla ----* //
 
 .embla__arrow-left svg {

@@ -115,7 +115,7 @@ export default function WelcomeContent({ data }: WelcomeContentProps) {
       <div className="hero__content content-block">
         <h1 className="content-block__title">{data.title}</h1>
         <p className="content-block__description">{data.description}</p>
-        <Link href={'/offers'} className="button button--outline">
+        <Link href={'/offers'} className="button button--outline button--link">
           Go To Catalog
         </Link>
 
