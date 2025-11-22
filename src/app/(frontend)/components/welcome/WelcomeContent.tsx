@@ -116,7 +116,7 @@ export default function WelcomeContent({ data }: WelcomeContentProps) {
         <h1 className="content-block__title">{data.title}</h1>
         <p className="content-block__description">{data.description}</p>
         <Link href={'/offers'} className="button button--outline button--link">
-          Go To Catalog
+          Our Offers
         </Link>
 
         {/* <form
